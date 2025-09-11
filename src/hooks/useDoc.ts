@@ -22,7 +22,7 @@ export function useDocuments() {
         const res = await fetch(
           "https://upbstudents-backend-6hw3.vercel.app/api/afficher",
           {
-            method: "POST",
+            method: "GET",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({}),
           }
