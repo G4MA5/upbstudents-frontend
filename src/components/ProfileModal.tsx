@@ -109,14 +109,11 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
     };
 
     try {
-      const res = await fetch(
-        "https://upbstudents-backend-6hw3.vercel.app/api/connexion",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(longinData),
-        }
-      );
+      const res = await fetch("/api/connexion", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(longinData),
+      });
       const data = await res.json();
       if (data.user) {
         localStorage.setItem("supa_token", data.token);
@@ -152,14 +149,11 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
     };
 
     try {
-      const res = await fetch(
-        "https://upbstudents-backend-6hw3.vercel.app/api/inscription",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(signupData),
-        }
-      );
+      const res = await fetch("/api/inscription", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(signupData),
+      });
 
       const data = await res.json();
 
