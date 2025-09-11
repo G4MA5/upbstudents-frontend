@@ -20,7 +20,12 @@ export function useDocuments() {
     async function fetchDocs() {
       try {
         const res = await fetch(
-          "https://upbstudents-backend-6hw3.vercel.app/api/afficher"
+          "https://upbstudents-backend-6hw3.vercel.app/api/afficher",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({}),
+          }
         );
         const data = await res.json();
         setDocuments(data.document || []);
