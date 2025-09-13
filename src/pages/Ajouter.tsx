@@ -65,11 +65,14 @@ const Ajouter: React.FC = () => {
       body.append("niveau", formData.niveau);
       body.append("document", formData.document);
 
-      const res = await fetch("/api/document", {
-        method: "POST",
-        headers: { Authorization: `Bearer ${token}` },
-        body,
-      });
+      const res = await fetch(
+        "https://upbstudents-backend-6hw3.vercel.app/api/document",
+        {
+          method: "POST",
+          headers: { Authorization: `Bearer ${token}` },
+          body,
+        }
+      );
 
       const data = await res.json();
 

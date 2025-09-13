@@ -19,10 +19,13 @@ export function useDocuments() {
   useEffect(() => {
     async function fetchDocs() {
       try {
-        const res = await fetch("/api/afficher", {
-          method: "GET",
-          headers: { "Content-Type": "application/json" },
-        });
+        const res = await fetch(
+          "https://upbstudents-backend-6hw3.vercel.app/api/afficher",
+          {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+          }
+        );
         const data = await res.json();
         setDocuments(data.document || []);
       } catch (err) {

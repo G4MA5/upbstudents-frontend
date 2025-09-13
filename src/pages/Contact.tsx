@@ -47,16 +47,19 @@ const Contact: React.FC = () => {
 
     // --- 3️⃣ Envoi au backend ---
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nom: nomVal,
-          email: emailVal,
-          objet: objetVal,
-          message: messageVal,
-        }),
-      });
+      const res = await fetch(
+        "https://upbstudents-backend-6hw3.vercel.app/api/contact",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            nom: nomVal,
+            email: emailVal,
+            objet: objetVal,
+            message: messageVal,
+          }),
+        }
+      );
 
       if (res.ok) {
         setMessageEnvoye(true);
