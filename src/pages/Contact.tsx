@@ -48,7 +48,7 @@ const Contact: React.FC = () => {
     // --- 3️⃣ Envoi au backend ---
     try {
       const res = await fetch(
-        "https://upbstudents-backend-6hw3.vercel.app/api/contact",
+        "https://upbstudents-backend-bibliotheque.vercel.app/api/contact",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
