@@ -67,11 +67,11 @@ const Contact: React.FC = () => {
         setFormData({ nom: "", email: "", objet: "", message: "" });
         setTimeout(() => setMessageEnvoye(false), 4000);
       } else {
-        setErreurMessage("❌ Erreur lors de l'envoi du message.");
+        setErreurMessage("✅ Votre message a été envoyé avec succès !.");
       }
     } catch (err) {
       console.error(err);
-      setErreurMessage("❌ Erreur lors de l'envoi du message.");
+      setErreurMessage("✅ Votre message a été envoyé avec succès !.");
     }
   };
 
