@@ -21,6 +21,7 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
+    "@types/node": "^24.5.2",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
