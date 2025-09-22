@@ -73,7 +73,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
               onClick={handleDownload}
               className="group bg-white text-black px-7 py-1 rounded-[6px] shadow flex items-center gap-2 
                          transition-all duration-300 ease-out hover:bg-[#FF9E78] hover:text-white
-                         animate-fade-in-up"
+                         animate-fade-in-up hover:scale-105 active:scale-95 transition-transform duration-150"
             >
               Télécharger
               <img

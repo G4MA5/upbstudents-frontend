@@ -5,18 +5,24 @@ interface DropdownMenuProps {
   label: string;
   options: string[];
   onSelect?: (value: string) => void;
+  disabled?: boolean; // ✅ ajout de disabled
 }
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({
   label,
   options,
   onSelect,
+  disabled = false, // valeur par défaut false
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState<string | null>(null);
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
+  const toggleDropdown = () => {
+    if (!disabled) setIsOpen((prev) => !prev);
+  };
+
   const handleSelect = (value: string) => {
+    if (disabled) return;
     setSelected(value);
     onSelect?.(value);
     setIsOpen(false);
@@ -29,14 +35,19 @@ const DropdownMenu: React.FC<DropdownMenuProps> = ({
         onClick={toggleDropdown}
         className={`w-full px-3 py-2 rounded-full border text-sm transition-all duration-200 shadow-sm 
           ${
-            selected ? "bg-[#ff4b4b] text-white" : "bg-gray-200 text-gray-800"
+            selected
+              ? "bg-[#ff4b4b] text-white"
+              : disabled
+              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+              : "bg-gray-200 text-gray-800"
           }`}
+        disabled={disabled} // ✅ désactivation du bouton
       >
         {selected || label}
       </button>
 
       <AnimatePresence>
-        {isOpen && (
+        {isOpen && !disabled && (
           <motion.ul
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}

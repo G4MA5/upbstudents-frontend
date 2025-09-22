@@ -1,17 +1,22 @@
+// src/pages/Examen.tsx
 import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import bgg from "../assets/bgg.jpg";
 import AnimatedDropdown from "../components/AnimatedDropdown";
-import ExamenDocumentCard from "../components/ExamenDocumentCard";
+import ExamenDocumentCard, {
+  ExamenDocumentCardProps,
+} from "../components/ExamenDocumentCard";
+import CardPopup from "../components/CardPopup";
 import searchIcon from "../assets/Icon.png";
 import backgroundImage from "../assets/Background2.jpg";
 import gamaImage from "../assets/gama.png";
 import { useDocuments, DocumentType } from "../hooks/useDoc";
 import carte from "../assets/Docs/carte.jpg";
-import ProfileModal from "../components/ProfileModal"; // Ajoute l'import
+import ProfileModal from "../components/ProfileModal";
 
 const Examen: React.FC = () => {
-  const { document, loading } = useDocuments();
+  const { document, loading, setDocuments } = useDocuments();
+
   const [selectedFilters, setSelectedFilters] = useState({
     filiere: "",
     annee: "",
@@ -25,28 +30,67 @@ const Examen: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState(queryFromUrl);
 
   const resultsRef = useRef<HTMLDivElement>(null);
-  const [showProfileModal, setShowProfileModal] = useState(false); // Ajoute l'état
+  const [showProfileModal, setShowProfileModal] = useState(false);
 
-  // Met à jour searchTerm quand l’URL change
+  // Popup global
+  const [popupData, setPopupData] = useState<ExamenDocumentCardProps | null>(
+    null
+  );
+
+  // ✅ Flag pour afficher le popup si l'utilisateur est propriétaire
+  const [isProprietaire, setIsProprietaire] = useState(false);
+
+  // ⚡ Vérifier si l'utilisateur est propriétaire
+  useEffect(() => {
+    const checkProprietaire = async () => {
+      try {
+        const token = localStorage.getItem("supa_token");
+        if (!token) {
+          setShowProfileModal(true);
+          return;
+        }
+
+        const res = await fetch(
+          "https://upbstudents-backend-bibliotheque.vercel.app/api/utilisateur",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await res.json();
+        if (data.status === "ok") {
+          setIsProprietaire(data.utilisateur.proprietaire);
+        } else {
+          setShowProfileModal(true);
+        }
+      } catch (err) {
+        console.error(err);
+        setShowProfileModal(true);
+      }
+    };
+    checkProprietaire();
+  }, []);
+
   useEffect(() => {
     setSearchTerm(queryFromUrl);
-
-    // scroll vers les résultats
     if (queryFromUrl && resultsRef.current) {
       resultsRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [queryFromUrl]);
 
   const handleFilterChange = (label: string, value: string) => {
-    setSelectedFilters((prev) => ({
-      ...prev,
-      [label.toLowerCase()]: value,
-    }));
+    setSelectedFilters((prev) => ({ ...prev, [label.toLowerCase()]: value }));
   };
+
+  const isSessionDisabled =
+    selectedFilters.type === "TD" || selectedFilters.type === "TP";
 
   const filteredDocuments = document.filter((doc: DocumentType) => {
     const { filiere, annee, licence, session, type } = selectedFilters;
-
     const matchesFilters =
       (!filiere || doc.filiere === filiere) &&
       (!annee || doc.annee === annee) &&
@@ -62,8 +106,45 @@ const Examen: React.FC = () => {
     return matchesFilters && matchesSearch;
   });
 
+  // Supprimer un document
+  const handleDelete = async (id: number, filePath: string) => {
+    try {
+      const token = localStorage.getItem("supa_token");
+      if (!token) {
+        setShowProfileModal(true);
+        return;
+      }
+
+      const res = await fetch(
+        "https://upbstudents-backend-bibliotheque.vercel.app/api/supprimer",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ id, filePath }),
+        }
+      );
+
+      if (!res.ok) {
+        throw new Error("Erreur suppression ou utilisateur non connecté");
+      }
+
+      setDocuments((prevDocs: DocumentType[]) =>
+        prevDocs.filter((doc) => doc.id !== id)
+      );
+      console.log("✅ Document supprimé avec succès");
+    } catch (error) {
+      console.error("❌ Erreur lors de la suppression :", error);
+      setShowProfileModal(true); // 🔥 Affiche le modal si erreur
+    } finally {
+      setPopupData(null);
+    }
+  };
+
   return (
-    <div className="w-full bg-white">
+    <div className="w-full bg-white relative">
       {/* Bannière */}
       <div
         className="w-full h-[300px] md:h-[700px] bg-cover bg-center flex items-center justify-center"
@@ -81,8 +162,7 @@ const Examen: React.FC = () => {
         </h2>
         <p className="text-md md:text-lg text-gray-600 mb-8">
           Selectionner chaque champs afin d'être le plus
-          <br className="hidden md:block" />
-          précis dans votre recherche
+          <br className="hidden md:block" /> précis dans votre recherche
         </p>
 
         {/* Filtres */}
@@ -90,12 +170,12 @@ const Examen: React.FC = () => {
           <AnimatedDropdown
             label="Filière"
             options={["MIAGE", "ASSRI", "SEA", "SEG", "3EA", "SJAP", "RIT"]}
-            onSelect={(value) => handleFilterChange("filiere", value)}
+            onSelect={(v) => handleFilterChange("filiere", v)}
           />
           <AnimatedDropdown
             label="Année"
             options={["2025", "2024", "2023", "2022"]}
-            onSelect={(value) => handleFilterChange("annee", value)}
+            onSelect={(v) => handleFilterChange("annee", v)}
           />
           <AnimatedDropdown
             label="Niveau"
@@ -106,17 +186,18 @@ const Examen: React.FC = () => {
               "Master 1",
               "Master 2",
             ]}
-            onSelect={(value) => handleFilterChange("licence", value)}
+            onSelect={(v) => handleFilterChange("licence", v)}
           />
           <AnimatedDropdown
             label="Session"
             options={["Session 1", "Session 2"]}
-            onSelect={(value) => handleFilterChange("session", value)}
+            disabled={isSessionDisabled}
+            onSelect={(v) => handleFilterChange("session", v)}
           />
           <AnimatedDropdown
             label="Type"
             options={["Examen", "TD", "TP"]}
-            onSelect={(value) => handleFilterChange("type", value)}
+            onSelect={(v) => handleFilterChange("type", v)}
           />
         </div>
 
@@ -152,7 +233,10 @@ const Examen: React.FC = () => {
                 filiere={doc.filiere}
                 file_url={doc.file_url}
                 session={doc.session}
-                openProfileModal={() => setShowProfileModal(true)} // Passe la fonction ici
+                openGlobalPopup={(docData) => setPopupData(docData)}
+                id={doc.id}
+                filePath={doc.filePath}
+                openProfileModal={() => setShowProfileModal(true)}
               />
             ))}
           </div>
@@ -166,6 +250,16 @@ const Examen: React.FC = () => {
         )}
       </div>
 
+      {/* Popup centralisé */}
+      {popupData && isProprietaire && (
+        <CardPopup
+          id={popupData.id}
+          filePath={popupData.filePath}
+          onDelete={handleDelete}
+          closePopup={() => setPopupData(null)}
+        />
+      )}
+
       {/* Objectifs */}
       <section
         className="relative bg-cover bg-center text-white min-h-[500px] py-24 px-4 md:px-20 hidden md:block lg:block"
@@ -173,11 +267,9 @@ const Examen: React.FC = () => {
       >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Objectifs</h2>
-
           <p className="text-white text-base mb-4">
             Nous espérons que notre bibliothèque vous aidera
           </p>
-
           <div className="mb-6">
             <img
               src={gamaImage}
@@ -185,7 +277,6 @@ const Examen: React.FC = () => {
               className="mx-auto w-[100px] h-[100px] rounded-full object-cover"
             />
           </div>
-
           <p className="text-sm text-white leading-relaxed">
             La bibliothèque digitale que j’ai créée est née d’un constat simple
             : au sein de notre université, de nombreux étudiants peinent à

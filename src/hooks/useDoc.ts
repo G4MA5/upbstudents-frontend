@@ -10,6 +10,9 @@ export interface DocumentType {
   session: string;
   type: string;
   file_url: string;
+
+  id: number;
+  filePath: string;
 }
 
 export function useDocuments() {
@@ -24,6 +27,7 @@ export function useDocuments() {
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },
+            cache: "no-store",
           }
         );
         const data = await res.json();
@@ -38,5 +42,5 @@ export function useDocuments() {
     fetchDocs();
   }, []);
 
-  return { document, loading };
+  return { document, loading, setDocuments };
 }

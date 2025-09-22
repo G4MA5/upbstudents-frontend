@@ -5,20 +5,27 @@ interface AnimatedDropdownProps {
   label: string;
   options: string[];
   onSelect?: (value: string) => void;
+  disabled?: boolean;
+  value?: string;
 }
 
 const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
   label,
   options,
   onSelect,
+  disabled = false,
+  value,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState<string | null>(null);
+  const [selected, setSelected] = useState<string | null>(value || null);
 
-  const toggleDropdown = () => setIsOpen((prev) => !prev);
-  const handleSelect = (value: string) => {
-    setSelected(value);
-    onSelect?.(value);
+  const toggleDropdown = () => {
+    if (!disabled) setIsOpen((prev) => !prev);
+  };
+
+  const handleSelect = (val: string) => {
+    setSelected(val);
+    onSelect?.(val);
     setIsOpen(false);
   };
 
@@ -27,15 +34,15 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
       <button
         onClick={toggleDropdown}
         className={`w-full px-3 py-2 rounded-full border text-sm transition-all duration-200 shadow-sm 
-          ${
-            selected ? "bg-[#ff4b4b] text-white" : "bg-gray-200 text-gray-800"
-          }`}
+          ${disabled ? "bg-gray-300 text-gray-500 cursor-not-allowed" : ""}
+          ${selected && !disabled ? "bg-[#ff4b4b] text-white" : ""}
+          ${!selected && !disabled ? "bg-gray-200 text-gray-800" : ""}`}
       >
         {selected || label}
       </button>
 
       <AnimatePresence>
-        {isOpen && (
+        {isOpen && !disabled && (
           <motion.ul
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}

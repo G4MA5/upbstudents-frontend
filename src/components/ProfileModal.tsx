@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Eye, EyeOff } from "lucide-react"; // <-- import des icônes
+import ForgotPasswordModal from "./ForgotPasswordModal";
 
 interface Props {
   closeModal: () => void;
@@ -20,7 +22,6 @@ const AnimatedDropdown: React.FC<AnimatedDropdownProps> = ({
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const toggleDropdown = () => setIsOpen((p) => !p);
   const handleSelect = (val: string) => {
     onChange(val);
@@ -85,6 +86,10 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
   // login form state
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+
+  // <-- login
+  const [isForgotModalOpen, setIsForgotModalOpen] = useState(false);
 
   // signup form state
   const [nom, setNom] = useState("");
@@ -94,20 +99,19 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
   const [numero, setNumero] = useState("");
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState(""); // Ajouté
-  const [alertMsg, setAlertMsg] = useState(""); // Ajout état
-  const [passwordError, setPasswordError] = useState(""); // Ajouté
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [showSignupPassword, setShowSignupPassword] = useState(false); // <-- signup pwd
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // <-- confirm pwd
+
+  const [alertMsg, setAlertMsg] = useState("");
+  const [passwordError, setPasswordError] = useState("");
 
   const inputClass =
     "w-full px-4 py-3 border rounded-full text-gray-600 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300";
 
   const handleLoginSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const longinData = {
-      email: loginEmail,
-      password: loginPassword,
-    };
-
+    const longinData = { email: loginEmail, password: loginPassword };
     try {
       const res = await fetch(
         "https://upbstudents-backend-bibliotheque.vercel.app/api/connexion",
@@ -122,9 +126,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
         localStorage.setItem("supa_token", data.token);
         alert(`Bienvenue dans notre Bibliotèque ${data.user.email} !`);
         closeModal();
-      } else {
-        alert("Erreur : " + data.message);
-      }
+      } else alert("Erreur : " + data.message);
     } catch (err) {
       console.error(err);
       alert("Erreur lors de connexion");
@@ -133,13 +135,10 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
 
   const handleSignupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (signupPassword !== confirmPassword) {
       setPasswordError("Les mots de passe ne correspondent pas.");
       return;
-    } else {
-      setPasswordError("");
-    }
+    } else setPasswordError("");
 
     const signupData = {
       nom,
@@ -160,22 +159,17 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
           body: JSON.stringify(signupData),
         }
       );
-
       const data = await res.json();
-
       if (data.status === "ok") {
         setAlertMsg(
-          "Votre compte a été créé avec succès ! Un email de confirmation vous a été envoyé. Veuillez vérifier votre boîte mail et confirmer votre compte."
+          "Votre compte a été créé avec succès ! Un email de confirmation vous a été envoyé. Veuillez vérifier votre boîte mail et confirmer votre compte et vous connecter."
         );
-        alert("Bienvenue dans notre Bibliotèque !");
-        // Optionnel : fermer le modal après quelques secondes
+        alert("Bienvenue dans notre Bibliotèque !, Veuillez vous connecter.");
         setTimeout(() => {
           setAlertMsg("");
           closeModal();
         }, 6000);
-      } else {
-        alert("Erreur : " + data.message);
-      }
+      } else alert("Erreur : " + data.message);
     } catch (err) {
       console.error(err);
       alert("Erreur lors de l'inscription");
@@ -184,18 +178,15 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
 
   return (
     <>
-      {/* Overlay */}
       <div
         className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40"
         onClick={closeModal}
       ></div>
 
-      {/* Modal */}
       <div
         onClick={(e) => e.stopPropagation()}
         className="fixed top-1/2 left-1/2 w-[90%] sm:w-[95%] md:w-[90%] max-w-sm md:max-w-3xl min-h-[320px] md:min-h-[500px] -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg md:rounded-xl shadow-lg z-50 p-6 md:p-12 flex flex-col"
       >
-        {/* Message d'alerte en haut */}
         {alertMsg && (
           <div className="mb-4 px-4 py-2 bg-green-100 text-green-700 rounded text-center font-semibold">
             {alertMsg}
@@ -227,7 +218,6 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
         {/* CARDS */}
         {activeView === "cards" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 flex-grow font-sen">
-            {/* Carte connexion */}
             <div className="bg-orange-50 rounded-2xl p-4 md:p-8 flex flex-col justify-between shadow-md h-full min-h-[220px]">
               <div>
                 <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-center">
@@ -238,14 +228,13 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
                 </p>
               </div>
               <button
-                className="w-full py-3 md:py-4 bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 transition"
+                className="w-full py-3 md:py-4 bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 transition hover:scale-105 active:scale-95 transition-transform duration-150"
                 onClick={() => setActiveView("login")}
               >
                 Se connecter
               </button>
             </div>
 
-            {/* Carte inscription */}
             <div className="bg-green-50 rounded-2xl p-4 md:p-8 flex flex-col justify-between shadow-md h-full min-h-[220px]">
               <div>
                 <h3 className="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-center">
@@ -257,7 +246,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
                 </p>
               </div>
               <button
-                className="w-full py-3 md:py-4 bg-white border border-gray-800 text-gray-800 font-semibold rounded-full hover:bg-gray-100 transition"
+                className="w-full py-3 md:py-4 bg-white border border-gray-800 text-gray-800 font-semibold rounded-full hover:bg-gray-100 transition hover:scale-105 active:scale-95 transition-transform duration-150"
                 onClick={() => setActiveView("signup")}
               >
                 Créer mon compte
@@ -272,6 +261,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
             className="flex flex-col space-y-4 md:space-y-6 font-sen w-full max-w-md mx-auto"
             onSubmit={handleLoginSubmit}
           >
+            {/* Champ Email */}
             <input
               type="email"
               placeholder="Email"
@@ -280,22 +270,44 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
               onChange={(e) => setLoginEmail(e.target.value)}
               required
             />
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              className="w-full px-4 py-3 md:py-4 border rounded-full text-gray-700 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-              value={loginPassword}
-              onChange={(e) => setLoginPassword(e.target.value)}
-              required
-            />
+
+            {/* Champ Mot de passe avec toggle */}
+            <div className="relative">
+              <input
+                type={showLoginPassword ? "text" : "password"}
+                placeholder="Mot de passe"
+                className="w-full px-4 py-3 md:py-4 border rounded-full text-gray-700 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                value={loginPassword}
+                onChange={(e) => setLoginPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                onClick={() => setShowLoginPassword((prev) => !prev)}
+              >
+                {showLoginPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+
+            {/* Lien Mot de passe oublié */}
+            <p
+              className="text-right text-sm text-orange-400 hover:underline cursor-pointer"
+              onClick={() => setIsForgotModalOpen(true)}
+            >
+              Mot de passe oublié ?
+            </p>
+
+            {/* Bouton Se connecter */}
             <button
               type="submit"
               className="w-full py-3 md:py-4 bg-red-500 text-white font-semibold rounded-full hover:bg-red-600
-             transition hover:scale-105 active:scale-95 transition-transform duration-150"
+       transition hover:scale-105 active:scale-95 transition-transform duration-150"
             >
               Se connecter
             </button>
 
+            {/* Lien vers inscription */}
             <p className="text-center text-sm md:text-base">
               Pas de compte ?{" "}
               <button
@@ -333,7 +345,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
                 required
               />
             </div>
-            {/* Niveau & Filière */}
+
             <div className="grid grid-cols-2 gap-3">
               <AnimatedDropdown
                 label="Niveau"
@@ -354,6 +366,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
                 onChange={setFiliere}
               />
             </div>
+
             <div className="grid grid-cols-2 gap-3">
               <input
                 type="email"
@@ -375,27 +388,49 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
                 required
               />
             </div>
-            <input
-              type="password"
-              placeholder="Mot de passe"
-              className={inputClass}
-              value={signupPassword}
-              onChange={(e) => setSignupPassword(e.target.value)}
-              required
-            />
-            <input
-              type="password"
-              placeholder="Confirmer Mot de passe"
-              className={inputClass}
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
+
+            <div className="relative">
+              <input
+                type={showSignupPassword ? "text" : "password"}
+                placeholder="Mot de passe"
+                className={inputClass}
+                value={signupPassword}
+                onChange={(e) => setSignupPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                onClick={() => setShowSignupPassword((prev) => !prev)}
+              >
+                {showSignupPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+
+            <div className="relative">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="Confirmer Mot de passe"
+                className={inputClass}
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+              >
+                {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+
             {passwordError && (
               <div className="text-red-500 text-sm text-center mb-2">
                 {passwordError}
               </div>
             )}
+
             <button
               type="submit"
               className="w-full py-3 bg-orange-300 text-white rounded-full
@@ -403,6 +438,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
             >
               Créer mon compte
             </button>
+
             <p className="text-center text-sm">
               Déjà inscrit ?{" "}
               <button
@@ -416,6 +452,11 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
           </form>
         )}
       </div>
+
+      <ForgotPasswordModal
+        isOpen={isForgotModalOpen}
+        closeModal={() => setIsForgotModalOpen(false)}
+      />
     </>
   );
 };

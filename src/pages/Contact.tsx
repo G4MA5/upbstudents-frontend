@@ -67,21 +67,22 @@ const Contact: React.FC = () => {
         setFormData({ nom: "", email: "", objet: "", message: "" });
         setTimeout(() => setMessageEnvoye(false), 4000);
       } else {
-        setErreurMessage("✅ Votre message a été envoyé avec succès !.");
+        setMessageEnvoye(true);
       }
     } catch (err) {
       console.error(err);
-      setErreurMessage("✅ Votre message a été envoyé avec succès !.");
+      setMessageEnvoye(true);
     }
   };
 
   return (
     <div className="bg-white">
       {/* Bandeau supérieur */}
-      <div className="bg-gray-200 py-4">
-        <h1 className="text-center font-bold text-lg md:text-2xl">
-          CONTACTEZ-NOUS
-        </h1>
+
+      <div className="bg-gray-200 py-4 w-full">
+        <div className="w-full max-w-[clamp(320px,90%,1200px)] mx-auto px-4 md:px-12 lg:px-20 text-center">
+          <p className="text-gray-800 font-medium">CONTACTEZ-NOUS</p>
+        </div>
       </div>
 
       {/* Contenu principal */}
@@ -107,7 +108,7 @@ const Contact: React.FC = () => {
 
           <div className="flex items-start gap-4">
             <Smartphone className="w-6 h-6 text-gray-700 mt-1" />
-            <p className="text-gray-700">+225 27 22 49 92 22</p>
+            <p className="text-gray-700">+225 01 72 48 93 31</p>
           </div>
         </div>
 
@@ -148,7 +149,7 @@ const Contact: React.FC = () => {
 
             <button
               type="submit"
-              className="w-full bg-gray-900 text-white py-3 rounded-md text-sm font-semibold hover:bg-gray-800 transition"
+              className="w-full bg-gray-900 text-white py-3 rounded-full text-sm font-semibold hover:bg-gray-800 transition hover:scale-105 active:scale-95 transition-transform duration-150"
             >
               Envoyer le message
             </button>

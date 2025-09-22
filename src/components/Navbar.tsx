@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/upb-logo.png";
-import profilePic from "../assets/profile.png";
+import profilePic from "../assets/profile3.png";
 import searchIcon from "../assets/Icon.png";
 import ProfileModal from "./ProfileModal";
+import { motion, AnimatePresence } from "framer-motion";
+import { Home, BookOpen, PlusSquare, Phone } from "lucide-react";
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -146,69 +148,105 @@ const Navbar: React.FC = () => {
         </form>
       </div>
 
-      {/* Mobile menu */}
-      {isOpen && (
-        <>
-          {/* Overlay sombre */}
-          <div
-            className="fixed inset-0 bg-black/30 z-40"
-            onClick={() => setIsOpen(false)}
-          ></div>
-          {/* Drawer menu */}
-          <div
-            className="fixed top-0 left-0 h-full w-64 bg-white shadow-lg z-50 transition-transform duration-300 ease-in-out"
-            style={{
-              transform: isOpen ? "translateX(0)" : "translateX(-100%)",
-            }}
-          >
-            <div className="flex flex-col p-6 pt-10 space-y-6 text-lg font-semibold">
-              <button
-                className="self-end text-2xl mb-6"
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Overlay sombre */}
+            <motion.div
+              className="fixed inset-0 bg-black/20 z-40"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Drawer menu */}
+            <motion.div
+              initial={{ x: "-100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "-100%", opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="fixed top-0 left-0 h-full w-64 z-50 text-gray-800 shadow-xl border-r border-gray-200 rounded-t-2xl pt-16 md:pt-0 bg-gray-100"
+              style={{ fontFamily: "var(--font-worksans)" }}
+            >
+              {/* Bouton fermer */}
+              <motion.button
+                className="absolute top-7 right-5 text-xl text-gray-600 hover:text-red-500 transition"
                 onClick={() => setIsOpen(false)}
                 aria-label="Fermer le menu"
+                whileTap={{ scale: 0.9 }}
               >
                 ✕
-              </button>
-              <NavLink
-                to="/"
-                className={(props) =>
-                  `${getActiveClass(props)} block ${linkStyle}`
-                }
-                onClick={() => setIsOpen(false)}
+              </motion.button>
+
+              {/* Liens animés */}
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={{
+                  hidden: { opacity: 0, x: -20 },
+                  visible: {
+                    opacity: 1,
+                    x: 0,
+                    transition: { staggerChildren: 0.08 },
+                  },
+                }}
+                className="flex flex-col mt-20 px-6 space-y-2"
               >
-                Accueil
-              </NavLink>
-              <NavLink
-                to="/examen"
-                className={(props) =>
-                  `${getActiveClass(props)} block ${linkStyle}`
-                }
-                onClick={() => setIsOpen(false)}
-              >
-                Examen, TD & TP
-              </NavLink>
-              <NavLink
-                to="/ajouter"
-                className={(props) =>
-                  `${getActiveClass(props)} block ${linkStyle}`
-                }
-                onClick={() => setIsOpen(false)}
-              >
-                Ajouter document
-              </NavLink>
-              <NavLink
-                to="/contact"
-                className={(props) =>
-                  `${getActiveClass(props)} block ${linkStyle}`
-                }
-                onClick={() => setIsOpen(false)}
-              >
-                Contact
-              </NavLink>
-            </div>
-          </div>
-        </>
-      )}
+                {[
+                  {
+                    text: "Accueil",
+                    to: "/",
+                    icon: <Home className="w-5 h-5 text-black" />,
+                  },
+                  {
+                    text: "Examen, TD & TP",
+                    to: "/examen",
+                    icon: <BookOpen className="w-5 h-5 text-black" />,
+                  },
+                  {
+                    text: "Ajouter document",
+                    to: "/ajouter",
+                    icon: <PlusSquare className="w-5 h-5 text-black" />,
+                  },
+                  {
+                    text: "Contact",
+                    to: "/contact",
+                    icon: <Phone className="w-5 h-5 text-black" />,
+                  },
+                ].map((item) => (
+                  <motion.div
+                    key={item.text}
+                    variants={{
+                      hidden: { x: -20, opacity: 0 },
+                      visible: { x: 0, opacity: 1 },
+                    }}
+                    transition={{ duration: 0.25 }}
+                  >
+                    <NavLink
+                      to={item.to}
+                      className={({ isActive }) =>
+                        `flex items-center gap-3 px-3 py-2 rounded-md transition
+                   ${
+                     isActive
+                       ? "bg-white text-black"
+                       : "text-black hover:bg-gray-200"
+                   }`
+                      }
+                      onClick={() => setIsOpen(false)}
+                    >
+                      {item.icon}
+                      <span className="font-medium">{item.text}</span>
+                    </NavLink>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
 
       {/* Modal */}
       {isProfileOpen && (
@@ -220,7 +258,7 @@ const Navbar: React.FC = () => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg shadow-lg p-8 text-center">
             <h2 className="text-xl font-bold mb-4 text-green-600">
-              Vous êtes bien connecté sur la bibliothèque d'UPB !
+              Vous êtes bien sur la bibliothèque d'UPB !
             </h2>
             <button
               className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-full font-semibold"
