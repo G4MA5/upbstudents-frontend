@@ -1,0 +1,5 @@
+# frontend/netlify.toml (à la racine du frontend)
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
