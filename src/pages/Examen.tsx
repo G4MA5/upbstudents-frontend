@@ -58,6 +58,7 @@ const Examen: React.FC = () => {
               "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
+            credentials: "include",
           }
         );
 
@@ -242,7 +243,7 @@ const Examen: React.FC = () => {
           </div>
         ) : (
           <p className="text-center text-gray-500 text-lg mt-8">
-            Aucun document trouvé pour votre recherche.
+            Aucun document n'est trouvé pour votre recherche.
           </p>
         )}
         {showProfileModal && (
