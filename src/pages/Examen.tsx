@@ -55,10 +55,8 @@ const Examen: React.FC = () => {
           {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
-            credentials: "include",
           }
         );
 
