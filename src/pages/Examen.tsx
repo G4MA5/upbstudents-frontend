@@ -55,6 +55,7 @@ const Examen: React.FC = () => {
           {
             method: "GET",
             headers: {
+              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
           }
@@ -241,7 +242,7 @@ const Examen: React.FC = () => {
           </div>
         ) : (
           <p className="text-center text-gray-500 text-lg mt-8">
-            Aucun document n'est trouvé pour votre recherche.
+            Aucun document trouvé pour votre recherche.
           </p>
         )}
         {showProfileModal && (
