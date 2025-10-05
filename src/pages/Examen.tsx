@@ -51,7 +51,7 @@ const Examen: React.FC = () => {
         }
 
         const res = await fetch(
-          "https://upbstudents-backend-bibliotheque.vercel.app/api/utilisateur",
+          "https://upbstudents-backend-1u7x.vercel.app/api/utilisateur",
           {
             method: "GET",
             headers: {
@@ -116,7 +116,7 @@ const Examen: React.FC = () => {
       }
 
       const res = await fetch(
-        "https://upbstudents-backend-bibliotheque.vercel.app/api/supprimer",
+        "https://upbstudents-backend-1u7x.vercel.app/api/supprimer",
         {
           method: "DELETE",
           headers: {

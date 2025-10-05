@@ -12,7 +12,7 @@ const ForgotPasswordModal: React.FC<Props> = ({ isOpen, closeModal }) => {
 
   async function handleSend() {
     const res = await fetch(
-      "https://upbstudents-backend-bibliotheque.vercel.app/api/forgot",
+      "https://upbstudents-backend-1u7x.vercel.app/api/forgot",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

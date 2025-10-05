@@ -23,7 +23,7 @@ export function useDocuments() {
     async function fetchDocs() {
       try {
         const res = await fetch(
-          "https://upbstudents-backend-bibliotheque.vercel.app/api/afficher",
+          "https://upbstudents-backend-1u7x.vercel.app/api/afficher",
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },

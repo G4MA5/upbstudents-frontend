@@ -114,7 +114,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
     const longinData = { email: loginEmail, password: loginPassword };
     try {
       const res = await fetch(
-        "https://upbstudents-backend-bibliotheque.vercel.app/api/connexion",
+        "https://upbstudents-backend-1u7x.vercel.app/api/connexion",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -152,7 +152,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
 
     try {
       const res = await fetch(
-        "https://upbstudents-backend-bibliotheque.vercel.app/api/inscription",
+        "https://upbstudents-backend-1u7x.vercel.app/api/inscription",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
