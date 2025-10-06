@@ -1,9 +1,48 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import bookImage from "../assets/book-cover.png";
 import backgroundImage from "../assets/Background2.jpg";
-import gamaImage from "../assets/gama.png"; // Assure-toi que le fichier existe
+import gamaImage from "../assets/gama.png";
 
 const StayConnected: React.FC = () => {
+  // Définir le compteur (exemple : 1 jour, 2 heures, 10 minutes, 30 secondes)
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 10,
+    seconds: 30,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        let { days, hours, minutes, seconds } = prev;
+
+        if (seconds > 0) {
+          seconds -= 1;
+        } else {
+          seconds = 59;
+          if (minutes > 0) {
+            minutes -= 1;
+          } else {
+            minutes = 59;
+            if (hours > 0) {
+              hours -= 1;
+            } else {
+              hours = 23;
+              if (days > 0) {
+                days -= 1;
+              }
+            }
+          }
+        }
+
+        return { days, hours, minutes, seconds };
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <>
       {/* Section Stay Connected */}
@@ -14,7 +53,7 @@ const StayConnected: React.FC = () => {
             <img
               src={bookImage}
               alt="Livre"
-              className="w-[300px] md:w-[600px]" // Image un peu plus grande sur Windows
+              className="w-[300px] md:w-[600px]"
             />
           </div>
 
@@ -31,22 +70,30 @@ const StayConnected: React.FC = () => {
               alors consultez régulièrement cette page.
             </p>
 
-            {/* Compteur statique */}
+            {/* Compteur fonctionnel */}
             <div className="flex space-x-6 text-center text-gray-800 font-medium">
               <div>
-                <p className="text-2xl">00</p>
+                <p className="text-2xl">
+                  {String(timeLeft.days).padStart(2, "0")}
+                </p>
                 <span className="text-sm">Jours</span>
               </div>
               <div>
-                <p className="text-2xl">00</p>
+                <p className="text-2xl">
+                  {String(timeLeft.hours).padStart(2, "0")}
+                </p>
                 <span className="text-sm">Heures</span>
               </div>
               <div>
-                <p className="text-2xl">00</p>
+                <p className="text-2xl">
+                  {String(timeLeft.minutes).padStart(2, "0")}
+                </p>
                 <span className="text-sm">Min</span>
               </div>
               <div>
-                <p className="text-2xl">00</p>
+                <p className="text-2xl">
+                  {String(timeLeft.seconds).padStart(2, "0")}
+                </p>
                 <span className="text-sm">Sec</span>
               </div>
             </div>
@@ -54,7 +101,7 @@ const StayConnected: React.FC = () => {
         </div>
       </section>
 
-      {/* Nouvelle section Objectifs */}
+      {/* Section Objectifs */}
       <section
         className="relative bg-cover bg-center text-white min-h-[500px] py-24 px-4 md:px-20"
         style={{ backgroundImage: `url(${backgroundImage})` }}
@@ -66,7 +113,6 @@ const StayConnected: React.FC = () => {
             Nous espérons que notre bibliothèque vous aidera
           </p>
 
-          {/* Image arrondie juste en dessous */}
           <div className="mb-6">
             <img
               src={gamaImage}
@@ -76,14 +122,14 @@ const StayConnected: React.FC = () => {
           </div>
 
           <p className="text-sm text-white leading-relaxed">
-            La bibliothèque digitale que j’ai créée est née d’un constat simple
-            : au sein de notre université, de nombreux étudiants peinent à
-            retrouver les TD et sujets d’examen des années précédentes. Ce
+            La bibliothèque digitale que nous avons créée est née d’un constat
+            simple : au sein de notre université, de nombreux étudiants peinent
+            à retrouver les TD et sujets d’examen des années précédentes. Ce
             manque d’accès freine la révision, ralentit la progression et creuse
-            parfois des inégalités. J’ai donc voulu créer un espace organisé,
-            clair et accessible, où chacun peut retrouver les documents
-            essentiels à sa réussite, selon sa filière, son année et ses
-            matières.
+            parfois des inégalités. Nous avons donc voulu créer un espace
+            organisé, clair et accessible, où chacun peut retrouver les
+            documents essentiels à sa réussite, selon sa filière, son année et
+            ses matières.
             <br />
             <br />
             <strong>GAMA_LABS</strong>

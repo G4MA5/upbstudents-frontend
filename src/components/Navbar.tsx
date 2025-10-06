@@ -7,22 +7,31 @@ import ProfileModal from "./ProfileModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { Home, BookOpen, PlusSquare, Phone } from "lucide-react";
 
+const COLORS = {
+  Orange: "#FF8C42",
+  Red: "#D33A3A",
+  SkyBlue: "#A7D8F5",
+};
+
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
-  const [showConnectedPopup, setShowConnectedPopup] = useState(false); // Ajout popup
+  const [showConnectedPopup, setShowConnectedPopup] = useState(false);
+  const [searchExpanded, setSearchExpanded] = useState(false);
   const navigate = useNavigate();
 
-  const linkStyle = "hover:text-red-400 transition-colors duration-200";
+  const linkStyle =
+    "transition-all duration-300 px-4 py-2 cursor-pointer rounded-full";
   const getActiveClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? "text-red-500 font-semibold" : "text-[#5B5B5B]";
+    isActive ? `bg-orange-400 text-white font-semibold` : "text-[#5B5B5B]";
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
       navigate(`/examen?query=${encodeURIComponent(searchTerm)}`);
       setSearchTerm("");
+      setSearchExpanded(false);
     }
   };
 
@@ -52,107 +61,101 @@ const Navbar: React.FC = () => {
             alt="UpB Logo"
             className="w-36 sm:w-40 h-auto absolute left-1/2 -translate-x-1/2 hidden md:block"
           />
-          <img
+          {/* Profil mobile identique à desktop */}
+          <motion.img
             src={profilePic}
             alt="Profil"
-            className="w-12 h-12 rounded-full border-2 border-white shadow-sm object-cover cursor-pointer"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full border-4 shadow-xl object-cover cursor-pointer ml-4"
+            style={{ borderColor: COLORS.Orange }}
             onClick={handleProfileClick}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: `0 0 0 6px ${COLORS.Orange}20`,
+            }}
+            transition={{ type: "spring", stiffness: 300 }}
           />
         </div>
 
         {/* Desktop */}
         <div className="hidden md:flex justify-between items-center w-full">
-          <img
-            src={logo}
-            alt="UpB Logo"
-            className="w-36 md:w-48 h-auto w-28 md:w-36 lg:w-25 h-auto d-none md:block"
-          />
+          <img src={logo} alt="UpB Logo" className="w-36 md:w-48 h-auto" />
 
-          <ul className="flex items-center space-x-4 sm:space-x-6 md:space-x-8 font-worksans font-normal pb-[1px] text-[clamp(12px,1.2vw,18px)]">
-            <li>
-              <NavLink
-                to="/"
-                className={(props) => `${getActiveClass(props)} ${linkStyle}`}
-              >
-                Accueil
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/examen"
-                className={(props) => `${getActiveClass(props)} ${linkStyle}`}
-              >
-                Examen , TD & TP
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/ajouter"
-                className={(props) => `${getActiveClass(props)} ${linkStyle}`}
-              >
-                Ajouter document
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                to="/contact"
-                className={(props) => `${getActiveClass(props)} ${linkStyle}`}
-              >
-                Contact
-              </NavLink>
-            </li>
+          {/* Menu desktop avec BADGRAM rond qui prend tout le lien */}
+          <ul className="flex items-center space-x-4 lg:sm:space-x-4 sm:space-x-6 md:space-x-8 font-worksans font-normal pb-[1px] text-[clamp(12px,1.2vw,18px)]">
+            {[
+              { text: "Accueil", to: "/" },
+              { text: "Examen , TD & TP", to: "/examen" },
+              { text: "Ajouter document", to: "/ajouter" },
+              { text: "Contact", to: "/contact" },
+            ].map((item) => (
+              <li key={item.text} className={linkStyle}>
+                <NavLink
+                  to={item.to}
+                  className={({ isActive }) =>
+                    `flex items-center justify-center px-4 py-2 rounded-full transition-colors duration-300 ${
+                      isActive
+                        ? "bg-orange-400 text-white font-semibold"
+                        : "text-[#5B5B5B] hover:bg-orange-400 hover:text-white"
+                    }`
+                  }
+                >
+                  {item.text}
+                </NavLink>
+              </li>
+            ))}
           </ul>
 
+          {/* Barre de recherche animée bleu ciel */}
           <form
             onSubmit={handleSearch}
-            className="flex items-center space-x-3 sm:space-x-4 md:space-x-5"
+            className="relative flex items-center ml-4"
           >
-            <div className="flex items-center px-2 sm:px-3 py-1 sm:py-1.5 md:py-2 lg:py-1.5 bg-gray-100 rounded-full border border-[#5B5B5B]">
+            <motion.div
+              className="flex items-center bg-sky-100 rounded-full border border-sky-300 px-3 py-2 cursor-pointer"
+              initial={{ width: 40 }}
+              animate={{ width: searchExpanded ? 240 : 40 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
               <img
                 src={searchIcon}
                 alt="Rechercher"
-                className="w-4 sm:w-4.5 md:w-5 h-4 sm:h-4.5 md:h-5 mr-1 sm:mr-2"
+                className="w-5 h-5"
+                onClick={() => setSearchExpanded(!searchExpanded)}
               />
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                placeholder="Rechercher..."
-                className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(12px,1vw,16px)] placeholder:text-gray-500"
-              />
-            </div>
-            <img
-              src={profilePic}
-              alt="Profil"
-              className="w-[clamp(36px,3vw,56px)] h-[clamp(36px,3vw,56px)] rounded-full border-2 border-white shadow-sm object-cover cursor-pointer"
-              onClick={handleProfileClick}
-            />
+              {searchExpanded && (
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Rechercher..."
+                  className="ml-2 bg-transparent outline-none w-full placeholder-gray-500"
+                  autoFocus
+                />
+              )}
+            </motion.div>
           </form>
+
+          <motion.img
+            src={profilePic}
+            alt="Profil"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full border-4 shadow-xl object-cover cursor-pointer ml-4"
+            style={{ borderColor: COLORS.Orange }}
+            onClick={handleProfileClick}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: `0 0 0 6px ${COLORS.Orange}20`,
+            }}
+            transition={{ type: "spring", stiffness: 300 }}
+          />
         </div>
       </div>
 
       {/* Mobile search bar */}
-      <div className="md:hidden mt-6">
-        <form
-          onSubmit={handleSearch}
-          className="flex items-center bg-gray-100 px-3 py-2 rounded-full border border-gray-300"
-        >
-          <img src={searchIcon} alt="Rechercher" className="w-5 h-5 mr-2" />
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Rechercher..."
-            className="bg-transparent outline-none text-sm w-full placeholder:text-gray-500"
-          />
-        </form>
-      </div>
 
       {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <>
-            {/* Overlay sombre */}
             <motion.div
               className="fixed inset-0 bg-black/20 z-40"
               initial={{ opacity: 0 }}
@@ -160,17 +163,13 @@ const Navbar: React.FC = () => {
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
             />
-
-            {/* Drawer menu */}
             <motion.div
               initial={{ x: "-100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "-100%", opacity: 0 }}
               transition={{ type: "spring", stiffness: 300, damping: 30 }}
               className="fixed top-0 left-0 h-full w-64 z-50 text-gray-800 shadow-xl border-r border-gray-200 rounded-t-2xl pt-16 md:pt-0 bg-gray-100"
-              style={{ fontFamily: "var(--font-worksans)" }}
             >
-              {/* Bouton fermer */}
               <motion.button
                 className="absolute top-7 right-5 text-xl text-gray-600 hover:text-red-500 transition"
                 onClick={() => setIsOpen(false)}
@@ -180,7 +179,6 @@ const Navbar: React.FC = () => {
                 ✕
               </motion.button>
 
-              {/* Liens animés */}
               <motion.div
                 initial="hidden"
                 animate="visible"
@@ -228,12 +226,11 @@ const Navbar: React.FC = () => {
                     <NavLink
                       to={item.to}
                       className={({ isActive }) =>
-                        `flex items-center gap-3 px-3 py-2 rounded-md transition
-                   ${
-                     isActive
-                       ? "bg-white text-black"
-                       : "text-black hover:bg-gray-200"
-                   }`
+                        `flex items-center gap-3 px-3 py-2 rounded-md transition ${
+                          isActive
+                            ? "bg-white text-black"
+                            : "text-black hover:bg-gray-200"
+                        }`
                       }
                       onClick={() => setIsOpen(false)}
                     >
@@ -253,18 +250,18 @@ const Navbar: React.FC = () => {
         <ProfileModal closeModal={() => setIsProfileOpen(false)} />
       )}
 
-      {/* Popup connecté */}
+      {/* Popup connecté amélioré */}
       {showConnectedPopup && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+          <div className="bg-white rounded-2xl shadow-xl p-8 text-center w-[90%] max-w-sm mx-auto">
             <h2 className="text-xl font-bold mb-4 text-green-600">
               Vous êtes bien sur la bibliothèque d'UPB !
             </h2>
             <button
-              className="mt-4 px-6 py-2 bg-orange-500 text-white rounded-full font-semibold"
+              className="mt-4 px-6 py-2 bg-sky-300 text-white rounded-full font-semibold hover:bg-sky-400 transition-colors"
               onClick={() => setShowConnectedPopup(false)}
             >
-              OK
+              Commencer
             </button>
           </div>
           <div

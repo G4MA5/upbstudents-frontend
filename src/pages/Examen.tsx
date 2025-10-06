@@ -55,7 +55,6 @@ const Examen: React.FC = () => {
           {
             method: "GET",
             headers: {
-              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
           }
@@ -208,10 +207,10 @@ const Examen: React.FC = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Rechercher..."
-            className="w-full pl-10 pr-4 py-3 rounded-full bg-gray-200 text-base text-gray-700 focus:outline-none focus:ring-2 focus:ring-[#ff4b4b]"
+            className="w-full pl-10 pr-4 py-3 rounded-full bg-sky-100 text-base text-gray-700 focus:outline-none focus:ring-2 focus:ring-sky-100"
           />
-          <span className="absolute left-4 top-3.5 text-gray-500 text-lg">
-            <img src={searchIcon} alt="Rechercher" className="w-5 h-5 mr-2" />
+          <span className="absolute left-4 top-3.5 text-gray-500 text-lg cursor-pointer">
+            <img src={searchIcon} alt="Rechercher" className="w-5 h-5" />
           </span>
         </div>
       </div>

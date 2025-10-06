@@ -4,7 +4,6 @@ import { Document, Page } from "react-pdf";
 import mammoth from "mammoth";
 import * as XLSX from "xlsx";
 import DownloadIcon from "../assets/Docs/telechargement.png";
-import EyeIcon from "../assets/Docs/Eye.png";
 
 export interface ExamenDocumentCardProps {
   title: string;
@@ -18,8 +17,7 @@ export interface ExamenDocumentCardProps {
   openProfileModal?: () => void;
   id: number;
   filePath: string;
-
-  openGlobalPopup?: (doc: ExamenDocumentCardProps) => void; // popup centralisé
+  openGlobalPopup?: (doc: ExamenDocumentCardProps) => void;
 }
 
 const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
@@ -31,7 +29,6 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
   filiere,
   file_url,
   session,
-
   id,
   filePath,
   openProfileModal,
@@ -75,7 +72,6 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
     setXlsxData([]);
   };
 
-  // Long press pour popup centralisé
   const handlePressStart = () => {
     timerRef.current = setTimeout(() => {
       if (openGlobalPopup) {
@@ -88,7 +84,6 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
           filiere,
           file_url,
           session,
-
           id,
           filePath,
         });
@@ -105,7 +100,6 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
 
   const fileExtension = file_url.split(".").pop()?.toLowerCase();
 
-  // Load TXT
   useEffect(() => {
     if (localPopupVisible && fileExtension === "txt") {
       fetch(file_url)
@@ -115,7 +109,6 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
     }
   }, [localPopupVisible, fileExtension, file_url]);
 
-  // Load DOCX
   useEffect(() => {
     if (localPopupVisible && fileExtension === "docx") {
       fetch(file_url)
@@ -131,7 +124,6 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
     }
   }, [localPopupVisible, fileExtension, file_url]);
 
-  // Load XLSX
   useEffect(() => {
     if (localPopupVisible && fileExtension === "xlsx") {
       fetch(file_url)
@@ -157,106 +149,82 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
         onMouseLeave={handlePressEnd}
         onTouchStart={handlePressStart}
         onTouchEnd={handlePressEnd}
-        className="cursor-pointer transition-shadow duration-300 shadow-sm hover:shadow-md max-w-[220px] mx-auto md:max-w-none bg-white rounded-md my-6 relative"
+        className="w-full sm:w-[230px] bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden transform hover:-translate-y-1"
       >
-        <div className="relative">
-          <img
-            src={cover}
-            alt={title}
-            className="w-full h-48 md:h-64 object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center mt-0 items-start">
-            <span className="text-white text font-bold px-4 py-2 mb-5">
-              <p className="mt-0 mb-5 text-sm">
-                {type} <br /> {filiere}
-              </p>
-            </span>
-          </div>
-
-          {clicked && (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 mt-4">
-              <motion.button
-                onClick={handleDownload}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3 }}
-                className="group bg-white text-black px-7 py-1 rounded-[6px] shadow flex items-center gap-2 transition-all duration-300 ease-out hover:bg-[#FF9E78] hover:text-white hover:scale-105 active:scale-95"
-              >
-                Télécharger
-                <img
-                  src={DownloadIcon}
-                  alt="Télécharger"
-                  className="w-4 h-4 transition duration-200 group-hover:brightness-0 group-hover:invert"
-                />
-              </motion.button>
-
-              <motion.button
-                onClick={handleView}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.15 }}
-                className="group bg-white text-black px-7 py-1 rounded-[6px] shadow flex items-center gap-2 transition-all duration-300 ease-out hover:bg-[#FF9E78] hover:text-white hover:scale-105 active:scale-95"
-              >
-                Voir
-                <img
-                  src={EyeIcon}
-                  alt="Voir"
-                  className="w-4 h-4 transition duration-200 group-hover:brightness-0 group-hover:invert"
-                />
-              </motion.button>
-            </div>
-          )}
-        </div>
-
-        <div
-          className={`transition-colors duration-300 ${
-            clicked ? "bg-orange-500 text-white" : "bg-white text-gray-800"
-          }`}
-        >
-          <div className="flex justify-between items-center text-xs mb-1">
-            <span className="uppercase font-medium">{type}</span>
-            <span className="italic">{level}</span>
-          </div>
-          <h3 className="text-sm font-semibold line-clamp-2">{title}</h3>
-          <p
-            className={`text-sm mt-1 font-bold ${
-              clicked ? "text-[#032541]" : "text-[#F44344]"
-            }`}
-          >
-            {session} / {year}
+        {/* Haut avec fond rose */}
+        <div className="bg-[#ffe1e1] h-24 flex flex-col items-center justify-center text-center px-2">
+          <p className="text-[#f44344] text-sm font-semibold uppercase leading-tight">
+            {filiere} {type}
           </p>
         </div>
+
+        {/* Bas de la carte */}
+        <div className="p-4">
+          <h3 className="text-base font-semibold text-gray-800 mb-2 line-clamp-2">
+            {title}
+          </h3>
+
+          <p className="text-gray-500 text-sm">
+            {level} / {year}
+          </p>
+
+          <div className="flex items-center justify-between mt-3 text-sm">
+            <span
+              className={`px-3 py-1 rounded-full text-white ${
+                type.toLowerCase() === "td" ? "bg-indigo-400" : "bg-purple-400"
+              }`}
+            >
+              {type}
+            </span>
+            <span className="text-gray-600">{session}</span>
+          </div>
+        </div>
+
+        {/* Boutons au clic */}
+        {clicked && (
+          <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-3">
+            <motion.button
+              onClick={handleDownload}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="flex items-center gap-2 bg-white text-black px-6 py-2 rounded-md font-medium shadow 
+                         hover:bg-[#FF9E78] hover:text-white transition-all duration-300"
+            >
+              Télécharger
+              <img src={DownloadIcon} alt="Télécharger" className="w-4 h-4" />
+            </motion.button>
+          </div>
+        )}
       </div>
 
-      {/* Popup */}
+      {/* Popup identique */}
       {localPopupVisible && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 p-4 overflow-auto"
+          className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4"
         >
           <motion.div
-            initial={{ scale: 0.8 }}
+            initial={{ scale: 0.9 }}
             animate={{ scale: 1 }}
-            exit={{ scale: 0.8 }}
-            className="bg-white rounded-md shadow-lg max-w-4xl w-full p-4 relative"
+            exit={{ scale: 0.9 }}
+            className="bg-white rounded-xl shadow-lg max-w-4xl w-full p-6 relative overflow-auto max-h-[90vh]"
           >
-            {/* Croix fermer */}
             <button
               onClick={handleCloseLocalPopup}
-              className="absolute top-2 right-2 text-gray-600 hover:text-black font-bold text-lg"
+              className="absolute top-3 right-4 text-gray-500 hover:text-black text-2xl"
             >
               ×
             </button>
 
-            {/* Aperçu */}
-            <div className="mb-4 max-h-[700px] overflow-auto">
+            <div className="max-h-[70vh] overflow-auto">
               {["png", "jpg", "jpeg", "gif"].includes(fileExtension || "") && (
                 <img
                   src={file_url}
                   alt={title}
-                  className="w-full object-contain rounded-md"
+                  className="w-full object-contain rounded-lg"
                 />
               )}
               {fileExtension === "pdf" && (
@@ -274,12 +242,12 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
                 </Document>
               )}
               {fileExtension === "txt" && (
-                <pre className="bg-gray-100 p-2 rounded-md">
+                <pre className="bg-gray-100 p-3 rounded-md text-sm">
                   {txtContent || "Chargement..."}
                 </pre>
               )}
               {fileExtension === "docx" && (
-                <div className="bg-gray-100 p-2 rounded-md whitespace-pre-wrap">
+                <div className="bg-gray-100 p-3 rounded-md text-sm whitespace-pre-wrap">
                   {docxContent || "Chargement..."}
                 </div>
               )}
@@ -303,27 +271,12 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
                   </table>
                 </div>
               )}
-              {![
-                "png",
-                "jpg",
-                "jpeg",
-                "gif",
-                "pdf",
-                "txt",
-                "docx",
-                "xlsx",
-              ].includes(fileExtension || "") && (
-                <p className="text-center text-gray-500">
-                  Aperçu non disponible. Cliquez sur "Télécharger".
-                </p>
-              )}
             </div>
 
-            {/* Télécharger */}
-            <div className="flex justify-center">
+            <div className="flex justify-center mt-4">
               <button
                 onClick={handleDownload}
-                className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-md"
+                className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-md"
               >
                 Télécharger
                 <img src={DownloadIcon} alt="Télécharger" className="w-4 h-4" />
