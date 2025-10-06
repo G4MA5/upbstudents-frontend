@@ -32,7 +32,7 @@ const PopularDocuments: React.FC = () => {
   };
 
   return (
-    <div className="bg-white py-12 px-4 md:px-20">
+    <div className="bg-white py-12 px-4 sm:px-6 md:px-12 lg:px-20">
       <div className="text-center mb-8">
         <h2 className="text-2xl md:text-3xl font-semibold text-gray-800">
           Documents les plus populaires
@@ -43,7 +43,7 @@ const PopularDocuments: React.FC = () => {
         </p>
 
         {/* BOUTONS */}
-        <div className="flex justify-center mt-8 space-x-3">
+        <div className="flex flex-wrap justify-center gap-3 mt-8">
           <button
             onClick={() => handleCategoryChange("best")}
             className={`px-4 py-1 rounded-full text-sm transition ${
@@ -80,26 +80,27 @@ const PopularDocuments: React.FC = () => {
       {/* LISTE DES DOCUMENTS AVEC ANIMATION */}
       <div
         key={animationKey}
-        className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-screen-xl mx-auto animate-fade-in-up"
+        className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto animate-fade-in-up"
       >
         {loading ? (
-          <div className="col-span-4 text-center text-gray-500">
+          <div className="col-span-full text-center text-gray-500">
             Chargement...
           </div>
         ) : (
           getDocuments().map((doc, index) => (
-            <DocumentCard
-              key={index}
-              title={doc.title}
-              cover={carte}
-              year={doc.annee}
-              level={doc.licence}
-              type={doc.type}
-              filiere={doc.filiere}
-              file_url={doc.file_url}
-              session={doc.session}
-              openProfileModal={() => setShowProfileModal(true)} // Passe la prop ici
-            />
+            <div key={index} className="flex justify-center">
+              <DocumentCard
+                title={doc.title}
+                cover={carte}
+                year={doc.annee}
+                level={doc.licence}
+                type={doc.type}
+                filiere={doc.filiere}
+                file_url={doc.file_url}
+                session={doc.session}
+                openProfileModal={() => setShowProfileModal(true)} // Passe la prop ici
+              />
+            </div>
           ))
         )}
       </div>

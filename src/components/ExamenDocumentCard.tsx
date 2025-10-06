@@ -144,10 +144,10 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
         onMouseLeave={handlePressEnd}
         onTouchStart={handlePressStart}
         onTouchEnd={handlePressEnd}
-        className="w-full sm:w-[230px] bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden transform hover:-translate-y-1"
+        className="w-full sm:w-[220px] md:w-[260px] bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden transform hover:-translate-y-1 relative"
       >
         {/* Haut avec fond rose */}
-        <div className="bg-[#ffe1e1] h-24 flex flex-col items-center justify-center text-center px-2">
+        <div className="bg-[#ffe1e1] h-20 sm:h-24 flex flex-col items-center justify-center text-center px-2">
           <p className="text-[#f44344] text-sm font-semibold uppercase leading-tight">
             {filiere} {type}
           </p>
@@ -155,7 +155,7 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
 
         {/* Bas de la carte */}
         <div className="p-4">
-          <h3 className="text-base font-semibold text-gray-800 mb-2 line-clamp-2">
+          <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
             {title}
           </h3>
 
@@ -177,13 +177,13 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
 
         {/* Boutons au clic */}
         {clicked && (
-          <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-3">
+          <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-3 p-4">
             <motion.button
               onClick={handleDownload}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="flex items-center gap-2 bg-white text-black px-6 py-2 rounded-md font-medium shadow 
+              className="flex items-center gap-2 bg-white text-black px-4 py-2 md:px-6 md:py-2 rounded-md font-medium shadow 
                          hover:bg-[#FF9E78] hover:text-white transition-all duration-300"
             >
               Télécharger
@@ -202,10 +202,10 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
           className="fixed inset-0 bg-black/60 flex justify-center items-center z-50 p-4"
         >
           <motion.div
-            initial={{ scale: 0.9 }}
+            initial={{ scale: 0.95 }}
             animate={{ scale: 1 }}
-            exit={{ scale: 0.9 }}
-            className="bg-white rounded-xl shadow-lg max-w-4xl w-full p-6 relative overflow-auto max-h-[90vh]"
+            exit={{ scale: 0.95 }}
+            className="bg-white rounded-xl shadow-lg w-full max-w-3xl md:max-w-4xl p-4 md:p-6 relative overflow-auto max-h-[90vh]"
           >
             <button
               onClick={handleCloseLocalPopup}
@@ -219,7 +219,7 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
                 <img
                   src={file_url}
                   alt={title}
-                  className="w-full object-contain rounded-lg"
+                  className="w-full object-contain rounded-lg max-h-[60vh]"
                 />
               )}
               {fileExtension === "pdf" && (
@@ -231,7 +231,12 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
                     <Page
                       key={`page_${i + 1}`}
                       pageNumber={i + 1}
-                      width={800}
+                      width={Math.min(
+                        900,
+                        typeof window !== "undefined"
+                          ? window.innerWidth * 0.8
+                          : 800
+                      )}
                     />
                   ))}
                 </Document>
