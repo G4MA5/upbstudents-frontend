@@ -23,8 +23,6 @@ const Navbar: React.FC = () => {
 
   const linkStyle =
     "transition-all duration-300 px-4 py-2 cursor-pointer rounded-full";
-  const getActiveClass = ({ isActive }: { isActive: boolean }) =>
-    isActive ? `bg-orange-400 text-white font-semibold` : "text-[#5B5B5B]";
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();

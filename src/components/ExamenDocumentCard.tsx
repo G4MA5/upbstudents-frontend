@@ -60,11 +60,6 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
     document.body.removeChild(link);
   };
 
-  const handleView = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    setLocalPopupVisible(true);
-  };
-
   const handleCloseLocalPopup = () => {
     setLocalPopupVisible(false);
     setTxtContent("");
