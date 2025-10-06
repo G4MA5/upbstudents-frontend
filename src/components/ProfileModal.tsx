@@ -389,11 +389,14 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
 
     try {
       // Le back est conservé tel quel (fetch vers API)
-      const res = await fetch("http://localhost:3000/api/inscription", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(signupData),
-      });
+      const res = await fetch(
+        "https://upbstudents-backend-1u7x.vercel.app/api/inscription",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(signupData),
+        }
+      );
       const data = await res.json();
 
       if (data.status === "ok") {
