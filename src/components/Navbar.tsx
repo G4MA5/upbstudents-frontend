@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
             className="w-36 sm:w-40 h-auto absolute left-1/2 -translate-x-1/2 hidden md:block"
           />
 
-        {/* Barre de recherche animée bleu ciel */}
+          {/* Barre de recherche animée bleu ciel */}
           <form
             onSubmit={handleSearch}
             className="relative flex items-center space-x-4 sm:space-x-4 md:space-x-5"
@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Rechercher..."
-                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(12px,1vw,16px)] placeholder:text-gray-500"
+                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(17px,1vw,20px)] placeholder:text-gray-500"
                   autoFocus
                 />
               )}
@@ -107,7 +107,11 @@ const Navbar: React.FC = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex justify-between items-center w-full">
-          <img src={logo} alt="UpB Logo" className="w-38 md:w-48 h-auto w-38 md:w-38 lg:w-25 h-auto hidden md:block " />
+          <img
+            src={logo}
+            alt="UpB Logo"
+            className="w-38 md:w-48 h-auto w-38 md:w-38 lg:w-25 h-auto hidden md:block "
+          />
 
           {/* Menu desktop avec BADGRAM rond qui prend tout le lien */}
           <ul className="flex items-center space-x-4 lg:sm:space-x-4 sm:space-x-4 md:space-x-4 font-worksans font-normal pb-[1px] text-[clamp(12px,1.2vw,18px)]">
@@ -157,7 +161,7 @@ const Navbar: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Rechercher..."
-                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(12px,1vw,16px)] placeholder:text-gray-500"
+                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(17px,1vw,20px)] placeholder:text-gray-500"
                   autoFocus
                 />
               )}

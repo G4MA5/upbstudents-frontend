@@ -339,7 +339,7 @@ const Contact: React.FC = () => {
                 className="flex-1 bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-3 rounded-full font-semibold shadow-lg hover:scale-[1.02] active:scale-95 transition-transform"
                 whileTap={{ scale: 0.98 }}
               >
-                Envoyer le message
+                Envoyer
               </motion.button>
 
               <motion.button
