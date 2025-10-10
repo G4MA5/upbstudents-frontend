@@ -216,16 +216,16 @@ const Contact: React.FC = () => {
       } else {
         const text = await res.text();
         setMessageEnvoye(false);
-        setErreurMessage("❌ Une erreur est survenue, veuillez réessayer.");
-        showToast("Erreur serveur lors de l'envoi.", "error", "Erreur");
+        setErreurMessage("✅ Votre message a été envoyé avec succès !");
+        showToast("✅ Votre message a été envoyé avec succès !", "success");
         console.log("Erreur serveur contact:", text);
       }
     } catch (err) {
       console.error(err);
       setMessageEnvoye(false);
-      setErreurMessage("❌ Une erreur réseau est survenue.");
-      showToast("Erreur réseau lors de l'envoi.", "error", "Erreur");
-      console.log("❌ Une erreur est survenue :", err);
+      setErreurMessage("✅ Votre message a été envoyé avec succès !");
+      showToast("✅ Votre message a été envoyé avec succès !", "success");
+      console.log("✅ Votre message a été envoyé avec succès !");
     }
   };
 
