@@ -442,7 +442,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
           transition={{ type: "spring", stiffness: 200, damping: 20 }}
           onClick={(e) => e.stopPropagation()}
           // Enhanced responsiveness: wider on large screens, ensuring maximum utility
-          className="pointer-events-auto w-[90%] sm:w-[95%] md:w-[90%] max-w-lg md:max-w-3xl min-h-[320px] bg-white/95 backdrop-blur-sm rounded-3xl shadow-3xl shadow-orange-300/30 p-6 md:p-10 flex flex-col font-['Sen']"
+          className="pointer-events-auto w-[100%] sm:w-[95%] md:w-[90%] max-w-lg md:max-w-3xl min-h-[280px] sm:min-h-[300px] md:min-h-[320px] max-h-[92vh] md:max-h-[85vh] overflow-y-auto bg-white/95 backdrop-blur-sm rounded-3xl shadow-3xl shadow-orange-300/30 p-6 md:p-10 flex flex-col font-['Sen']"
         >
           {/* Bouton de fermeture élégant */}
           <button
@@ -488,77 +488,98 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
 
           {/* CONTENU PRINCIPAL AVEC TRANSITION */}
           <AnimatePresence mode="wait">
-            {/* CARDS (Choix Initial) */}
-            {activeView === "cards" && (
-              <motion.div
-                key="cards"
-                initial={{ opacity: 0, x: 50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -50 }}
-                transition={{ duration: 0.3 }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-8 flex-grow"
-              >
-                {/* Carte Connexion (Orange pour le focus) */}
-                <motion.div
-                  whileHover={{
-                    scale: 1.03,
-                    boxShadow: "0 10px 20px rgba(251, 146, 60, 0.4)",
-                  }} // Orange shadow on hover
-                  whileTap={{ scale: 0.99 }}
-                  className="bg-orange-50 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-lg border-2 border-orange-200/50 h-full min-h-[220px]"
-                >
-                  <div>
-                    <LogIn
-                      size={40}
-                      className="text-orange-500 mb-3 mx-auto drop-shadow-sm"
-                    />
-                    <h3 className="text-xl font-extrabold mb-2 text-center text-orange-700">
-                      J'ai déjà un compte
-                    </h3>
-                    <p className="text-sm text-gray-600 text-center mb-6">
-                      Accédez rapidement à votre espace personnel.
-                    </p>
-                  </div>
-                  <motion.button
-                    className="w-full py-3 bg-orange-500 text-white font-bold rounded-full shadow-lg hover:bg-orange-600 transition-colors"
-                    onClick={() => setActiveView("login")}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Se connecter
-                  </motion.button>
-                </motion.div>
+     {/* CARDS (Choix Initial) */}
+{activeView === "cards" && (
+  <motion.div
+    key="cards"
+    initial={{ opacity: 0, x: 50 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: -50 }}
+    transition={{ duration: 0.3 }}
+    className="flex-grow"
+  >
+    {/* Conteneur swipe horizontal sur mobile et grille sur desktop */}
+    <div
+      className="flex md:grid md:grid-cols-2 gap-5 md:gap-8 overflow-x-auto md:overflow-visible snap-x snap-mandatory"
+      style={{
+        scrollbarWidth: "none", // Firefox
+        msOverflowStyle: "none", // IE / Edge
+      }}
+    >
+      <style>
+        {`
+          div::-webkit-scrollbar { display: none; }
 
-                {/* Carte Inscription (Bleu Ciel pour le soft) */}
-                <motion.div
-                  whileHover={{
-                    scale: 1.03,
-                    boxShadow: "0 10px 20px rgba(96, 165, 250, 0.4)",
-                  }} // Blue shadow on hover
-                  whileTap={{ scale: 0.99 }}
-                  className="bg-blue-50 rounded-3xl p-6 md:p-8 flex flex-col justify-between shadow-lg border-2 border-blue-200/50 h-full min-h-[220px]"
-                >
-                  <div>
-                    <UserPlus
-                      size={40}
-                      className="text-blue-500 mb-3 mx-auto drop-shadow-sm"
-                    />
-                    <h3 className="text-xl font-extrabold mb-2 text-center text-blue-700">
-                      Nouveau à l'UPB ?
-                    </h3>
-                    <p className="text-sm text-gray-600 text-center mb-6">
-                      Créez votre compte étudiant en quelques clics.
-                    </p>
-                  </div>
-                  <motion.button
-                    className="w-full py-3 bg-blue-500 text-white font-bold rounded-full shadow-xl shadow-blue-300/50 hover:bg-blue-600 transition-all"
-                    onClick={() => setActiveView("signup")}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    Créer mon compte
-                  </motion.button>
-                </motion.div>
-              </motion.div>
-            )}
+          /* ✅ Hover desktop uniquement */
+          @media (hover: hover) and (pointer: fine) {
+            .card-hover-orange:hover {
+              transform: scale(1.05);
+              box-shadow: 0 12px 28px rgba(251, 146, 60, 0.45);
+            }
+            .card-hover-blue:hover {
+              transform: scale(1.05);
+              box-shadow: 0 12px 28px rgba(96, 165, 250, 0.45);
+            }
+          }
+
+          .card-hover-orange, .card-hover-blue {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+        `}
+      </style>
+
+      {/* Carte Connexion (orange) */}
+      <motion.div
+        className="card-hover-orange flex-shrink-0 w-[100%] md:w-full bg-orange-50 rounded-3xl p-6 md:p-8 flex flex-col justify-between border-2 border-orange-200 h-full min-h-[220px] snap-start"
+        whileTap={{ scale: 0.97 }}
+      >
+        <div>
+          <LogIn size={40} className="text-orange-500 mb-3 mx-auto drop-shadow-sm" />
+          <h3 className="text-xl font-extrabold mb-2 text-center text-orange-700">
+            J'ai déjà un compte
+          </h3>
+          <p className="text-sm text-gray-600 text-center mb-6">
+            Accédez rapidement à votre espace personnel.
+          </p>
+        </div>
+        <motion.button
+          className="w-full py-3 bg-orange-500 text-white font-bold rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+          onClick={() => setActiveView("login")}
+          whileTap={{ scale: 0.97 }}
+        >
+          Se connecter
+        </motion.button>
+      </motion.div>
+
+      {/* Carte Inscription (bleue) */}
+      <motion.div
+        className="card-hover-blue flex-shrink-0 w-[100%] md:w-full bg-blue-50 rounded-3xl p-6 md:p-8 flex flex-col justify-between border-2 border-blue-200 h-full min-h-[220px] snap-start"
+        whileTap={{ scale: 0.97 }}
+      >
+        <div>
+          <UserPlus size={40} className="text-blue-500 mb-3 mx-auto drop-shadow-sm" />
+          <h3 className="text-xl font-extrabold mb-2 text-center text-blue-700">
+            Nouveau à l'UPB ?
+          </h3>
+          <p className="text-sm text-gray-600 text-center mb-6">
+            Créez votre compte étudiant en quelques clics.
+          </p>
+        </div>
+        <motion.button
+          className="w-full py-3 bg-blue-500 text-white font-bold rounded-full shadow-xl shadow-blue-300/50 hover:bg-blue-600 transition-all"
+          onClick={() => setActiveView("signup")}
+          whileTap={{ scale: 0.97 }}
+        >
+          Créer mon compte
+        </motion.button>
+      </motion.div>
+    </div>
+  </motion.div>
+)}
+
+
+
+
 
             {/* LOGIN */}
             {activeView === "login" && (
@@ -638,160 +659,143 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
             )}
 
             {/* SIGNUP */}
-            {activeView === "signup" && (
-              <motion.form
-                key="signup"
-                initial={{ opacity: 0, x: -50 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 50 }}
-                transition={{ duration: 0.3 }}
-                className="flex flex-col space-y-4 max-w-lg mx-auto w-full"
-                onSubmit={handleSignupSubmit}
-              >
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="text"
-                    placeholder="Nom"
-                    className={inputClass}
-                    value={nom}
-                    onChange={(e) => setNom(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="Prénom"
-                    className={inputClass}
-                    value={prenom}
-                    onChange={(e) => setPrenom(e.target.value)}
-                    required
-                  />
-                </div>
+{activeView === "signup" && (
+  <motion.form
+    key="signup"
+    initial={{ opacity: 0, x: -50 }}
+    animate={{ opacity: 1, x: 0 }}
+    exit={{ opacity: 0, x: 50 }}
+    transition={{ duration: 0.3 }}
+    className="flex flex-col font-sen space-y-4lex flex-col space-y-4 max-w-lg mx-auto w-full"
+    onSubmit={handleSignupSubmit}
+  >
+    {/* Nom et Prénom */}
+    <div className="grid grid-cols-2 gap-3">
+      <input
+        type="text"
+        placeholder="Nom"
+        className={inputClass}
+        value={nom}
+        onChange={(e) => setNom(e.target.value)}
+        required
+      />
+      <input
+        type="text"
+        placeholder="Prénom"
+        className={inputClass}
+        value={prenom}
+        onChange={(e) => setPrenom(e.target.value)}
+        required
+      />
+    </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <AnimatedDropdown
-                    label="Niveau"
-                    options={[
-                      "Licence 1",
-                      "Licence 2",
-                      "Licence 3",
-                      "Master 1",
-                      "Master 2",
-                    ]}
-                    value={niveau}
-                    onChange={setNiveau}
-                  />
-                  <AnimatedDropdown
-                    label="Filière"
-                    options={[
-                      "MIAGE",
-                      "ASSRI",
-                      "SEA",
-                      "SEG",
-                      "3EA",
-                      "SJAP",
-                      "RIT",
-                    ]}
-                    value={filiere}
-                    onChange={setFiliere}
-                  />
-                </div>
+    {/* Niveau et Filière */}
+    <div className="grid grid-cols-2 gap-3">
+      <AnimatedDropdown
+        label="Niveau"
+        options={["Licence 1", "Licence 2", "Licence 3", "Master 1", "Master 2"]}
+        value={niveau}
+        onChange={setNiveau}
+      />
+      <AnimatedDropdown
+        label="Filière"
+        options={["MIAGE", "ASSRI", "SEA", "SEG", "3EA", "SJAP", "RIT"]}
+        value={filiere}
+        onChange={setFiliere}
+      />
+    </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <input
-                    type="email"
-                    placeholder="Email"
-                    className={inputClass}
-                    value={signupEmail}
-                    onChange={(e) => setSignupEmail(e.target.value)}
-                    required
-                  />
-                  <input
-                    type="tel"
-                    name="phone"
-                    placeholder="Numéro ex: 0612345678"
-                    className={inputClass}
-                    value={numero}
-                    onChange={(e) => setNumero(e.target.value)}
-                    pattern="[0-9]{10}"
-                    required
-                  />
-                </div>
+    {/* Email et Numéro */}
+    <div className="grid grid-cols-2 gap-3">
+      <input
+        type="email"
+        placeholder="Email"
+        className={inputClass}
+        value={signupEmail}
+        onChange={(e) => setSignupEmail(e.target.value)}
+        required
+      />
+      <input
+        type="tel"
+        placeholder="Numéro ex: 0612345678"
+        className={inputClass}
+        value={numero}
+        onChange={(e) => setNumero(e.target.value)}
+        pattern="[0-9]{10}"
+        required
+      />
+    </div>
 
-                {/* Champ Mot de passe */}
-                <div className="relative">
-                  <input
-                    type={showSignupPassword ? "text" : "password"}
-                    placeholder="Mot de passe"
-                    className={inputClass}
-                    value={signupPassword}
-                    onChange={(e) => setSignupPassword(e.target.value)}
-                    required
-                  />
-                  <motion.button
-                    type="button"
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition"
-                    onClick={() => setShowSignupPassword((prev) => !prev)}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    {showSignupPassword ? (
-                      <EyeOff size={20} />
-                    ) : (
-                      <Eye size={20} />
-                    )}
-                  </motion.button>
-                </div>
+    {/* Mot de passe */}
+    <div className="relative">
+      <input
+        type={showSignupPassword ? "text" : "password"}
+        placeholder="Mot de passe"
+        className={inputClass}
+        value={signupPassword}
+        onChange={(e) => setSignupPassword(e.target.value)}
+        required
+      />
+      <motion.button
+        type="button"
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition"
+        onClick={() => setShowSignupPassword((prev) => !prev)}
+        whileTap={{ scale: 0.9 }}
+      >
+        {showSignupPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+      </motion.button>
+    </div>
 
-                {/* Champ Confirmer Mot de passe */}
-                <div className="relative">
-                  <input
-                    type={showConfirmPassword ? "text" : "password"}
-                    placeholder="Confirmer Mot de passe"
-                    className={inputClass}
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    required
-                  />
-                  <motion.button
-                    type="button"
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition"
-                    onClick={() => setShowConfirmPassword((prev) => !prev)}
-                    whileTap={{ scale: 0.9 }}
-                  >
-                    {showConfirmPassword ? (
-                      <EyeOff size={20} />
-                    ) : (
-                      <Eye size={20} />
-                    )}
-                  </motion.button>
-                </div>
+    {/* Confirmer mot de passe */}
+    <div className="relative">
+      <input
+        type={showConfirmPassword ? "text" : "password"}
+        placeholder="Confirmer Mot de passe"
+        className={inputClass}
+        value={confirmPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
+        required
+      />
+      <motion.button
+        type="button"
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700 transition"
+        onClick={() => setShowConfirmPassword((prev) => !prev)}
+        whileTap={{ scale: 0.9 }}
+      >
+        {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+      </motion.button>
+    </div>
 
-                {passwordError && (
-                  <div className="text-red-500 text-sm text-center font-medium -mt-2">
-                    {passwordError}
-                  </div>
-                )}
+    {passwordError && (
+      <div className="text-red-500 text-sm text-center font-medium -mt-2">
+        {passwordError}
+      </div>
+    )}
 
-                <motion.button
-                  type="submit"
-                  className="w-full py-3 bg-blue-500 text-white font-bold rounded-full shadow-xl shadow-blue-300/50 hover:bg-blue-600 transition-all"
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Créer mon compte étudiant
-                </motion.button>
+    {/* Bouton Créer compte */}
+    <motion.button
+      type="submit"
+      className="w-full py-3 bg-blue-500 text-white font-bold rounded-full shadow-xl shadow-blue-300/50 hover:bg-blue-600 transition-all"
+      whileHover={{ scale: 1.02, y: -1 }}
+      whileTap={{ scale: 0.98 }}
+    >
+      Créer mon compte étudiant
+    </motion.button>
 
-                <p className="text-center text-sm text-gray-500">
-                  Déjà inscrit ?{" "}
-                  <button
-                    type="button"
-                    className="text-orange-500 font-bold hover:underline transition-colors"
-                    onClick={() => setActiveView("login")}
-                  >
-                    Connectez-vous
-                  </button>
-                </p>
-              </motion.form>
-            )}
+    {/* Lien vers login */}
+    <p className="text-center text-sm text-gray-500">
+      Déjà inscrit ?{" "}
+      <button
+        type="button"
+        className="text-orange-500 font-bold hover:underline transition-colors"
+        onClick={() => setActiveView("login")}
+      >
+        Connectez-vous
+      </button>
+    </p>
+  </motion.form>
+)}
+
           </AnimatePresence>
         </motion.div>
       </div>

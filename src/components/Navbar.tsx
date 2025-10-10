@@ -59,11 +59,42 @@ const Navbar: React.FC = () => {
             alt="UpB Logo"
             className="w-36 sm:w-40 h-auto absolute left-1/2 -translate-x-1/2 hidden md:block"
           />
+
+        {/* Barre de recherche animée bleu ciel */}
+          <form
+            onSubmit={handleSearch}
+            className="relative flex items-center space-x-4 sm:space-x-4 md:space-x-5"
+          >
+            <motion.div
+              className="flex items-center bg-sky-100 rounded-full border border-sky-300 px-3 py-2 cursor-pointer"
+              initial={{ width: 40 }}
+              animate={{ width: searchExpanded ? 240 : 40 }}
+              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            >
+              <img
+                src={searchIcon}
+                alt="Rechercher"
+                className="w-4 sm:w-4.5 md:w-5 h-4 sm:h-4.5 md:h-5 mr-1 sm:mr-2"
+                onClick={() => setSearchExpanded(!searchExpanded)}
+              />
+              {searchExpanded && (
+                <input
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Rechercher..."
+                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(12px,1vw,16px)] placeholder:text-gray-500"
+                  autoFocus
+                />
+              )}
+            </motion.div>
+          </form>
+
           {/* Profil mobile identique à desktop */}
           <motion.img
             src={profilePic}
             alt="Profil"
-            className="w-12 h-12 md:w-14 md:h-14 rounded-full border-4 shadow-xl object-cover cursor-pointer ml-4"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-full border-4 shadow-xl object-cover cursor-pointer "
             style={{ borderColor: COLORS.Orange }}
             onClick={handleProfileClick}
             whileHover={{
@@ -76,10 +107,10 @@ const Navbar: React.FC = () => {
 
         {/* Desktop */}
         <div className="hidden md:flex justify-between items-center w-full">
-          <img src={logo} alt="UpB Logo" className="w-36 md:w-48 h-auto" />
+          <img src={logo} alt="UpB Logo" className="w-38 md:w-48 h-auto w-38 md:w-38 lg:w-25 h-auto hidden md:block " />
 
           {/* Menu desktop avec BADGRAM rond qui prend tout le lien */}
-          <ul className="flex items-center space-x-4 lg:sm:space-x-4 sm:space-x-6 md:space-x-8 font-worksans font-normal pb-[1px] text-[clamp(12px,1.2vw,18px)]">
+          <ul className="flex items-center space-x-4 lg:sm:space-x-4 sm:space-x-4 md:space-x-4 font-worksans font-normal pb-[1px] text-[clamp(12px,1.2vw,18px)]">
             {[
               { text: "Accueil", to: "/" },
               { text: "Examen , TD & TP", to: "/examen" },
@@ -92,7 +123,7 @@ const Navbar: React.FC = () => {
                   className={({ isActive }) =>
                     `flex items-center justify-center px-4 py-2 rounded-full transition-colors duration-300 ${
                       isActive
-                        ? "bg-orange-400 text-white font-semibold"
+                        ? "bg-orange-400 text-white"
                         : "text-[#5B5B5B] hover:bg-orange-400 hover:text-white"
                     }`
                   }
@@ -106,7 +137,7 @@ const Navbar: React.FC = () => {
           {/* Barre de recherche animée bleu ciel */}
           <form
             onSubmit={handleSearch}
-            className="relative flex items-center ml-4"
+            className="relative flex items-center space-x-3 sm:space-x-4 md:space-x-5"
           >
             <motion.div
               className="flex items-center bg-sky-100 rounded-full border border-sky-300 px-3 py-2 cursor-pointer"
@@ -117,7 +148,7 @@ const Navbar: React.FC = () => {
               <img
                 src={searchIcon}
                 alt="Rechercher"
-                className="w-5 h-5"
+                className="w-4 sm:w-4.5 md:w-5 h-4 sm:h-4.5 md:h-5 mr-1 sm:mr-2"
                 onClick={() => setSearchExpanded(!searchExpanded)}
               />
               {searchExpanded && (
@@ -126,7 +157,7 @@ const Navbar: React.FC = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   placeholder="Rechercher..."
-                  className="ml-2 bg-transparent outline-none w-full placeholder-gray-500"
+                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(12px,1vw,16px)] placeholder:text-gray-500"
                   autoFocus
                 />
               )}
@@ -136,7 +167,7 @@ const Navbar: React.FC = () => {
           <motion.img
             src={profilePic}
             alt="Profil"
-            className="w-12 h-12 md:w-14 md:h-14 rounded-full border-4 shadow-xl object-cover cursor-pointer ml-4"
+            className="w-[clamp(36px,3vw,56px)] h-[clamp(36px,3vw,56px)] rounded-full border-2 border-white shadow-sm object-cover cursor-pointer"
             style={{ borderColor: COLORS.Orange }}
             onClick={handleProfileClick}
             whileHover={{
