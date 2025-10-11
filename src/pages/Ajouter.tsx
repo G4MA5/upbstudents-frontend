@@ -218,7 +218,7 @@ const Ajouter: React.FC = () => {
       if (formData.document) body.append("document", formData.document);
 
       const res = await fetch(
-        "https://upbstudents-backend-1u7x.vercel.app/api/document",
+        "https://upbstudents-backend-biblo.vercel.app/api/document",
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },

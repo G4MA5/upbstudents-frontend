@@ -109,7 +109,7 @@ const ResetPassword: React.FC = () => {
 
     try {
       const res = await fetch(
-        "https://upbstudents-backend-1u7x.vercel.app/api/reset",
+        "https://upbstudents-backend-biblo.vercel.app/api/reset",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
