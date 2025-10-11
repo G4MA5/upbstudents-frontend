@@ -317,9 +317,6 @@ const Ajouter: React.FC = () => {
                     "3EA",
                     "SJAP",
                     "RIT",
-                    "MIAGE / ASSRI",
-                    "SEA / SEG",
-                    "MIAGE / ASSRI / RIT",
                   ]}
                   onSelect={(value) => handleChange("filiere", value)}
                 />

@@ -168,23 +168,21 @@ const Examen: React.FC = () => {
         <div className="flex flex-wrap gap-4 justify-center mb-8">
           <AnimatedDropdown
             label="Filière"
-            options={[
-              "MIAGE",
-              "ASSRI",
-              "SEA",
-              "SEG",
-              "3EA",
-              "SJAP",
-              "RIT",
-              "MIAGE / ASSRI",
-              "SEA / SEG",
-              "MIAGE / ASSRI / RIT",
-            ]}
+            options={["MIAGE", "ASSRI", "SEA", "SEG", "3EA", "SJAP", "RIT"]}
             onSelect={(v) => handleFilterChange("filiere", v)}
           />
           <AnimatedDropdown
             label="Année"
-            options={["2025", "2024", "2023", "2022"]}
+            options={[
+              "2025",
+              "2024",
+              "2023",
+              "2022",
+              "2021",
+              "2020",
+              "2019",
+              "2018",
+            ]}
             onSelect={(v) => handleFilterChange("annee", v)}
           />
           <AnimatedDropdown
