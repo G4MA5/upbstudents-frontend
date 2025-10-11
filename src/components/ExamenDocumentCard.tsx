@@ -183,8 +183,8 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.25 }}
-              className="flex items-center gap-2 bg-white text-black px-4 py-2 md:px-6 md:py-2 rounded-md font-medium shadow 
-                         hover:bg-[#FF9E78] hover:text-white transition-all duration-300"
+              className=" groupe flex items-center gap-2 bg-white text-black px-4 py-2 md:px-6 md:py-2 rounded-md font-medium shadow 
+                         hover:bg-[#ffe1e1] hover:text-white transition-all duration-300"
             >
               Télécharger
               <img src={DownloadIcon} alt="Télécharger" className="w-4 h-4" />
