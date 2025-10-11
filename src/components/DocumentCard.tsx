@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DownloadIcon from "../assets/Docs/telechargement.png";
-
+import { motion } from "framer-motion";
 interface DocumentCardProps {
   title: string;
   year: string;
@@ -80,19 +80,18 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
 
       {/* Bouton téléchargement visible au clic */}
       {clicked && (
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center animate-fade-in">
-          <button
+        <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-3 p-4">
+          <motion.button
             onClick={handleDownload}
-            className="flex items-center gap-2 bg-white text-gray-900 font-medium px-6 py-2 rounded-lg shadow 
-                       hover:bg-[#ff9e78] hover:text-white transition-all duration-300 hover:scale-105"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="flex items-center gap-2 bg-white text-black px-4 py-2 md:px-6 md:py-2 rounded-md font-medium shadow 
+                         hover:bg-[#FF9E78] hover:text-white transition-all duration-300"
           >
             Télécharger
-            <img
-              src={DownloadIcon}
-              alt="Télécharger"
-              className="w-4 h-4 transition duration-200 group-hover:brightness-0 group-hover:invert"
-            />
-          </button>
+            <img src={DownloadIcon} alt="Télécharger" className="w-4 h-4" />
+          </motion.button>
         </div>
       )}
     </div>

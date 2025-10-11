@@ -317,6 +317,9 @@ const Ajouter: React.FC = () => {
                     "3EA",
                     "SJAP",
                     "RIT",
+                    "MIAGE / ASSRI",
+                    "SEA / SEG",
+                    "MIAGE / ASSRI / RIT",
                   ]}
                   onSelect={(value) => handleChange("filiere", value)}
                 />
@@ -333,7 +336,16 @@ const Ajouter: React.FC = () => {
                 />
                 <DropdownMenu
                   label="Année"
-                  options={["2025", "2024", "2023", "2022"]}
+                  options={[
+                    "2025",
+                    "2024",
+                    "2023",
+                    "2022",
+                    "2021",
+                    "2020",
+                    "2019",
+                    "2018",
+                  ]}
                   onSelect={(value) => handleChange("annee", value)}
                 />
               </div>
@@ -341,13 +353,7 @@ const Ajouter: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DropdownMenu
                   label="Niveau"
-                  options={[
-                    "Licence 1",
-                    "Licence 2",
-                    "Licence 3",
-                    "Master 1",
-                    "Master 2",
-                  ]}
+                  options={["Licence 1", "Licence 2", "Licence 3"]}
                   onSelect={(value) => handleChange("niveau", value)}
                 />
                 <input

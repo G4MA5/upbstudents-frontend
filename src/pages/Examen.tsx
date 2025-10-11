@@ -168,7 +168,18 @@ const Examen: React.FC = () => {
         <div className="flex flex-wrap gap-4 justify-center mb-8">
           <AnimatedDropdown
             label="Filière"
-            options={["MIAGE", "ASSRI", "SEA", "SEG", "3EA", "SJAP", "RIT"]}
+            options={[
+              "MIAGE",
+              "ASSRI",
+              "SEA",
+              "SEG",
+              "3EA",
+              "SJAP",
+              "RIT",
+              "MIAGE / ASSRI",
+              "SEA / SEG",
+              "MIAGE / ASSRI / RIT",
+            ]}
             onSelect={(v) => handleFilterChange("filiere", v)}
           />
           <AnimatedDropdown
@@ -178,13 +189,7 @@ const Examen: React.FC = () => {
           />
           <AnimatedDropdown
             label="Niveau"
-            options={[
-              "Licence 1",
-              "Licence 2",
-              "Licence 3",
-              "Master 1",
-              "Master 2",
-            ]}
+            options={["Licence 1", "Licence 2", "Licence 3"]}
             onSelect={(v) => handleFilterChange("licence", v)}
           />
           <AnimatedDropdown
@@ -221,7 +226,7 @@ const Examen: React.FC = () => {
           <p className="text-center text-gray-500 text-lg">Chargement...</p>
         ) : filteredDocuments.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-screen-xl mx-auto animate-fade-in-up">
-            {filteredDocuments.map((doc, index) => (
+            {filteredDocuments.slice(0, 30).map((doc, index) => (
               <ExamenDocumentCard
                 key={index}
                 title={doc.title}
