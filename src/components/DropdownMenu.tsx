@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from "react";
+import { useState, useEffect, forwardRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface DropdownMenuProps {
@@ -9,23 +9,20 @@ interface DropdownMenuProps {
   isOpen?: boolean;
   onToggle?: (isOpen: boolean) => void;
   innerRef?: (el: HTMLDivElement | null) => void;
-  selectedValue?: string; // contrôle externe de la sélection
+  selectedValue?: string;
 }
 
 const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
-  (
-    {
-      label,
-      options,
-      onSelect,
-      disabled = false,
-      isOpen: controlledIsOpen,
-      onToggle,
-      innerRef,
-      selectedValue,
-    },
-    ref
-  ) => {
+  ({
+    label,
+    options,
+    onSelect,
+    disabled = false,
+    isOpen: controlledIsOpen,
+    onToggle,
+    innerRef,
+    selectedValue,
+  }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [selected, setSelected] = useState<string | null>(null);
 
@@ -36,14 +33,12 @@ const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
 
     const open = controlledIsOpen !== undefined ? controlledIsOpen : isOpen;
 
-    // Toggle dropdown / désélection si déjà choisi
     const toggleDropdown = () => {
       if (disabled) return;
 
       if (selected) {
-        // Si une option est déjà sélectionnée, désélectionner et fermer
         setSelected(null);
-        onSelect?.(""); // notifier parent
+        onSelect?.("");
         if (controlledIsOpen !== undefined && onToggle) {
           onToggle(false);
         } else {
@@ -52,7 +47,6 @@ const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
         return;
       }
 
-      // Toggle normal
       if (controlledIsOpen !== undefined && onToggle) {
         onToggle(!controlledIsOpen);
       } else {
@@ -60,7 +54,6 @@ const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
       }
     };
 
-    // Sélection d'une option
     const handleSelect = (value: string) => {
       if (disabled) return;
       setSelected(value);
@@ -74,22 +67,18 @@ const DropdownMenu = forwardRef<HTMLDivElement, DropdownMenuProps>(
     };
 
     return (
-      <div
-        ref={(el) => {
-          if (innerRef) innerRef(el);
-        }}
-        className="relative w-full text-left"
-      >
+      <div ref={innerRef} className="relative w-full text-left">
         {/* Bouton principal */}
         <button
           type="button"
           onClick={toggleDropdown}
           className={`w-full px-3 py-2 rounded-full border text-sm transition-all duration-200 shadow-sm 
-            ${selected
-              ? "bg-[#ff4b4b] text-white"
-              : disabled
-              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-              : "bg-gray-200 text-gray-800"
+            ${
+              selected
+                ? "bg-[#ff4b4b] text-white"
+                : disabled
+                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                : "bg-gray-200 text-gray-800"
             }`}
           disabled={disabled}
         >
