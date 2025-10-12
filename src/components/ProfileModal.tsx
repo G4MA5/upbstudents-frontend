@@ -41,7 +41,7 @@ const ForgotPasswordModal: React.FC<ForgotModalProps> = ({
     try {
       // NOTE: Remplacer par la logique d'appel API réelle
       const res = await fetch(
-        "https://upbstudents-backend-1u7x.vercel.app/api/forgot",
+        "https://upbstudents-backend-biblo.vercel.app/api/forgot",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

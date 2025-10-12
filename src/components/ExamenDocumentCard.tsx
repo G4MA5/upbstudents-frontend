@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Document, Page } from "react-pdf";
 import mammoth from "mammoth";
 import * as XLSX from "xlsx";
@@ -41,7 +41,9 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
   const [xlsxData, setXlsxData] = useState<any[][]>([]);
   const [numPages, setNumPages] = useState<number>(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const downloadRef = useRef<HTMLDivElement>(null);
 
+  const cardRef = useRef<HTMLDivElement>(null);
   const handleClick = () => setClicked(!clicked);
 
   const handleDownload = (e?: React.MouseEvent) => {
@@ -52,6 +54,7 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
     }
 
     if (e) e.stopPropagation();
+    window.open(file_url, "_blank");
     const link = document.createElement("a");
     link.href = file_url;
     link.download = file_url.split("/").pop() || "document";
@@ -96,6 +99,24 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
   const fileExtension = file_url.split(".").pop()?.toLowerCase();
 
   useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        cardRef.current &&
+        !cardRef.current.contains(event.target as Node) &&
+        downloadRef.current &&
+        !downloadRef.current.contains(event.target as Node)
+      ) {
+        setClicked(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
+  useEffect(() => {
     if (localPopupVisible && fileExtension === "txt") {
       fetch(file_url)
         .then((res) => res.text())
@@ -138,13 +159,14 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
     <>
       {/* Carte */}
       <div
+        ref={cardRef}
         onClick={handleClick}
         onMouseDown={handlePressStart}
         onMouseUp={handlePressEnd}
         onMouseLeave={handlePressEnd}
         onTouchStart={handlePressStart}
         onTouchEnd={handlePressEnd}
-        className="w-full sm:w-[220px] md:w-[260px] bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden transform hover:-translate-y-1 relative"
+        className="w-full max-w-[260px] bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden transform hover:-translate-y-1 relative"
       >
         {/* Haut avec fond rose */}
         <div className="bg-[#ffe1e1] h-20 sm:h-24 flex flex-col items-center justify-center text-center px-2">
@@ -155,7 +177,7 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
 
         {/* Bas de la carte */}
         <div className="p-4">
-          <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 line-clamp-2">
+          <h3 className="text-base md:text-lg font-semibold text-gray-800 mb-2 line-clamp-2 overflow-hidden">
             {title}
           </h3>
 
@@ -175,22 +197,36 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
           </div>
         </div>
 
-        {/* Boutons au clic */}
-        {clicked && (
-          <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-3 p-4">
-            <motion.button
-              onClick={handleDownload}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.25 }}
-              className="flex items-center gap-2 bg-white text-black px-4 py-2 md:px-6 md:py-2 rounded-md font-medium shadow 
-                         hover:bg-[#FF9E78] hover:text-white transition-all duration-300"
+        {/* Bouton téléchargement visible au clic */}
+        <AnimatePresence mode="wait">
+          {clicked && (
+            <motion.div
+              ref={downloadRef}
+              className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-3 p-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0, y: 40 }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
             >
-              Télécharger
-              <img src={DownloadIcon} alt="Télécharger" className="w-4 h-4" />
-            </motion.button>
-          </div>
-        )}
+              <motion.button
+                onClick={handleDownload}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.3 }}
+                className="group flex items-center gap-2 bg-white text-black px-4 py-2 md:px-6 md:py-2 rounded-md font-medium shadow 
+                  hover:bg-indigo-500 hover:text-white transition-all duration-300"
+              >
+                Télécharger
+                <img
+                  src={DownloadIcon}
+                  alt="Télécharger"
+                  className="w-4 h-4 transition-all duration-300 filter group-hover:brightness-0 group-hover:invert"
+                />
+              </motion.button>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Popup identique */}
@@ -276,7 +312,7 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
             <div className="flex justify-center mt-4">
               <button
                 onClick={handleDownload}
-                className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-md"
+                className="flex items-center gap-2 bg-[#ffe1e1] hover:bg-[#f44344] text-white px-5 py-2 rounded-md"
               >
                 Télécharger
                 <img src={DownloadIcon} alt="Télécharger" className="w-4 h-4" />

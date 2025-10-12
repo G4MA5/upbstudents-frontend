@@ -119,6 +119,28 @@ const Ajouter: React.FC = () => {
   // Profile modal if not authenticated
   const [showProfileModal, setShowProfileModal] = useState(false);
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+
+  // -------------------- Dropdown control --------------------
+const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+const formRef = useRef<HTMLDivElement>(null);
+// Refs pour chaque dropdown
+const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({})
+
+useEffect(() => {
+  const handleClickOutside = (event: MouseEvent) => {
+    const clickedInsideAny =
+      Object.values(dropdownRefs.current).some(
+        (ref) => ref && ref.contains(event.target as Node)
+      ) || (formRef.current && formRef.current.contains(event.target as Node));
+
+    if (!clickedInsideAny) setOpenDropdown(null);
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
   /* Toast state & helper */
   const [toasts, setToasts] = useState<ToastItem[]>([]);
   const toastIdRef = useRef(0);
@@ -305,6 +327,7 @@ const Ajouter: React.FC = () => {
               </p>
             </div>
 
+            <div ref={formRef} className="space-y-6 w-full">
             <form onSubmit={handleSubmit} className="space-y-6 w-full">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <DropdownMenu
@@ -319,17 +342,29 @@ const Ajouter: React.FC = () => {
                     "RIT",
                   ]}
                   onSelect={(value) => handleChange("filiere", value)}
+                  isOpen={openDropdown === "Filière"}
+                   selectedValue={formData.filiere}  // 👈 synchronisation
+        onToggle={(isOpen) => setOpenDropdown(isOpen ? "Filière" : null)}
+                   innerRef={(el) => (dropdownRefs.current["Filière"] = el)}
                 />
                 <DropdownMenu
                   label="Type de doc"
                   options={["Examen", "TD", "TP"]}
                   onSelect={(value) => handleChange("type", value)}
+                   selectedValue={formData.type}   // 👈 Ajouter
+                  isOpen={openDropdown === "Type de doc"}
+                  onToggle={(isOpen) => setOpenDropdown(isOpen ? "Type de doc" : null)}
+                  innerRef={(el) => (dropdownRefs.current["Type de doc"] = el)}
                 />
                 <DropdownMenu
                   label="Session"
                   options={["Session 1", "Session 2"]}
                   onSelect={(value) => handleChange("session", value)}
+                    selectedValue={formData.session} // 👈 ajouté
                   disabled={formData.type === "TD" || formData.type === "TP"}
+                  isOpen={openDropdown === "Session"}
+        onToggle={(isOpen) => setOpenDropdown(isOpen ? "Session" : null)}
+                  innerRef={(el) => (dropdownRefs.current["Session"] = el)}
                 />
                 <DropdownMenu
                   label="Année"
@@ -344,6 +379,10 @@ const Ajouter: React.FC = () => {
                     "2018",
                   ]}
                   onSelect={(value) => handleChange("annee", value)}
+                  isOpen={openDropdown === "Année"}
+                   selectedValue={formData.annee}  // 👈 ajouté
+                  onToggle={(isOpen) => setOpenDropdown(isOpen ? "Année" : null)}
+                   innerRef={(el) => (dropdownRefs.current["Année"] = el)}
                 />
               </div>
 
@@ -352,6 +391,10 @@ const Ajouter: React.FC = () => {
                   label="Niveau"
                   options={["Licence 1", "Licence 2", "Licence 3"]}
                   onSelect={(value) => handleChange("niveau", value)}
+                  selectedValue={formData.niveau} // 👈 ajouté
+                   isOpen={openDropdown === "Niveau"}
+                  onToggle={(isOpen) => setOpenDropdown(isOpen ? "Niveau" : null)}
+                  innerRef={(el) => (dropdownRefs.current["Niveau"] = el)}
                 />
                 <input
                   type="text"
@@ -417,7 +460,9 @@ const Ajouter: React.FC = () => {
                       type="file"
                       accept=".pdf,.doc,.docx,.png,.jpg"
                       className="hidden"
+                        ref={fileInputRef}
                       onChange={handleFileChange}
+                      
                     />
                   </label>
                 </div>
@@ -432,27 +477,30 @@ const Ajouter: React.FC = () => {
                   Valider
                 </motion.button>
 
-                <motion.button
-                  type="button"
-                  onClick={() => {
-                    setFormData({
-                      filiere: "",
-                      session: "",
-                      annee: "",
-                      type: "",
-                      matiere: "",
-                      password: "",
-                      niveau: "",
-                      document: null,
-                    });
-                    showToast("Formulaire réinitialisé", "info");
-                  }}
-                  className="px-4 py-3 rounded-full border bg-white"
-                >
-                  Réinitialiser
-                </motion.button>
+               <motion.button
+  type="button"
+  onClick={() => {
+    setFormData({
+      filiere: "",
+      session: "",
+      annee: "",
+      type: "",
+      matiere: "",
+      password: "",
+      niveau: "",
+      document: null,
+    });
+    setOpenDropdown(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+    showToast("Formulaire et filtres réinitialisés", "info");
+  }}
+  className="px-4 py-3 rounded-full border bg-white"
+>
+  Réinitialiser
+</motion.button>
               </div>
             </form>
+            </div>
           </div>
 
           {/* RIGHT: hero / illustration */}
