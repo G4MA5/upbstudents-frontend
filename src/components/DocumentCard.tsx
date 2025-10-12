@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import DownloadIcon from "../assets/Docs/telechargement.png"; // Ton icône PNG noire
-
+import DownloadIcon from "../assets/Docs/telechargement.png";
+import { motion } from "framer-motion";
 interface DocumentCardProps {
   title: string;
   year: string;
@@ -10,14 +10,13 @@ interface DocumentCardProps {
   filiere: string;
   file_url: string;
   session: string;
-  openProfileModal?: () => void; // Ajouté
+  openProfileModal?: () => void;
 }
 
 const DocumentCard: React.FC<DocumentCardProps> = ({
   title,
   year,
   level,
-  cover,
   type,
   filiere,
   file_url,
@@ -37,12 +36,10 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
       if (openProfileModal) openProfileModal();
       return;
     }
-    if (e) e.stopPropagation();
     window.open(file_url, "_blank");
     const link = document.createElement("a");
     link.href = file_url;
     link.download = file_url.split("/").pop() || "document";
-    // optionnel, mais utile pour certains navigateurs
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -51,64 +48,53 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
   return (
     <div
       onClick={handleClick}
-      className="cursor-pointer transition-shadow duration-300 shadow-sm hover:shadow-md max-w-[220px] mx-auto md:max-w-none bg-white"
+      className="w-full sm:w-[230px] bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer overflow-hidden transform hover:-translate-y-1"
     >
-      {/* Image + bouton de téléchargement */}
-      <div className="relative">
-        <img
-          src={cover}
-          alt={title}
-          className="w-full h-48 md:h-64 object-cover"
-        />
-
-        <div className="absolute inset-0 flex items-center justify-center mt-0 items-start">
-          <span className="text-white text font-bold px-4 py-2 mb-5 ">
-            <p className="mt-0 mb-5 text-sm">
-              {type} <br /> {filiere}
-            </p>
-          </span>
-        </div>
-
-        {clicked && (
-          <div className="absolute inset-0 flex items-center justify-center bg-black/30">
-            <button
-              onClick={handleDownload}
-              className="group bg-white text-black px-7 py-1 rounded-[6px] shadow flex items-center gap-2 
-                         transition-all duration-300 ease-out hover:bg-[#FF9E78] hover:text-white
-                         animate-fade-in-up"
-            >
-              Télécharger
-              <img
-                src={DownloadIcon}
-                alt="Télécharger"
-                className="w-4 h-4 transition duration-200 group-hover:brightness-0 group-hover:invert"
-              />
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* Zone texte */}
-      <div
-        className={`p-4 transition-colors duration-300 ${
-          clicked ? "bg-orange-500 text-white" : "bg-white text-gray-800"
-        }`}
-      >
-        <div className="flex justify-between items-center text-xs mb-1">
-          <span className="uppercase font-medium">{type}</span>
-          <span className="italic">{level}</span>
-        </div>
-
-        <h3 className="text-sm font-semibold line-clamp-2">{title}</h3>
-
-        <p
-          className={`text-sm mt-1 font-bold ${
-            clicked ? "text-[#032541]" : "text-[#F44344]"
-          }`}
-        >
-          {session} / {year}
+      {/* Bande supérieure rose */}
+      <div className="bg-[#ffe1e1] h-24 flex flex-col items-center justify-center text-center px-2">
+        <p className="text-[#f44344] text-sm font-semibold uppercase leading-tight">
+          {filiere} {type}
         </p>
       </div>
+
+      {/* Contenu principal */}
+      <div className="p-4">
+        <h3 className="text-base font-semibold text-gray-800 mb-2 line-clamp-2">
+          {title}
+        </h3>
+
+        <p className="text-gray-500 text-sm">
+          {level} / {year}
+        </p>
+
+        <div className="flex items-center justify-between mt-3 text-sm">
+          <span
+            className={`px-3 py-1 rounded-full text-white ${
+              type.toLowerCase() === "td" ? "bg-indigo-400" : "bg-purple-400"
+            }`}
+          >
+            {type}
+          </span>
+          <span className="text-gray-600">{session}</span>
+        </div>
+      </div>
+
+      {/* Bouton téléchargement visible au clic */}
+      {clicked && (
+        <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center gap-3 p-4">
+          <motion.button
+            onClick={handleDownload}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25 }}
+            className="flex items-center gap-2 bg-white text-black px-4 py-2 md:px-6 md:py-2 rounded-md font-medium shadow 
+                         hover:bg-[#FF9E78] hover:text-white transition-all duration-300"
+          >
+            Télécharger
+            <img src={DownloadIcon} alt="Télécharger" className="w-4 h-4" />
+          </motion.button>
+        </div>
+      )}
     </div>
   );
 };
