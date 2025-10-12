@@ -42,51 +42,6 @@ const Navbar: React.FC = () => {
     }
   };
 
-  const [logoutLoading, setLogoutLoading] = useState(false);
-
-  const handleLogout = async () => {
-    const token = localStorage.getItem("supa_token");
-    if (!token) {
-      // nothing to do, just navigate home
-      localStorage.removeItem("supa_token");
-      setShowConnectedPopup(false);
-      navigate("/");
-      return;
-    }
-
-    setLogoutLoading(true);
-    try {
-      const res = await fetch(
-        "https://upbstudents-backend-biblo.vercel.app/api/deconnexion",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      if (!res.ok) {
-        const body = await res.text().catch(() => null);
-        console.warn("déconnexion ", res.status, body);
-      }
-
-      // Clear local token regardless of server response to ensure logout client-side
-      localStorage.removeItem("supa_token");
-      setShowConnectedPopup(false);
-      navigate("/");
-    } catch (err) {
-      console.error("Erreur lors de la déconnexion:", err);
-      // Clear token anyway
-      localStorage.removeItem("supa_token");
-      setShowConnectedPopup(false);
-      navigate("/");
-    } finally {
-      setLogoutLoading(false);
-    }
-  };
-
   return (
     <nav className="bg-white px-3 sm:px-4 md:px-6 pt-3 sm:pt-4 md:pt-4 pb-2 relative z-50">
       <div className="flex justify-between items-center md:items-end h-auto md:h-20">
@@ -318,26 +273,6 @@ const Navbar: React.FC = () => {
                   </motion.div>
                 ))}
               </motion.div>
-              {/* Bouton “Soutenir le projet” en bas avec effet de respiration */}
-              <div className="absolute bottom-6 left-0 w-full px-6">
-                <motion.button
-                  animate={{
-                    scale: [1, 1.05, 1],
-                  }}
-                  transition={{
-                    duration: 2,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full font-semibold text-white 
-               bg-gradient-to-r from-orange-500 to-blue-600 hover:from-orange-600 hover:to-blue-700 
-               transition-all shadow-md hover:shadow-lg"
-                >
-                  Soutenir le projet
-                </motion.button>
-              </div>
             </motion.div>
           </>
         )}
@@ -361,15 +296,6 @@ const Navbar: React.FC = () => {
             >
               Commencer
             </button>
-            <div className="mt-3">
-              <button
-                onClick={handleLogout}
-                disabled={logoutLoading}
-                className="text-black underline cursor-pointer"
-              >
-                {logoutLoading ? "Déconnexion..." : "Déconnexion"}
-              </button>
-            </div>
           </div>
           <div
             className="fixed inset-0 z-40"
