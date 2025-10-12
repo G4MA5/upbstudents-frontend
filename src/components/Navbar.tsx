@@ -1,310 +1,297 @@
-import React, { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/upb-logo.png";
-import profilePic from "../assets/profile3.png";
-import searchIcon from "../assets/Icon.png";
-import ProfileModal from "./ProfileModal";
-import { motion, AnimatePresence } from "framer-motion";
-import { Home, BookOpen, PlusSquare, Phone } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Document, Page } from "react-pdf";
+import mammoth from "mammoth";
+import * as XLSX from "xlsx";
+import DownloadIcon from "../assets/Docs/telechargement.png";
 
-const COLORS = {
-  Orange: "#FF8C42",
-  Red: "#D33A3A",
-  SkyBlue: "#A7D8F5",
-};
+export interface ExamenDocumentCardProps {
+  title: string;
+  year: string;
+  level: string;
+  cover: string;
+  type: string;
+  filiere: string;
+  file_url: string;
+  session: string;
+  openProfileModal?: () => void;
+  id: number;
+  filePath: string;
+  openGlobalPopup?: (doc: ExamenDocumentCardProps) => void;
+}
 
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [showConnectedPopup, setShowConnectedPopup] = useState(false);
-  const [searchExpanded, setSearchExpanded] = useState(false);
-  const navigate = useNavigate();
+const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
+  title,
+  year,
+  level,
+  cover,
+  type,
+  filiere,
+  file_url,
+  session,
+  id,
+  filePath,
+  openProfileModal,
+  openGlobalPopup,
+}) => {
+  const [clicked, setClicked] = useState(false);
+  const [localPopupVisible, setLocalPopupVisible] = useState(false);
+  const [txtContent, setTxtContent] = useState<string>("");
+  const [docxContent, setDocxContent] = useState<string>("");
+  const [xlsxData, setXlsxData] = useState<any[][]>([]);
+  const [numPages, setNumPages] = useState<number>(0);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const linkStyle =
-    "transition-all duration-300 px-4 py-2 cursor-pointer rounded-full";
+  const handleClick = () => setClicked(!clicked);
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchTerm.trim()) {
-      navigate(`/examen?query=${encodeURIComponent(searchTerm)}`);
-      setSearchTerm("");
-      setSearchExpanded(false);
-    }
-  };
-
-  const handleProfileClick = () => {
+  const handleDownload = (e?: React.MouseEvent) => {
     const token = localStorage.getItem("supa_token");
-    if (token) {
-      setShowConnectedPopup(true);
-    } else {
-      setIsProfileOpen(true);
+    if (!token) {
+      if (openProfileModal) openProfileModal();
+      return;
+    }
+
+    if (e) e.stopPropagation();
+    const link = document.createElement("a");
+    link.href = file_url;
+    link.download = file_url.split("/").pop() || "document";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const handleCloseLocalPopup = () => {
+    setLocalPopupVisible(false);
+    setTxtContent("");
+    setDocxContent("");
+    setXlsxData([]);
+  };
+
+  const handlePressStart = () => {
+    timerRef.current = setTimeout(() => {
+      if (openGlobalPopup) {
+        openGlobalPopup({
+          title,
+          year,
+          level,
+          cover,
+          type,
+          filiere,
+          file_url,
+          session,
+          id,
+          filePath,
+        });
+      }
+    }, 600);
+  };
+
+  const handlePressEnd = () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
   };
+
+  const fileExtension = file_url.split(".").pop()?.toLowerCase();
+
+  useEffect(() => {
+    if (localPopupVisible && fileExtension === "txt") {
+      fetch(file_url)
+        .then((res) => res.text())
+        .then((text) => setTxtContent(text))
+        .catch(() => setTxtContent("Impossible de charger le contenu."));
+    }
+  }, [localPopupVisible, fileExtension, file_url]);
+
+  useEffect(() => {
+    if (localPopupVisible && fileExtension === "docx") {
+      fetch(file_url)
+        .then((res) => res.arrayBuffer())
+        .then((buffer) =>
+          mammoth
+            .extractRawText({ arrayBuffer: buffer })
+            .then((result) => setDocxContent(result.value))
+            .catch(() =>
+              setDocxContent("Impossible de charger le fichier DOCX.")
+            )
+        );
+    }
+  }, [localPopupVisible, fileExtension, file_url]);
+
+  useEffect(() => {
+    if (localPopupVisible && fileExtension === "xlsx") {
+      fetch(file_url)
+        .then((res) => res.arrayBuffer())
+        .then((buffer) => {
+          const workbook = XLSX.read(buffer, { type: "array" });
+          const sheetName = workbook.SheetNames[0];
+          const sheet = workbook.Sheets[sheetName];
+          const json = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+          setXlsxData(json as any[][]);
+        })
+        .catch(() => setXlsxData([["Impossible de charger le fichier XLSX."]]));
+    }
+  }, [localPopupVisible, fileExtension, file_url]);
 
   return (
-    <nav className="bg-white px-3 sm:px-4 md:px-6 pt-3 sm:pt-4 md:pt-4 pb-2 relative z-50">
-      <div className="flex justify-between items-center md:items-end h-auto md:h-20">
-        {/* Mobile */}
-        <div className="flex w-full items-center justify-between md:hidden relative">
-          <button
-            className="text-3xl sm:text-4xl"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Menu mobile"
-          >
-            {isOpen ? "✕" : "☰"}
-          </button>
-          <img
-            src={logo}
-            alt="UpB Logo"
-            className="w-36 sm:w-40 h-auto absolute left-1/2 -translate-x-1/2 hidden md:block"
-          />
-
-          {/* Barre de recherche animée bleu ciel */}
-          <form
-            onSubmit={handleSearch}
-            className="relative flex items-center space-x-4 sm:space-x-4 md:space-x-5"
-          >
-            <motion.div
-              className="flex items-center bg-sky-100 rounded-full border border-sky-300 px-3 py-2 cursor-pointer"
-              initial={{ width: 40 }}
-              animate={{ width: searchExpanded ? 240 : 40 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            >
-              <img
-                src={searchIcon}
-                alt="Rechercher"
-                className="w-4 sm:w-4.5 md:w-5 h-4 sm:h-4.5 md:h-5 mr-1 sm:mr-2"
-                onClick={() => setSearchExpanded(!searchExpanded)}
-              />
-              {searchExpanded && (
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Rechercher..."
-                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(17px,1vw,20px)] placeholder:text-gray-500"
-                  autoFocus
-                />
-              )}
-            </motion.div>
-          </form>
-
-          {/* Profil mobile identique à desktop */}
-          <motion.img
-            src={profilePic}
-            alt="Profil"
-            className="w-12 h-12 md:w-14 md:h-14 rounded-full border-4 shadow-xl object-cover cursor-pointer "
-            style={{ borderColor: COLORS.Orange }}
-            onClick={handleProfileClick}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: `0 0 0 6px ${COLORS.Orange}20`,
-            }}
-            transition={{ type: "spring", stiffness: 300 }}
-          />
+    <>
+      {/* Carte responsive */}
+      <div
+        onClick={handleClick}
+        onMouseDown={handlePressStart}
+        onMouseUp={handlePressEnd}
+        onMouseLeave={handlePressEnd}
+        onTouchStart={handlePressStart}
+        onTouchEnd={handlePressEnd}
+        className="relative w-full sm:w-[220px] md:w-[240px] bg-white rounded-2xl shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer overflow-hidden transform hover:-translate-y-1"
+      >
+        {/* Bandeau supérieur */}
+        <div className="bg-[#ffe1e1] h-24 sm:h-28 flex flex-col items-center justify-center text-center px-3">
+          <p className="text-[#f44344] text-sm sm:text-base font-semibold uppercase leading-tight">
+            {filiere} {type}
+          </p>
         </div>
 
-        {/* Desktop */}
-        <div className="hidden md:flex justify-between items-center w-full">
-          <img
-            src={logo}
-            alt="UpB Logo"
-            className="w-38 md:w-48 h-auto w-38 md:w-38 lg:w-25 h-auto hidden md:block "
-          />
+        {/* Contenu bas */}
+        <div className="p-4 sm:p-5">
+          <h3 className="text-sm sm:text-base font-semibold text-gray-800 mb-2 line-clamp-2">
+            {title}
+          </h3>
 
-          {/* Menu desktop avec BADGRAM rond qui prend tout le lien */}
-          <ul className="flex items-center space-x-4 lg:sm:space-x-4 sm:space-x-4 md:space-x-4 font-worksans font-normal pb-[1px] text-[clamp(12px,1.2vw,18px)]">
-            {[
-              { text: "Accueil", to: "/" },
-              { text: "Examen , TD & TP", to: "/examen" },
-              { text: "Ajouter document", to: "/ajouter" },
-              { text: "Contact", to: "/contact" },
-            ].map((item) => (
-              <li key={item.text} className={linkStyle}>
-                <NavLink
-                  to={item.to}
-                  className={({ isActive }) =>
-                    `flex items-center justify-center px-4 py-2 rounded-full transition-colors duration-300 ${
-                      isActive
-                        ? "bg-orange-400 text-white"
-                        : "text-[#5B5B5B] hover:bg-orange-400 hover:text-white"
-                    }`
-                  }
-                >
-                  {item.text}
-                </NavLink>
-              </li>
-            ))}
-          </ul>
+          <p className="text-gray-500 text-xs sm:text-sm">
+            {level} / {year}
+          </p>
 
-          {/* Barre de recherche animée bleu ciel */}
-          <form
-            onSubmit={handleSearch}
-            className="relative flex items-center space-x-3 sm:space-x-4 md:space-x-5"
-          >
-            <motion.div
-              className="flex items-center bg-sky-100 rounded-full border border-sky-300 px-3 py-2 cursor-pointer"
-              initial={{ width: 40 }}
-              animate={{ width: searchExpanded ? 240 : 40 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
+          <div className="flex items-center justify-between mt-3 text-xs sm:text-sm">
+            <span
+              className={`px-3 py-1 rounded-full text-white font-medium ${
+                type.toLowerCase() === "td" ? "bg-indigo-400" : "bg-purple-400"
+              }`}
+            >
+              {type}
+            </span>
+            <span className="text-gray-600">{session}</span>
+          </div>
+        </div>
+
+        {/* Overlay au clic */}
+        {clicked && (
+          <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center gap-3 p-4">
+            <motion.button
+              onClick={handleDownload}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.25 }}
+              className="group flex items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-400 text-white px-6 py-2 rounded-full font-medium shadow-md hover:from-orange-600 hover:to-orange-500 transform hover:scale-105 transition-all duration-300"
             >
               <img
-                src={searchIcon}
-                alt="Rechercher"
-                className="w-4 sm:w-4.5 md:w-5 h-4 sm:h-4.5 md:h-5 mr-1 sm:mr-2"
-                onClick={() => setSearchExpanded(!searchExpanded)}
+                src={DownloadIcon}
+                alt="Télécharger"
+                className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300"
               />
-              {searchExpanded && (
-                <input
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Rechercher..."
-                  className="bg-transparent outline-none w-[clamp(100px,20vw,240px)] text-[clamp(17px,1vw,20px)] placeholder:text-gray-500"
-                  autoFocus
-                />
-              )}
-            </motion.div>
-          </form>
-
-          <motion.img
-            src={profilePic}
-            alt="Profil"
-            className="w-[clamp(36px,3vw,56px)] h-[clamp(36px,3vw,56px)] rounded-full border-2 border-white shadow-sm object-cover cursor-pointer"
-            style={{ borderColor: COLORS.Orange }}
-            onClick={handleProfileClick}
-            whileHover={{
-              scale: 1.05,
-              boxShadow: `0 0 0 6px ${COLORS.Orange}20`,
-            }}
-            transition={{ type: "spring", stiffness: 300 }}
-          />
-        </div>
+              Télécharger
+            </motion.button>
+          </div>
+        )}
       </div>
 
-      {/* Mobile search bar */}
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            <motion.div
-              className="fixed inset-0 bg-black/20 z-40"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "-100%", opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: "-100%", opacity: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 30 }}
-              className="fixed top-0 left-0 h-full w-64 z-50 text-gray-800 shadow-xl border-r border-gray-200 rounded-t-2xl pt-16 md:pt-0 bg-gray-100"
-            >
-              <motion.button
-                className="absolute top-7 right-5 text-xl text-gray-600 hover:text-red-500 transition"
-                onClick={() => setIsOpen(false)}
-                aria-label="Fermer le menu"
-                whileTap={{ scale: 0.9 }}
-              >
-                ✕
-              </motion.button>
-
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                variants={{
-                  hidden: { opacity: 0, x: -20 },
-                  visible: {
-                    opacity: 1,
-                    x: 0,
-                    transition: { staggerChildren: 0.08 },
-                  },
-                }}
-                className="flex flex-col mt-20 px-6 space-y-2"
-              >
-                {[
-                  {
-                    text: "Accueil",
-                    to: "/",
-                    icon: <Home className="w-5 h-5 text-black" />,
-                  },
-                  {
-                    text: "Examen, TD & TP",
-                    to: "/examen",
-                    icon: <BookOpen className="w-5 h-5 text-black" />,
-                  },
-                  {
-                    text: "Ajouter document",
-                    to: "/ajouter",
-                    icon: <PlusSquare className="w-5 h-5 text-black" />,
-                  },
-                  {
-                    text: "Contact",
-                    to: "/contact",
-                    icon: <Phone className="w-5 h-5 text-black" />,
-                  },
-                ].map((item) => (
-                  <motion.div
-                    key={item.text}
-                    variants={{
-                      hidden: { x: -20, opacity: 0 },
-                      visible: { x: 0, opacity: 1 },
-                    }}
-                    transition={{ duration: 0.25 }}
-                  >
-                    <NavLink
-                      to={item.to}
-                      className={({ isActive }) =>
-                        `flex items-center gap-3 px-3 py-2 rounded-md transition ${
-                          isActive
-                            ? "bg-white text-black"
-                            : "text-black hover:bg-gray-200"
-                        }`
-                      }
-                      onClick={() => setIsOpen(false)}
-                    >
-                      {item.icon}
-                      <span className="font-medium">{item.text}</span>
-                    </NavLink>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Modal */}
-      {isProfileOpen && (
-        <ProfileModal closeModal={() => setIsProfileOpen(false)} />
-      )}
-
-      {/* Popup connecté amélioré */}
-      {showConnectedPopup && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl shadow-xl p-8 text-center w-[90%] max-w-sm mx-auto">
-            <h2 className="text-xl font-bold mb-4 text-green-600">
-              Vous êtes bien sur la bibliothèque d'UPB !
-            </h2>
+      {/* Popup responsive */}
+      {localPopupVisible && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/70 flex justify-center items-center z-50 p-2 sm:p-4"
+        >
+          <motion.div
+            initial={{ scale: 0.9 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.9 }}
+            className="bg-white rounded-2xl shadow-lg w-full max-w-5xl p-4 sm:p-6 relative overflow-auto max-h-[90vh]"
+          >
             <button
-              className="mt-4 px-6 py-2 bg-sky-300 text-white rounded-full font-semibold hover:bg-sky-400 transition-colors"
-              onClick={() => setShowConnectedPopup(false)}
+              onClick={handleCloseLocalPopup}
+              className="absolute top-2 right-3 text-gray-500 hover:text-black text-2xl sm:text-3xl"
             >
-              Commencer
+              ×
             </button>
-          </div>
-          <div
-            className="fixed inset-0 z-40"
-            onClick={() => setShowConnectedPopup(false)}
-          ></div>
-        </div>
+
+            <div className="max-h-[70vh] overflow-auto">
+              {["png", "jpg", "jpeg", "gif"].includes(fileExtension || "") && (
+                <img
+                  src={file_url}
+                  alt={title}
+                  className="w-full object-contain rounded-lg"
+                />
+              )}
+              {fileExtension === "pdf" && (
+                <Document
+                  file={file_url}
+                  onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+                >
+                  {Array.from(new Array(numPages), (_, i) => (
+                    <Page
+                      key={`page_${i + 1}`}
+                      pageNumber={i + 1}
+                      width={window.innerWidth < 640 ? 300 : 800}
+                    />
+                  ))}
+                </Document>
+              )}
+              {fileExtension === "txt" && (
+                <pre className="bg-gray-100 p-3 rounded-md text-sm">
+                  {txtContent || "Chargement..."}
+                </pre>
+              )}
+              {fileExtension === "docx" && (
+                <div className="bg-gray-100 p-3 rounded-md text-sm whitespace-pre-wrap">
+                  {docxContent || "Chargement..."}
+                </div>
+              )}
+              {fileExtension === "xlsx" && (
+                <div className="overflow-auto">
+                  <table className="table-auto border-collapse border border-gray-300 w-full text-sm">
+                    <tbody>
+                      {xlsxData.map((row, idx) => (
+                        <tr key={idx}>
+                          {row.map((cell, cidx) => (
+                            <td
+                              key={cidx}
+                              className="border border-gray-300 px-2 py-1"
+                            >
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+            </div>
+
+            {/* Bouton de téléchargement amélioré */}
+            <div className="flex justify-center mt-4">
+              <motion.button
+                onClick={handleDownload}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="group flex items-center gap-2 bg-gradient-to-r from-orange-500 to-orange-400 hover:from-orange-600 hover:to-orange-500 text-white px-5 py-2 rounded-full font-semibold shadow-md transition-all duration-300"
+              >
+                <img
+                  src={DownloadIcon}
+                  alt="Télécharger"
+                  className="w-5 h-5 group-hover:translate-y-[-2px] transition-transform duration-300"
+                />
+                Télécharger
+              </motion.button>
+            </div>
+          </motion.div>
+        </motion.div>
       )}
-    </nav>
+    </>
   );
 };
 
-export default Navbar;
+export default ExamenDocumentCard;

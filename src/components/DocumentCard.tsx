@@ -36,6 +36,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
       if (openProfileModal) openProfileModal();
       return;
     }
+    window.open(file_url, "_blank");
     const link = document.createElement("a");
     link.href = file_url;
     link.download = file_url.split("/").pop() || "document";

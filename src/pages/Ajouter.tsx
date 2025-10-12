@@ -297,7 +297,7 @@ const Ajouter: React.FC = () => {
                 whileHover={{ scale: 1.03 }}
               />
               <h1 className="mt-4 text-2xl sm:text-3xl font-bold text-slate-800">
-                Le Register
+                Publié un document
               </h1>
               <p className="text-sm text-slate-500 mt-2 text-center max-w-[520px]">
                 Partagez vos ressources pour illuminer la communauté. (rapide,

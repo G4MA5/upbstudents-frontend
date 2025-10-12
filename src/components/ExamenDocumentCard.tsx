@@ -52,6 +52,7 @@ const ExamenDocumentCard: React.FC<ExamenDocumentCardProps> = ({
     }
 
     if (e) e.stopPropagation();
+    window.open(file_url, "_blank");
     const link = document.createElement("a");
     link.href = file_url;
     link.download = file_url.split("/").pop() || "document";
