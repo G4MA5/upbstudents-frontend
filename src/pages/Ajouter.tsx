@@ -122,24 +122,25 @@ const Ajouter: React.FC = () => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   // -------------------- Dropdown control --------------------
-const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-const formRef = useRef<HTMLDivElement>(null);
-// Refs pour chaque dropdown
-const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({})
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const formRef = useRef<HTMLDivElement>(null);
+  // Refs pour chaque dropdown
+  const dropdownRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
-useEffect(() => {
-  const handleClickOutside = (event: MouseEvent) => {
-    const clickedInsideAny =
-      Object.values(dropdownRefs.current).some(
-        (ref) => ref && ref.contains(event.target as Node)
-      ) || (formRef.current && formRef.current.contains(event.target as Node));
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const clickedInsideAny =
+        Object.values(dropdownRefs.current).some(
+          (ref) => ref && ref.contains(event.target as Node)
+        ) ||
+        (formRef.current && formRef.current.contains(event.target as Node));
 
-    if (!clickedInsideAny) setOpenDropdown(null);
-  };
+      if (!clickedInsideAny) setOpenDropdown(null);
+    };
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => document.removeEventListener("mousedown", handleClickOutside);
-}, []);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   /* Toast state & helper */
   const [toasts, setToasts] = useState<ToastItem[]>([]);
@@ -240,7 +241,7 @@ useEffect(() => {
       if (formData.document) body.append("document", formData.document);
 
       const res = await fetch(
-        "https://upbstudents-backend-biblo.vercel.app/api/document",
+        "https://upbstudents-backend-6.vercel.app/api/document",
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
@@ -328,178 +329,191 @@ useEffect(() => {
             </div>
 
             <div ref={formRef} className="space-y-6 w-full">
-            <form onSubmit={handleSubmit} className="space-y-6 w-full">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DropdownMenu
-                  label="Filière"
-                  options={[
-                    "MIAGE",
-                    "ASSRI",
-                    "SEA",
-                    "SEG",
-                    "3EA",
-                    "SJAP",
-                    "RIT",
-                  ]}
-                  onSelect={(value) => handleChange("filiere", value)}
-                  isOpen={openDropdown === "Filière"}
-                   selectedValue={formData.filiere}  // 👈 synchronisation
-        onToggle={(isOpen) => setOpenDropdown(isOpen ? "Filière" : null)}
-                   innerRef={(el) => (dropdownRefs.current["Filière"] = el)}
-                />
-                <DropdownMenu
-                  label="Type de doc"
-                  options={["Examen", "TD", "TP"]}
-                  onSelect={(value) => handleChange("type", value)}
-                   selectedValue={formData.type}   // 👈 Ajouter
-                  isOpen={openDropdown === "Type de doc"}
-                  onToggle={(isOpen) => setOpenDropdown(isOpen ? "Type de doc" : null)}
-                  innerRef={(el) => (dropdownRefs.current["Type de doc"] = el)}
-                />
-                <DropdownMenu
-                  label="Session"
-                  options={["Session 1", "Session 2"]}
-                  onSelect={(value) => handleChange("session", value)}
+              <form onSubmit={handleSubmit} className="space-y-6 w-full">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <DropdownMenu
+                    label="Filière"
+                    options={[
+                      "MIAGE",
+                      "ASSRI",
+                      "SEA",
+                      "SEG",
+                      "3EA",
+                      "SJAP",
+                      "RIT",
+                    ]}
+                    onSelect={(value) => handleChange("filiere", value)}
+                    isOpen={openDropdown === "Filière"}
+                    selectedValue={formData.filiere} // 👈 synchronisation
+                    onToggle={(isOpen) =>
+                      setOpenDropdown(isOpen ? "Filière" : null)
+                    }
+                    innerRef={(el) => (dropdownRefs.current["Filière"] = el)}
+                  />
+                  <DropdownMenu
+                    label="Type de doc"
+                    options={["Examen", "TD", "TP"]}
+                    onSelect={(value) => handleChange("type", value)}
+                    selectedValue={formData.type} // 👈 Ajouter
+                    isOpen={openDropdown === "Type de doc"}
+                    onToggle={(isOpen) =>
+                      setOpenDropdown(isOpen ? "Type de doc" : null)
+                    }
+                    innerRef={(el) =>
+                      (dropdownRefs.current["Type de doc"] = el)
+                    }
+                  />
+                  <DropdownMenu
+                    label="Session"
+                    options={["Session 1", "Session 2"]}
+                    onSelect={(value) => handleChange("session", value)}
                     selectedValue={formData.session} // 👈 ajouté
-                  disabled={formData.type === "TD" || formData.type === "TP"}
-                  isOpen={openDropdown === "Session"}
-        onToggle={(isOpen) => setOpenDropdown(isOpen ? "Session" : null)}
-                  innerRef={(el) => (dropdownRefs.current["Session"] = el)}
-                />
-                <DropdownMenu
-                  label="Année"
-                  options={[
-                    "2025",
-                    "2024",
-                    "2023",
-                    "2022",
-                    "2021",
-                    "2020",
-                    "2019",
-                    "2018",
-                  ]}
-                  onSelect={(value) => handleChange("annee", value)}
-                  isOpen={openDropdown === "Année"}
-                   selectedValue={formData.annee}  // 👈 ajouté
-                  onToggle={(isOpen) => setOpenDropdown(isOpen ? "Année" : null)}
-                   innerRef={(el) => (dropdownRefs.current["Année"] = el)}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <DropdownMenu
-                  label="Niveau"
-                  options={["Licence 1", "Licence 2", "Licence 3"]}
-                  onSelect={(value) => handleChange("niveau", value)}
-                  selectedValue={formData.niveau} // 👈 ajouté
-                   isOpen={openDropdown === "Niveau"}
-                  onToggle={(isOpen) => setOpenDropdown(isOpen ? "Niveau" : null)}
-                  innerRef={(el) => (dropdownRefs.current["Niveau"] = el)}
-                />
-                <input
-                  type="text"
-                  name="matiere"
-                  placeholder="Nom matière"
-                  value={formData.matiere}
-                  onChange={(e) => handleChange("matiere", e.target.value)}
-                  className="border rounded-full px-4 py-3 w-full text-sm focus:ring-2 focus:ring-sky-200"
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Mot de passe"
-                  value={formData.password}
-                  onChange={(e) => handleChange("password", e.target.value)}
-                  className="border rounded-full px-4 py-3 w-full text-sm focus:ring-2 focus:ring-orange-100"
-                />
-
-                {/* File control: clickable label */}
-                <div className="relative">
-                  <label
-                    htmlFor="fileinput"
-                    className="flex items-center justify-between gap-3 border rounded-full px-4 py-3 cursor-pointer hover:shadow-md bg-gray-50"
-                    title="Cliquez pour sélectionner un fichier"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="rounded-full bg-blue-100 p-2">
-                        <Upload size={18} />
-                      </div>
-                      <div className="min-w-0">
-                        <div className="text-sm font-medium text-slate-700 truncate">
-                          {formData.document
-                            ? formData.document.name
-                            : "Ajouter document"}
-                        </div>
-                        <div className="text-xs text-slate-400">
-                          {formData.document
-                            ? `${(formData.document.size / 1024).toFixed(1)} KB`
-                            : "pdf, docx, 20MB max"}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* actions: remove X if present */}
-                    <div className="flex items-center gap-2">
-                      {formData.document && (
-                        <button
-                          type="button"
-                          onClick={removeSelectedFile}
-                          className="p-2 rounded-full hover:bg-red-50"
-                          aria-label="retirer fichier"
-                        >
-                          <Trash size={16} />
-                        </button>
-                      )}
-                    </div>
-
-                    <input
-                      id="fileinput"
-                      type="file"
-                      accept=".pdf,.doc,.docx,.png,.jpg"
-                      className="hidden"
-                        ref={fileInputRef}
-                      onChange={handleFileChange}
-                      
-                    />
-                  </label>
+                    disabled={formData.type === "TD" || formData.type === "TP"}
+                    isOpen={openDropdown === "Session"}
+                    onToggle={(isOpen) =>
+                      setOpenDropdown(isOpen ? "Session" : null)
+                    }
+                    innerRef={(el) => (dropdownRefs.current["Session"] = el)}
+                  />
+                  <DropdownMenu
+                    label="Année"
+                    options={[
+                      "2025",
+                      "2024",
+                      "2023",
+                      "2022",
+                      "2021",
+                      "2020",
+                      "2019",
+                      "2018",
+                    ]}
+                    onSelect={(value) => handleChange("annee", value)}
+                    isOpen={openDropdown === "Année"}
+                    selectedValue={formData.annee} // 👈 ajouté
+                    onToggle={(isOpen) =>
+                      setOpenDropdown(isOpen ? "Année" : null)
+                    }
+                    innerRef={(el) => (dropdownRefs.current["Année"] = el)}
+                  />
                 </div>
-              </div>
 
-              <div className="flex gap-3">
-                <motion.button
-                  type="submit"
-                  className="flex-1 bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-3 rounded-full font-semibold shadow-lg hover:scale-[1.02] active:scale-95 transition-transform"
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Valider
-                </motion.button>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <DropdownMenu
+                    label="Niveau"
+                    options={["Licence 1", "Licence 2", "Licence 3"]}
+                    onSelect={(value) => handleChange("niveau", value)}
+                    selectedValue={formData.niveau} // 👈 ajouté
+                    isOpen={openDropdown === "Niveau"}
+                    onToggle={(isOpen) =>
+                      setOpenDropdown(isOpen ? "Niveau" : null)
+                    }
+                    innerRef={(el) => (dropdownRefs.current["Niveau"] = el)}
+                  />
+                  <input
+                    type="text"
+                    name="matiere"
+                    placeholder="Nom matière"
+                    value={formData.matiere}
+                    onChange={(e) => handleChange("matiere", e.target.value)}
+                    className="border rounded-full px-4 py-3 w-full text-sm focus:ring-2 focus:ring-sky-200"
+                  />
+                </div>
 
-               <motion.button
-  type="button"
-  onClick={() => {
-    setFormData({
-      filiere: "",
-      session: "",
-      annee: "",
-      type: "",
-      matiere: "",
-      password: "",
-      niveau: "",
-      document: null,
-    });
-    setOpenDropdown(null);
-    if (fileInputRef.current) fileInputRef.current.value = "";
-    showToast("Formulaire et filtres réinitialisés", "info");
-  }}
-  className="px-4 py-3 rounded-full border bg-white"
->
-  Réinitialiser
-</motion.button>
-              </div>
-            </form>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="Mot de passe"
+                    value={formData.password}
+                    onChange={(e) => handleChange("password", e.target.value)}
+                    className="border rounded-full px-4 py-3 w-full text-sm focus:ring-2 focus:ring-orange-100"
+                  />
+
+                  {/* File control: clickable label */}
+                  <div className="relative">
+                    <label
+                      htmlFor="fileinput"
+                      className="flex items-center justify-between gap-3 border rounded-full px-4 py-3 cursor-pointer hover:shadow-md bg-gray-50"
+                      title="Cliquez pour sélectionner un fichier"
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="rounded-full bg-blue-100 p-2">
+                          <Upload size={18} />
+                        </div>
+                        <div className="min-w-0">
+                          <div className="text-sm font-medium text-slate-700 truncate">
+                            {formData.document
+                              ? formData.document.name
+                              : "Ajouter document"}
+                          </div>
+                          <div className="text-xs text-slate-400">
+                            {formData.document
+                              ? `${(formData.document.size / 1024).toFixed(
+                                  1
+                                )} KB`
+                              : "pdf, docx, 20MB max"}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* actions: remove X if present */}
+                      <div className="flex items-center gap-2">
+                        {formData.document && (
+                          <button
+                            type="button"
+                            onClick={removeSelectedFile}
+                            className="p-2 rounded-full hover:bg-red-50"
+                            aria-label="retirer fichier"
+                          >
+                            <Trash size={16} />
+                          </button>
+                        )}
+                      </div>
+
+                      <input
+                        id="fileinput"
+                        type="file"
+                        accept=".pdf,.doc,.docx,.png,.jpg"
+                        className="hidden"
+                        ref={fileInputRef}
+                        onChange={handleFileChange}
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <motion.button
+                    type="submit"
+                    className="flex-1 bg-gradient-to-r from-sky-500 to-indigo-500 text-white py-3 rounded-full font-semibold shadow-lg hover:scale-[1.02] active:scale-95 transition-transform"
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    Valider
+                  </motion.button>
+
+                  <motion.button
+                    type="button"
+                    onClick={() => {
+                      setFormData({
+                        filiere: "",
+                        session: "",
+                        annee: "",
+                        type: "",
+                        matiere: "",
+                        password: "",
+                        niveau: "",
+                        document: null,
+                      });
+                      setOpenDropdown(null);
+                      if (fileInputRef.current) fileInputRef.current.value = "";
+                      showToast("Formulaire et filtres réinitialisés", "info");
+                    }}
+                    className="px-4 py-3 rounded-full border bg-white"
+                  >
+                    Réinitialiser
+                  </motion.button>
+                </div>
+              </form>
             </div>
           </div>
 

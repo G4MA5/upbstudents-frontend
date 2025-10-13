@@ -41,7 +41,7 @@ const ForgotPasswordModal: React.FC<ForgotModalProps> = ({
     try {
       // NOTE: Remplacer par la logique d'appel API réelle
       const res = await fetch(
-        "https://upbstudents-backend-biblo.vercel.app/api/forgot",
+        "https://upbstudents-backend-6.vercel.app/api/forgot",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -335,7 +335,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
     try {
       // Le back est conservé tel quel (fetch vers API)
       const res = await fetch(
-        "https://upbstudents-backend-biblo.vercel.app/api/connexion",
+        "https://upbstudents-backend-6.vercel.app/api/connexion",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
