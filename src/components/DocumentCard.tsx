@@ -39,12 +39,6 @@ const DocumentCard: React.FC<DocumentCardProps> = ({
     }
     window.open(file_url, "_blank");
     // Téléchargement
-    const link = document.createElement("a");
-    link.href = file_url;
-    link.download = file_url.split("/").pop() || "document";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
   };
 
   useEffect(() => {

@@ -169,53 +169,68 @@ const Examen: React.FC = () => {
         </p>
 
         {/* Filtres */}
-<div className="flex flex-wrap gap-4 justify-center mb-8">
-  <AnimatedDropdown
-    label="Filière"
-    options={["MIAGE", "ASSRI", "SEA", "SEG", "3EA", "SJAP", "RIT"]}
-    value={selectedFilters.filiere}
-    isOpen={openDropdown === "Filière"}
-    onToggle={(isOpen) => setOpenDropdown(isOpen ? "Filière" : null)}
-    onSelect={(v) => handleFilterChange("filiere", v)}
-  />
+        <div className="flex flex-wrap gap-4 justify-center mb-8">
+          <AnimatedDropdown
+            label="Filière"
+            options={["MIAGE", "ASSRI", "SEA", "SEG", "3EA", "SJAP", "RIT"]}
+            value={selectedFilters.filiere}
+            isOpen={openDropdown === "Filière"}
+            onToggle={(isOpen) => setOpenDropdown(isOpen ? "Filière" : null)}
+            onSelect={(v) => handleFilterChange("filiere", v)}
+          />
 
-  <AnimatedDropdown
-    label="Année"
-    options={["2025", "2024", "2023", "2022"]}
-    value={selectedFilters.annee}
-    isOpen={openDropdown === "Année"}
-    onToggle={(isOpen) => setOpenDropdown(isOpen ? "Année" : null)}
-    onSelect={(v) => handleFilterChange("annee", v)}
-  />
+          <AnimatedDropdown
+            label="Année"
+            options={[
+              "2025",
+              "2024",
+              "2023",
+              "2022",
+              "2021",
+              "2020",
+              "2019",
+              "2018",
+            ]}
+            value={selectedFilters.annee}
+            isOpen={openDropdown === "Année"}
+            onToggle={(isOpen) => setOpenDropdown(isOpen ? "Année" : null)}
+            onSelect={(v) => handleFilterChange("annee", v)}
+          />
 
-  <AnimatedDropdown
-    label="Niveau"
-    options={["Licence 1", "Licence 2", "Licence 3", "Master 1", "Master 2"]}
-    value={selectedFilters.licence}
-    isOpen={openDropdown === "Niveau"}
-    onToggle={(isOpen) => setOpenDropdown(isOpen ? "Niveau" : null)}
-    onSelect={(v) => handleFilterChange("licence", v)}
-  />
+          <AnimatedDropdown
+            label="Niveau"
+            options={[
+              "Licence 1",
+              "Licence 2",
+              "Licence 3",
+              "Master 1",
+              "Master 2",
+            ]}
+            value={selectedFilters.licence}
+            isOpen={openDropdown === "Niveau"}
+            onToggle={(isOpen) => setOpenDropdown(isOpen ? "Niveau" : null)}
+            onSelect={(v) => handleFilterChange("licence", v)}
+          />
 
-  <AnimatedDropdown
-    label="Session"
-    options={["Session 1", "Session 2"]}
-    disabled={isSessionDisabled}
-    value={selectedFilters.session}
-    isOpen={openDropdown === "Session"}
-    onToggle={(isOpen) => setOpenDropdown(isOpen ? "Session" : null)}
-    onSelect={(v) => handleFilterChange("session", v)}
-  />
+          <AnimatedDropdown
+            label="Session"
+            options={["Session 1", "Session 2"]}
+            disabled={isSessionDisabled}
+            value={selectedFilters.session}
+            isOpen={openDropdown === "Session"}
+            onToggle={(isOpen) => setOpenDropdown(isOpen ? "Session" : null)}
+            onSelect={(v) => handleFilterChange("session", v)}
+          />
 
-  <AnimatedDropdown
-    label="Type"
-    options={["Examen", "TD", "TP"]}
-    value={selectedFilters.type}
-    isOpen={openDropdown === "Type"}
-    onToggle={(isOpen) => setOpenDropdown(isOpen ? "Type" : null)}
-    onSelect={(v) => handleFilterChange("type", v)}
-  />
-</div>
+          <AnimatedDropdown
+            label="Type"
+            options={["Examen", "TD", "TP"]}
+            value={selectedFilters.type}
+            isOpen={openDropdown === "Type"}
+            onToggle={(isOpen) => setOpenDropdown(isOpen ? "Type" : null)}
+            onSelect={(v) => handleFilterChange("type", v)}
+          />
+        </div>
 
         {/* Barre de recherche */}
         <div className="relative w-full md:w-96 mx-auto">
@@ -233,67 +248,66 @@ const Examen: React.FC = () => {
       </div>
 
       {/* Section Cartes Documents */}
-<div ref={resultsRef} className="bg-white py-12 px-4 md:px-20">
-  {loading ? (
-    <p className="text-center text-gray-500 text-lg">Chargement...</p>
-  ) : filteredDocuments.length > 0 ? (
-    <>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-screen-xl mx-auto animate-fade-in-up">
-        {filteredDocuments.slice(0, visibleCount).map((doc, index) => (
-          <ExamenDocumentCard
-            key={index}
-            title={doc.title}
-            cover={carte}
-            year={doc.annee}
-            level={doc.licence}
-            type={doc.type}
-            filiere={doc.filiere}
-            file_url={doc.file_url}
-            session={doc.session}
-            openGlobalPopup={(docData) => setPopupData(docData)}
-            id={doc.id}
-            filePath={doc.filePath}
-            openProfileModal={() => setShowProfileModal(true)}
-          />
-        ))}
-      </div>
-{/* Boutons Voir plus / Voir moins centrés */}
-<div className="flex justify-center mt-12 gap-4">
-  {visibleCount < filteredDocuments.length && (
-    <button
-      onClick={() => setVisibleCount((prev) => prev + 11)}
-      className="group flex items-center gap-2 px-6 py-2 md:px-6 md:py-2 rounded-md font-medium shadow
+      <div ref={resultsRef} className="bg-white py-12 px-4 md:px-20">
+        {loading ? (
+          <p className="text-center text-gray-500 text-lg">Chargement...</p>
+        ) : filteredDocuments.length > 0 ? (
+          <>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-screen-xl mx-auto animate-fade-in-up">
+              {filteredDocuments.slice(0, visibleCount).map((doc, index) => (
+                <ExamenDocumentCard
+                  key={index}
+                  title={doc.title}
+                  cover={carte}
+                  year={doc.annee}
+                  level={doc.licence}
+                  type={doc.type}
+                  filiere={doc.filiere}
+                  file_url={doc.file_url}
+                  session={doc.session}
+                  openGlobalPopup={(docData) => setPopupData(docData)}
+                  id={doc.id}
+                  filePath={doc.filePath}
+                  openProfileModal={() => setShowProfileModal(true)}
+                />
+              ))}
+            </div>
+            {/* Boutons Voir plus / Voir moins centrés */}
+            <div className="flex justify-center mt-12 gap-4">
+              {visibleCount < filteredDocuments.length && (
+                <button
+                  onClick={() => setVisibleCount((prev) => prev + 11)}
+                  className="group flex items-center gap-2 px-6 py-2 md:px-6 md:py-2 rounded-md font-medium shadow
                  bg-gradient-to-r from-[#4A90E2] to-[#0074D9] text-white 
                  hover:opacity-90 transition-all duration-300"
-    >
-      Voir plus
-    </button>
-  )}
+                >
+                  Voir plus
+                </button>
+              )}
 
-  {visibleCount > 12 && ( 
-  <div className="flex justify-center mt-4">
-    <button
-      onClick={() => setVisibleCount(12)}
-      className="group flex items-center gap-2 px-6 py-2 md:px-6 md:py-2 rounded-md font-medium shadow
+              {visibleCount > 12 && (
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={() => setVisibleCount(12)}
+                    className="group flex items-center gap-2 px-6 py-2 md:px-6 md:py-2 rounded-md font-medium shadow
                  bg-gradient-to-r from-[#FF9E78] to-[#FF7A4C] text-white 
                  hover:opacity-90 transition-all duration-300"
-    >
-      Voir moins
-    </button>
-  </div>
-)}
-</div>
-    </>
-  ) : (
-    <p className="text-center text-gray-500 text-lg mt-8">
-      Aucun document trouvé pour votre recherche.
-    </p>
-  )}
-  {showProfileModal && (
-    <ProfileModal closeModal={() => setShowProfileModal(false)} />
-  )}
-</div>
-
+                  >
+                    Voir moins
+                  </button>
+                </div>
+              )}
+            </div>
+          </>
+        ) : (
+          <p className="text-center text-gray-500 text-lg mt-8">
+            Aucun document trouvé pour votre recherche.
+          </p>
+        )}
+        {showProfileModal && (
+          <ProfileModal closeModal={() => setShowProfileModal(false)} />
+        )}
+      </div>
 
       {/* Popup centralisé */}
       {popupData && isProprietaire && (
