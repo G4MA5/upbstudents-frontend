@@ -154,7 +154,7 @@ const ForgotPasswordModal: React.FC<ForgotModalProps> = ({
               <form onSubmit={handleForgotSubmit} className="w-full space-y-5">
                 <input
                   type="email"
-                  placeholder="Votre adresse e-mail universitaire"
+                  placeholder="Votre adresse e-mail"
                   className="w-full px-4 py-3 border border-gray-200 rounded-full text-gray-700 bg-gray-50 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-300 transition-all duration-200 shadow-sm disabled:opacity-60"
                   value={forgotEmail}
                   onChange={(e) => setForgotEmail(e.target.value)}
@@ -600,7 +600,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
                   placeholder="Adresse e-mail"
                   className={inputClass}
                   value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
+                  onChange={(e) => setLoginEmail(e.target.value.toLowerCase())}
                   required
                 />
 
