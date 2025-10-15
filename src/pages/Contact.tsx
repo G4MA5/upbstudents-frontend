@@ -189,7 +189,7 @@ const Contact: React.FC = () => {
 
     try {
       const res = await fetch(
-        "https://upbstudents-backend-6.vercel.app/api/contact",
+        "https://upbstudents-backend.vercel.app/api/contact",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },

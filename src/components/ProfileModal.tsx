@@ -26,7 +26,7 @@ const ForgotPasswordModal: React.FC<ForgotModalProps> = ({
   // Fonction utilitaire pour afficher les messages professionnels
   const displayAlert = (message: string) => {
     setAlertMsg(message);
-    setTimeout(() => setAlertMsg(""), 6000); // Masquer après 6 secondes
+    setTimeout(() => setAlertMsg(""), 10000); // Masquer après 6 secondes
   };
 
   // Gère la soumission du formulaire de mot de passe oublié (Utilise un vrai appel fetch)
@@ -335,7 +335,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
     try {
       // Le back est conservé tel quel (fetch vers API)
       const res = await fetch(
-        "https://upbstudents-backend-6.vercel.app/api/connexion",
+        "https://upbstudents-backend.vercel.app/api/connexion",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -390,7 +390,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
     try {
       // Le back est conservé tel quel (fetch vers API)
       const res = await fetch(
-        "https://upbstudents-backend-6.vercel.app/api/inscription",
+        "https://upbstudents-backend.vercel.app/api/inscription",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -597,7 +597,7 @@ const ProfileModal: React.FC<Props> = ({ closeModal }) => {
                 {/* Champ Email */}
                 <input
                   type="email"
-                  placeholder="Adresse e-mail universitaire"
+                  placeholder="Adresse e-mail"
                   className={inputClass}
                   value={loginEmail}
                   onChange={(e) => setLoginEmail(e.target.value)}
