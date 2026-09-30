@@ -1,0 +1,439 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* ------------------------------------------------------------------
+     Design tokens. Colors are RGB triplets so Tailwind can apply
+     opacity (bg-primary/10). Tailwind names map onto them in
+     tailwind.config.js (canvas → background, card → surface, ink → text…).
+     Identity: logo orange #F47B20 + logo blue #053251 on white.
+     ------------------------------------------------------------------ */
+  :root {
+    /* Brand */
+    --color-primary: 244 123 32; /* #F47B20, logo cap */
+    --color-primary-hover: 224 101 12; /* #E0650C */
+    --color-primary-active: 201 79 0; /* #C94F00, AA with white text */
+    --color-primary-soft: 255 241 230;
+    /* Orange for text and icons on light surfaces (AA). */
+    --color-accent: 201 79 0;
+    --color-secondary: 5 50 81; /* #053251, logo "U" */
+    --color-secondary-hover: 13 63 99;
+    --color-secondary-text: 5 50 81;
+    --color-secondary-soft: 234 241 247;
+
+    /* Surfaces */
+    --color-background: 247 247 249;
+    --color-surface: 255 255 255;
+    --color-surface-elevated: 255 255 255;
+    --color-surface-sunken: 241 242 245;
+
+    /* Text */
+    --color-text: 20 20 22;
+    --color-text-secondary: 58 60 66;
+    --color-text-muted: 106 110 120;
+    --color-text-faint: 158 162 170;
+
+    /* Lines and states */
+    --color-border: 234 235 239;
+    --color-border-strong: 214 216 222;
+    --color-success: 5 150 105;
+    --color-warning: 217 119 6;
+    --color-error: 220 38 38;
+    --shadow-color: 16 24 40;
+
+    /* Radii (8 / 12 / 16 / 24) */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+
+    /* Elevation */
+    --shadow-sm: 0 1px 2px rgb(var(--shadow-color) / 0.04), 0 1px 3px rgb(var(--shadow-color) / 0.05);
+    --shadow-md: 0 6px 16px -6px rgb(var(--shadow-color) / 0.14);
+    --shadow-lg: 0 24px 48px -18px rgb(var(--shadow-color) / 0.28), 0 6px 14px -6px rgb(var(--shadow-color) / 0.1);
+
+    /* Motion (mirrored in src/lib/motion.ts) */
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --duration-micro: 140ms;
+    --duration-standard: 220ms;
+    --duration-large: 320ms;
+
+    /* Layout */
+    --sidebar-w: 248px;
+    --rail-w: 320px;
+    --topbar-h: 72px;
+    /* Floating tab bar: capsule height + gap under it. */
+    --tabbar-h: 64px;
+    --bottomnav-h: 76px;
+    color-scheme: light;
+  }
+
+  [data-theme="dark"] {
+    --color-primary-soft: 58 34 18;
+    --color-accent: 251 139 58;
+    --color-secondary: 31 79 122;
+    --color-secondary-hover: 42 95 143;
+    --color-secondary-text: 147 187 224;
+    --color-secondary-soft: 20 37 54;
+
+    --color-background: 13 13 15;
+    --color-surface: 23 23 26;
+    --color-surface-elevated: 30 30 34;
+    --color-surface-sunken: 33 33 37;
+
+    --color-text: 245 245 246;
+    --color-text-secondary: 212 213 217;
+    --color-text-muted: 152 155 163;
+    --color-text-faint: 112 115 123;
+
+    --color-border: 42 42 48;
+    --color-border-strong: 60 60 68;
+    --shadow-color: 0 0 0;
+    color-scheme: dark;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: calc(var(--topbar-h) + 16px);
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  #root {
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+  @supports (overflow: clip) {
+    #root {
+      overflow-x: clip;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply tracking-tight text-ink;
+  }
+
+  img,
+  svg,
+  video,
+  canvas,
+  iframe {
+    max-width: 100%;
+  }
+
+  /* 16px minimum on phones: iOS Safari zooms into smaller fields. */
+  input,
+  select,
+  textarea {
+    font-size: 16px;
+  }
+  @media (min-width: 1024px) {
+    input,
+    select,
+    textarea {
+      font-size: 14px;
+    }
+  }
+
+  /* Search fields have their own clear button (the native one duplicated it). */
+  input[type="search"]::-webkit-search-cancel-button,
+  input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  :focus-visible {
+    outline: 2px solid theme("colors.brand.500");
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: theme("colors.brand.200");
+    color: #141416;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Small uppercase section label (as in the desktop mockup). */
+  .eyebrow {
+    @apply text-[13px] font-extrabold uppercase tracking-[0.08em] text-ink;
+  }
+
+  /* Standard page padding (mobile respects the notch). */
+  .page {
+    @apply px-4 pb-8 sm:px-6 lg:px-8 lg:pt-7;
+    padding-top: max(env(safe-area-inset-top), 1.25rem);
+  }
+  @media (min-width: 1024px) {
+    .page {
+      padding-top: 1.75rem;
+    }
+  }
+
+  .container-page {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  .page-head {
+    @apply px-4 pb-2 sm:px-6 lg:px-8 lg:pt-7;
+    padding-top: max(env(safe-area-inset-top), 1.25rem);
+  }
+  @media (min-width: 1024px) {
+    .page-head {
+      padding-top: 1.75rem;
+    }
+  }
+
+  /* Text fields, selects and search bars.
+     Filled at rest, lifted on focus (white, neutral outline, soft shadow):
+     no orange border or ring. Only the caret stays orange. */
+  .field {
+    @apply w-full border border-transparent bg-sunken text-ink placeholder:text-ink-faint;
+    caret-color: theme("colors.brand.500");
+    outline: none;
+    transition:
+      background-color var(--duration-standard) var(--ease-out),
+      border-color var(--duration-standard) var(--ease-out),
+      color var(--duration-standard) var(--ease-out),
+      box-shadow var(--duration-large) var(--ease-out);
+  }
+  .field:hover:not(:disabled):not(:focus):not([aria-expanded="true"]) {
+    background-color: rgb(var(--color-border) / 0.8);
+  }
+  .field:focus,
+  .field:focus-visible,
+  .field[aria-expanded="true"] {
+    outline: none;
+    border-color: rgb(var(--color-border-strong));
+    background-color: rgb(var(--color-surface));
+    box-shadow:
+      0 1px 2px rgb(var(--shadow-color) / 0.04),
+      0 10px 24px -12px rgb(var(--shadow-color) / 0.28);
+  }
+  /* A selected filter keeps a light accent tint (no border). */
+  .field[data-filled="true"]:not(:focus):not([aria-expanded="true"]) {
+    background-color: rgb(var(--color-primary-soft));
+    color: rgb(var(--color-accent));
+  }
+  .field[aria-invalid="true"] {
+    border-color: rgb(239 68 68 / 0.5);
+    background-color: rgb(239 68 68 / 0.05);
+  }
+  .field[aria-invalid="true"]:focus,
+  .field[aria-invalid="true"][aria-expanded="true"] {
+    border-color: rgb(239 68 68 / 0.75);
+    background-color: rgb(var(--color-surface));
+  }
+  .field:disabled {
+    cursor: not-allowed;
+    color: rgb(var(--color-text-faint));
+    opacity: 0.75;
+  }
+
+  .card {
+    @apply rounded-2xl border border-line bg-card shadow-card;
+  }
+
+  /* Frosted material of the floating mobile tab bar.
+     Opaque enough that colorful content scrolling underneath never turns
+     into color blotches (saturation kept moderate), with a light rim, a
+     sheen on top and a floating shadow. */
+  .liquid-glass {
+    position: relative;
+    isolation: isolate;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.84) 0%, rgba(255, 255, 255, 0.7) 100%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.9),
+      inset 0 -1px 1px rgba(255, 255, 255, 0.25),
+      inset 0 0 16px rgba(255, 255, 255, 0.3),
+      0 0 0 0.5px rgba(0, 0, 0, 0.07),
+      0 16px 36px -14px rgba(0, 0, 0, 0.32),
+      0 4px 12px -6px rgba(0, 0, 0, 0.14);
+  }
+  /* Specular sheen (light reflected on the upper half). */
+  .liquid-glass::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background:
+      radial-gradient(120% 140% at 15% -40%, rgba(255, 255, 255, 0.55), transparent 55%),
+      radial-gradient(90% 120% at 95% -30%, rgba(255, 255, 255, 0.35), transparent 50%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 50%);
+  }
+  /* Luminous rim: bright at the corners, fading along the sides. */
+  .liquid-glass::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: inherit;
+    padding: 1px;
+    pointer-events: none;
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0.25) 30%,
+      rgba(255, 255, 255, 0.08) 55%,
+      rgba(255, 255, 255, 0.35) 80%,
+      rgba(255, 255, 255, 0.85) 100%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    mask-composite: exclude;
+  }
+  /* Browsers without backdrop-filter: keep it legible. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .liquid-glass {
+      background: rgba(250, 250, 252, 0.96);
+    }
+  }
+  [data-theme="dark"] .liquid-glass {
+    background: linear-gradient(180deg, rgba(48, 48, 54, 0.82) 0%, rgba(28, 28, 32, 0.76) 100%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    backdrop-filter: blur(18px) saturate(140%);
+    box-shadow:
+      inset 0 1px 1px rgba(255, 255, 255, 0.22),
+      inset 0 0 14px rgba(255, 255, 255, 0.06),
+      0 0 0 0.5px rgba(0, 0, 0, 0.4),
+      0 16px 36px -14px rgba(0, 0, 0, 0.7);
+  }
+  [data-theme="dark"] .liquid-glass::before {
+    background:
+      radial-gradient(120% 140% at 15% -40%, rgba(255, 255, 255, 0.16), transparent 55%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 50%);
+  }
+  [data-theme="dark"] .liquid-glass::after {
+    background: linear-gradient(
+      125deg,
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0.06) 35%,
+      rgba(255, 255, 255, 0.04) 65%,
+      rgba(255, 255, 255, 0.25) 100%
+    );
+  }
+
+  .safe-bottom {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+
+  .modal-height {
+    max-height: 92vh;
+    max-height: 92dvh;
+  }
+  .modal-fill {
+    height: 92vh;
+    height: 92dvh;
+  }
+  @media (min-width: 640px) {
+    .modal-height {
+      max-height: calc(100vh - 48px);
+      max-height: calc(100dvh - 48px);
+    }
+    .modal-fill {
+      height: calc(100vh - 48px);
+      height: calc(100dvh - 48px);
+    }
+  }
+
+  /* Leaves room for the mobile bottom navigation. */
+  .pb-bottomnav {
+    padding-bottom: calc(var(--bottomnav-h) + env(safe-area-inset-bottom) + 24px);
+  }
+  @media (min-width: 1024px) {
+    .pb-bottomnav {
+      padding-bottom: 2.5rem;
+    }
+  }
+}
+
+@layer utilities {
+  /* aspect-ratio arrived in Safari 15 / Chrome 88. On older phones the
+     document covers collapsed to a thin strip: the padding technique keeps
+     the proportions (their content is absolutely positioned). */
+  @supports not (aspect-ratio: 1 / 1) {
+    .aspect-square {
+      height: 0 !important;
+      padding-top: 100%;
+    }
+    .aspect-\[3\/4\] {
+      height: 0 !important;
+      padding-top: 133.333%;
+    }
+    .aspect-\[1\/1\.414\] {
+      height: 0 !important;
+      padding-top: 141.4%;
+    }
+  }
+
+  .scrollbar-none {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(var(--color-border-strong)) transparent;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .snap-x-mandatory {
+    scroll-snap-type: x mandatory;
+  }
+}
+
+@keyframes toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.react-pdf__Page canvas {
+  display: block;
+  height: auto !important;
+  max-width: 100%;
+  margin: 0 auto;
+}
