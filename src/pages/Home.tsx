@@ -35,13 +35,24 @@ function useHomeData() {
   return useMemo(() => {
     const latest = [...documents].sort((a, b) => b.id - a.id);
     const byId = new Map(documents.map((d) => [d.id, d]));
-    const recent = recents.map((id) => byId.get(id)).filter(Boolean) as LibraryDocument[];
-    const mine = profile?.filiere ? latest.filter((d) => d.filiere === profile.filiere) : [];
+    const recent = recents
+      .map((id) => byId.get(id))
+      .filter(Boolean) as LibraryDocument[];
+    const mine = profile?.filiere
+      ? latest.filter((d) => d.filiere === profile.filiere)
+      : [];
     // "For you": the student's filière first, otherwise a stable daily selection.
     const day = Math.floor(Date.now() / 86400000);
-    const daily = [...latest].sort((a, b) => ((a.id * 31 + day) % 97) - ((b.id * 31 + day) % 97));
+    const daily = [...latest].sort(
+      (a, b) => ((a.id * 31 + day) % 97) - ((b.id * 31 + day) % 97),
+    );
     const picks = (mine.length >= 4 ? mine : daily).slice(0, 4);
-    return { latest, recent, picks, forFiliere: mine.length >= 4 ? profile?.filiere : null };
+    return {
+      latest,
+      recent,
+      picks,
+      forFiliere: mine.length >= 4 ? profile?.filiere : null,
+    };
   }, [documents, recents, profile?.filiere]);
 }
 
@@ -72,12 +83,17 @@ function Intro() {
         <p className="text-sm font-medium text-ink-muted">
           {profile?.prenom ? `Bonjour ${profile.prenom}` : "Bienvenue"}
         </p>
-        <h1 className="mt-0.5 text-[28px] font-extrabold leading-tight">Bibliothèque numérique</h1>
+        <h1 className="mt-0.5 text-[28px] font-extrabold leading-tight">
+          Bibliothèque numérique
+        </h1>
         <p className="mt-1.5 max-w-2xl text-[15px] text-ink-muted">
           {status === "ready" && documents.length ? (
             <>
-              <strong className="font-semibold text-ink-soft">{plural(documents.length, "document", "documents")}</strong>{" "}
-              partagés par les étudiants de l'Université Polytechnique de Bingerville.
+              <strong className="font-semibold text-ink-soft">
+                {plural(documents.length, "document", "documents")}
+              </strong>{" "}
+              partagés par les étudiants de l'Université Polytechnique de
+              Bingerville.
             </>
           ) : (
             "Examens, TD, TP et livres partagés par les étudiants de l'Université Polytechnique de Bingerville."
@@ -120,10 +136,20 @@ function DesktopHome() {
           >
             <div className="grid grid-cols-5 gap-5 2xl:grid-cols-6">
               {loading
-                ? Array.from({ length: 5 }, (_, i) => <CoverTileSkeleton key={i} square />)
+                ? Array.from({ length: 5 }, (_, i) => (
+                    <CoverTileSkeleton key={i} square />
+                  ))
                 : row.slice(0, 6).map((doc, i) => (
-                    <div key={doc.id} className={i === 5 ? "hidden 2xl:block" : undefined}>
-                      <CoverTile doc={doc} onOpen={openDocument} index={i} square />
+                    <div
+                      key={doc.id}
+                      className={i === 5 ? "hidden 2xl:block" : undefined}
+                    >
+                      <CoverTile
+                        doc={doc}
+                        onOpen={openDocument}
+                        index={i}
+                        square
+                      />
                     </div>
                   ))}
             </div>
@@ -131,17 +157,33 @@ function DesktopHome() {
 
           <Section
             title={forFiliere ? `Pour vous · ${forFiliere}` : "À découvrir"}
-            to={forFiliere ? `/documents?filiere=${encodeURIComponent(forFiliere)}` : "/documents"}
+            to={
+              forFiliere
+                ? `/documents?filiere=${encodeURIComponent(forFiliere)}`
+                : "/documents"
+            }
           >
             <div className="grid grid-cols-2 gap-4">
               {loading
-                ? Array.from({ length: 4 }, (_, i) => <RowCardSkeleton key={i} />)
-                : picks.map((doc, i) => <RowCard key={doc.id} doc={doc} onOpen={openDocument} index={i} />)}
+                ? Array.from({ length: 4 }, (_, i) => (
+                    <RowCardSkeleton key={i} />
+                  ))
+                : picks.map((doc, i) => (
+                    <RowCard
+                      key={doc.id}
+                      doc={doc}
+                      onOpen={openDocument}
+                      index={i}
+                    />
+                  ))}
             </div>
           </Section>
 
           {/* Shown whenever the right rail (and its filières list) is not. */}
-          <Section title="Filières" className={FEATURES.rightRail ? "xl:hidden" : ""}>
+          <Section
+            title="Filières"
+            className={FEATURES.rightRail ? "xl:hidden" : ""}
+          >
             <div className="max-w-2xl">
               <TopFilieres limit={7} />
             </div>
@@ -169,17 +211,27 @@ function MobileHome() {
         <div className="flex min-w-0 items-center gap-3">
           {/* Hidden on the narrowest phones so the full name stays readable. */}
           <span className="hidden h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-brand-500/10 xs:flex">
-            <img src="/logo5.png" alt="" width={30} height={30} className="h-[30px] w-[30px] object-contain" />
+            <img
+              src="/logo5.png"
+              alt=""
+              width={30}
+              height={30}
+              className="h-[30px] w-[30px] object-contain"
+            />
           </span>
           <div className="min-w-0">
-            <p className="truncate text-sm text-ink-muted">{profile?.prenom ? `Bonjour ${profile.prenom}` : "Bienvenue"}</p>
             <h1 className="truncate text-[21px] font-extrabold leading-tight xs:text-[22px]">
-              <span className="text-secondary-text">UpB</span> <span className="text-brand-500">Student's</span>
+              <span className="text-secondary-text">UpB</span>{" "}
+              <span className="text-brand-500">Student's</span>
             </h1>
           </div>
         </div>
         {authStatus === "authenticated" ? (
-          <Link to="/profil" aria-label="Mon profil" className="shrink-0 rounded-full transition active:scale-95">
+          <Link
+            to="/profil"
+            aria-label="Mon profil"
+            className="shrink-0 rounded-full transition active:scale-95"
+          >
             <Avatar size={44} />
           </Link>
         ) : authStatus === "anonymous" ? (
@@ -201,7 +253,11 @@ function MobileHome() {
         <Section
           title="Recherches récentes"
           action={
-            <button type="button" onClick={clearSearches} className="text-[13px] font-semibold text-ink-muted">
+            <button
+              type="button"
+              onClick={clearSearches}
+              className="text-[13px] font-semibold text-ink-muted"
+            >
               Tout effacer
             </button>
           }
@@ -216,7 +272,10 @@ function MobileHome() {
                 transition={SPRING.snappy}
                 className="inline-flex items-center rounded-full bg-sunken text-[13px] font-medium text-ink-soft"
               >
-                <Link to={`/documents?q=${encodeURIComponent(s)}`} className="py-2 pl-3.5 pr-1.5">
+                <Link
+                  to={`/documents?q=${encodeURIComponent(s)}`}
+                  className="py-2 pl-3.5 pr-1.5"
+                >
                   {s}
                 </Link>
                 <button
@@ -261,7 +320,9 @@ function MobileHome() {
                       <span className="block rounded-2xl bg-sunken p-2.5 transition active:scale-[0.97]">
                         <DocCover doc={doc} size="sm" />
                       </span>
-                      <span className="mt-2 block truncate text-[13px] font-bold text-ink">{doc.title}</span>
+                      <span className="mt-2 block truncate text-[13px] font-bold text-ink">
+                        {doc.title}
+                      </span>
                       <span className="block truncate text-xs text-ink-muted">
                         {doc.filiere} · {doc.niveau}
                       </span>
@@ -271,10 +332,19 @@ function MobileHome() {
           </Section>
 
           {recent.length > 0 && (
-            <Section title="Consultés" accent="récemment" to="/bibliotheque?vue=recents">
+            <Section
+              title="Consultés"
+              accent="récemment"
+              to="/bibliotheque?vue=recents"
+            >
               <div className="flex flex-col gap-3">
                 {recent.slice(0, 3).map((doc, i) => (
-                  <RowCard key={doc.id} doc={doc} onOpen={openDocument} index={i} />
+                  <RowCard
+                    key={doc.id}
+                    doc={doc}
+                    onOpen={openDocument}
+                    index={i}
+                  />
                 ))}
               </div>
             </Section>
@@ -304,9 +374,15 @@ function MobileHome() {
             </span>
             <span className="min-w-0 flex-1">
               <span className="block font-extrabold">Proposer un document</span>
-              <span className="block text-sm text-white/80">Partagez vos sujets, TD et TP. L'équipe vérifie avant publication.</span>
+              <span className="block text-sm text-white/80">
+                Partagez vos sujets, TD et TP. L'équipe vérifie avant
+                publication.
+              </span>
             </span>
-            <ChevronRight className="h-5 w-5 shrink-0 text-white/70" aria-hidden />
+            <ChevronRight
+              className="h-5 w-5 shrink-0 text-white/70"
+              aria-hidden
+            />
           </Link>
         </>
       )}
