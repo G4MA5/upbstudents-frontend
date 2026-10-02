@@ -14,6 +14,7 @@ import {
   LogIn,
   LogOut,
   Mail,
+  Megaphone,
   MessageCircle,
   Moon,
   Phone,
@@ -28,6 +29,10 @@ import { Alert, EmptyState, Skeleton } from "../components/ui/Feedback";
 import { Switch } from "../components/ui/Switch";
 import { PasswordInput } from "../components/ui/Field";
 import { useAuth } from "../context/AuthContext";
+// ---------- Divine : diffusion WhatsApp (admins) ----------
+import { useBroadcastAccess } from "../lib/useBroadcastAccess";
+import { WhatsAppProfileCard } from "../components/whatsapp/WhatsAppConsent";
+// ---------- Divine : fin ----------
 import { useTheme } from "../context/ThemeContext";
 import { useToast } from "../context/ToastContext";
 import { api, ApiError, errorMessage } from "../lib/api";
@@ -140,6 +145,9 @@ function Preferences() {
 export default function Profil() {
   usePageTitle("Mon profil");
   const { status, profile, contributions, memberSince, reloadProfile, openAuth, logout } = useAuth();
+  // ---------- Divine : diffusion WhatsApp (admins) ----------
+  const { allowed: canBroadcast } = useBroadcastAccess();
+  // ---------- Divine : fin ----------
   const [refreshing, setRefreshing] = useState(true);
 
   useEffect(() => {
@@ -280,9 +288,20 @@ export default function Profil() {
                   </ButtonLink>
                 </>
               )}
+              {/* ---------- Divine : diffusion WhatsApp (admins autorisés par le serveur) ---------- */}
+              {canBroadcast && (
+                <ButtonLink to="/diffusion" variant="outline" icon={<Megaphone className="h-4 w-4" />}>
+                  Diffusion WhatsApp
+                </ButtonLink>
+              )}
+              {/* ---------- Divine : fin ---------- */}
             </div>
           </div>
         </section>
+
+        {/* ---------- Divine : option notifications WhatsApp (mise en avant si pas accepté) ---------- */}
+        <WhatsAppProfileCard />
+        {/* ---------- Divine : fin ---------- */}
 
         <section className="rounded-3xl border border-line bg-card p-5 shadow-card sm:p-8" aria-labelledby="securite">
           <h2 id="securite" className="text-lg font-bold">Sécurité</h2>

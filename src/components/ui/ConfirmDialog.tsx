@@ -9,6 +9,8 @@ export function ConfirmDialog({
   children,
   confirmLabel,
   loading,
+  loadingText = "Suppression…",
+  tone = "danger",
   onConfirm,
   onCancel,
 }: {
@@ -17,13 +19,19 @@ export function ConfirmDialog({
   children: React.ReactNode;
   confirmLabel: string;
   loading?: boolean;
+  // ---------- Divine : options ajoutées pour la diffusion WhatsApp (valeurs par défaut = ancien comportement) ----------
+  /** Texte du bouton pendant l'action (par défaut : suppression). */
+  loadingText?: string;
+  /** "danger" (rouge, suppression) ou "primary" (action normale). */
+  tone?: "danger" | "primary";
+  // ---------- Divine : fin ----------
   onConfirm: () => void;
   onCancel: () => void;
 }) {
   return (
     <Modal open={open} onClose={() => !loading && onCancel()} size="sm" ariaLabel={title}>
       <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-        <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-red-500/10 text-red-600">
+        <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${tone === "danger" ? "bg-red-500/10 text-red-600" : "bg-accent-soft text-accent"}`}>
           <AlertTriangle className="h-6 w-6" aria-hidden />
         </div>
         <h2 className="mt-4 text-xl font-bold">{title}</h2>
@@ -32,7 +40,7 @@ export function ConfirmDialog({
           <Button variant="ghost" onClick={onCancel} disabled={loading}>
             Annuler
           </Button>
-          <Button variant="danger" onClick={onConfirm} loading={loading} loadingText="Suppression…">
+          <Button variant={tone} onClick={onConfirm} loading={loading} loadingText={loadingText}>
             {confirmLabel}
           </Button>
         </div>

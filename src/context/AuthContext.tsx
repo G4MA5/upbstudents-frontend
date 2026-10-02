@@ -34,6 +34,14 @@ const SESSION_KEY = "upb_session";
 const PROFILE_KEY = "upb_profile";
 const LEGACY_TOKEN_KEY = "supa_token";
 
+// ---------- Divine : consentement WhatsApp ----------
+/** accepte : true / false, ou null si l'étudiant n'a jamais répondu. disponible : false tant que le serveur ne gère pas encore l'option. */
+export interface WhatsAppConsent {
+  disponible: boolean;
+  accepte: boolean | null;
+}
+// ---------- Divine : fin ----------
+
 export interface SignupData {
   nom: string;
   prenom: string;
@@ -42,6 +50,8 @@ export interface SignupData {
   numero: string;
   email: string;
   password: string;
+  /** Divine : réponse à "recevoir les notifications WhatsApp ?" (formulaire d'inscription). */
+  whatsapp?: boolean;
 }
 
 interface AuthPayload {
@@ -53,6 +63,7 @@ interface UserPayload {
   profile: Profile;
   contributions: number;
   user?: { created_at?: string };
+  whatsapp?: WhatsAppConsent;
 }
 
 interface ModalState {
@@ -67,6 +78,10 @@ interface AuthContextValue {
   contributions: number | null;
   /** Account creation date (ISO), known once the profile is verified. */
   memberSince: string | null;
+  /** Divine : consentement aux notifications WhatsApp (null tant que le profil n'est pas chargé). */
+  whatsapp: WhatsAppConsent | null;
+  /** Divine : enregistre la réponse de l'étudiant (oui / non). */
+  setWhatsappConsent: (accepte: boolean) => Promise<void>;
   login: (email: string, password: string) => Promise<Profile>;
   signup: (data: SignupData) => Promise<string>;
   logout: () => Promise<void>;
@@ -133,6 +148,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
   const [contributions, setContributions] = useState<number | null>(null);
   const [memberSince, setMemberSince] = useState<string | null>(null);
+  // ---------- Divine : consentement WhatsApp ----------
+  const [whatsapp, setWhatsapp] = useState<WhatsAppConsent | null>(null);
+  // ---------- Divine : fin ----------
   const [status, setStatus] = useState<AuthStatus>(() => {
     const fromLink = sessionFromUrlHash();
     sessionRef.current = fromLink || initialSession();
@@ -171,6 +189,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setProfile(null);
     setContributions(null);
     setMemberSince(null);
+    setWhatsapp(null); // Divine
     setStatus("anonymous");
   }, []);
 
@@ -235,6 +254,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setProfile(data.profile);
     setContributions(data.contributions);
     setMemberSince(data.user?.created_at ?? null);
+    setWhatsapp(data.whatsapp ?? null); // Divine
     writeStorage(PROFILE_KEY, data.profile);
   }, []);
 
@@ -346,6 +366,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (session) persist(session, data.profile);
         setContributions(data.contributions);
         setMemberSince(data.user?.created_at ?? null);
+        setWhatsapp(data.whatsapp ?? null); // Divine
         if (authType === "signup") {
           toast.success(
             "Adresse e-mail confirmée",
@@ -411,6 +432,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return res.message;
   }, []);
 
+  // ---------- Divine : consentement WhatsApp ----------
+  const setWhatsappConsent = useCallback(async (accepte: boolean) => {
+    const res = await api<{ whatsapp: WhatsAppConsent }>("/api/whatsapp", {
+      auth: true,
+      body: { accepte },
+    });
+    setWhatsapp(res.whatsapp);
+  }, []);
+  // ---------- Divine : fin ----------
+
   const logout = useCallback(async () => {
     // Revocation is best effort: the local session is cleared regardless.
     api("/api/deconnexion", {
@@ -455,6 +486,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       profile,
       contributions,
       memberSince,
+      whatsapp, // Divine
+      setWhatsappConsent, // Divine
       login,
       signup,
       logout,
@@ -471,6 +504,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       profile,
       contributions,
       memberSince,
+      whatsapp, // Divine
+      setWhatsappConsent, // Divine
       login,
       signup,
       logout,

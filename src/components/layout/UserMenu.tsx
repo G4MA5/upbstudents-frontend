@@ -1,10 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ChevronDown, ClipboardCheck, Heart, LogOut, Upload, UserRound } from "lucide-react";
+import { ChevronDown, ClipboardCheck, Heart, LogOut, Megaphone, Upload, UserRound } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { initials } from "../../lib/format";
 import { popover } from "../../lib/motion";
+// ---------- Divine : diffusion WhatsApp (admins) ----------
+import { useBroadcastAccess } from "../../lib/useBroadcastAccess";
+// ---------- Divine : fin ----------
 
 export function Avatar({ size = 36, className = "" }: { size?: number; className?: string }) {
   const { profile } = useAuth();
@@ -43,6 +46,9 @@ export const dropdownMotion = popover;
 /** Avatar + name + status, with the account menu (desktop top bar). */
 export function UserMenu() {
   const { profile, logout } = useAuth();
+  // ---------- Divine : diffusion WhatsApp (admins) ----------
+  const { allowed: canBroadcast } = useBroadcastAccess();
+  // ---------- Divine : fin ----------
   const [open, setOpen] = useState(false);
   const ref = useOutsideClose(open, () => setOpen(false));
 
@@ -101,6 +107,13 @@ export function UserMenu() {
                   </Link>
                 </>
               )}
+              {/* ---------- Divine : diffusion WhatsApp (admins autorisés par le serveur) ---------- */}
+              {canBroadcast && (
+                <Link to="/diffusion" role="menuitem" className={item} onClick={() => setOpen(false)}>
+                  <Megaphone className="h-4 w-4" aria-hidden /> Diffusion WhatsApp
+                </Link>
+              )}
+              {/* ---------- Divine : fin ---------- */}
               <div className="my-1 h-px bg-line" />
               <button
                 type="button"

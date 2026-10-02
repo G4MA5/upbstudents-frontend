@@ -17,6 +17,9 @@ import { Alert, SuccessMark } from "../ui/Feedback";
 import { Input, PasswordInput, Select } from "../ui/Field";
 import { Modal } from "../ui/Modal";
 import { PasswordStrength } from "./PasswordStrength";
+// ---------- Divine : consentement WhatsApp ----------
+import { WhatsAppSignupOption } from "../whatsapp/WhatsAppConsent";
+// ---------- Divine : fin ----------
 
 type Feedback = {
   tone: "error" | "warning" | "info";
@@ -219,6 +222,9 @@ function SignupView({ onDone }: { onDone: (email: string) => void }) {
   );
   const [feedback, setFeedback] = useState<Feedback>(null);
   const [loading, setLoading] = useState(false);
+  // ---------- Divine : consentement WhatsApp (refusé par défaut : l'étudiant doit activer) ----------
+  const [whatsapp, setWhatsapp] = useState(false);
+  // ---------- Divine : fin ----------
 
   const set = (field: SignupField) => (e: { target: { value: string } }) => {
     const value = e.target.value;
@@ -251,6 +257,7 @@ function SignupView({ onDone }: { onDone: (email: string) => void }) {
         ...data,
         email: data.email.trim().toLowerCase(),
         numero: data.numero.replace(/[\s.-]/g, ""),
+        whatsapp, // Divine : réponse à la question WhatsApp
       });
       onDone(data.email.trim().toLowerCase());
     } catch (err) {
@@ -378,6 +385,11 @@ function SignupView({ onDone }: { onDone: (email: string) => void }) {
           onBlur={check("confirm")}
           error={errors.confirm}
         />
+        {/* ---------- Divine : option notifications WhatsApp ---------- */}
+        <div className="sm:col-span-2">
+          <WhatsAppSignupOption checked={whatsapp} onChange={setWhatsapp} />
+        </div>
+        {/* ---------- Divine : fin ---------- */}
       </div>
       <Button
         type="submit"

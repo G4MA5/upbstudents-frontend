@@ -69,3 +69,13 @@ export function initials(prenom?: string, nom?: string, email?: string) {
 export function plural(n: number, one: string, many: string) {
   return `${n.toLocaleString("fr-FR")} ${n > 1 ? many : one}`;
 }
+
+// ---------- Divine : diffusion WhatsApp (date + heure pour l'historique) ----------
+/** "2 octobre 2026 à 09:41" */
+export function formatDateTime(value?: string | null) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return `${date.toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })} à ${date.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" })}`;
+}
+// ---------- Divine : fin ----------

@@ -15,6 +15,7 @@ import {
   House,
   Layers,
   LayoutGrid,
+  Megaphone,
   MessageCircle,
   NotebookPen,
   Upload,
@@ -23,6 +24,9 @@ import {
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { SPRING, TRANSITION } from "../../lib/motion";
+// ---------- Divine : diffusion WhatsApp (admins) ----------
+import { useBroadcastAccess } from "../../lib/useBroadcastAccess";
+// ---------- Divine : fin ----------
 import { Logo } from "../ui/Logo";
 import { Tooltip } from "../ui/Tooltip";
 
@@ -115,6 +119,9 @@ function NavGroup({ title, items, collapsed }: { title?: string; items: Item[]; 
 
 export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle: () => void }) {
   const { profile, status } = useAuth();
+  // ---------- Divine : diffusion WhatsApp (admins) ----------
+  const { allowed: canBroadcast } = useBroadcastAccess();
+  // ---------- Divine : fin ----------
 
   const contribute: Item[] = [
     { label: "Proposer un document", to: "/proposer", icon: FilePlus2, match: (p) => p === "/proposer" },
@@ -124,6 +131,11 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
           { label: "Propositions", to: "/propositions", icon: ClipboardCheck, match: (p: string) => p === "/propositions" },
         ]
       : []),
+    // ---------- Divine : diffusion WhatsApp (admins autorisés par le serveur) ----------
+    ...(canBroadcast
+      ? [{ label: "Diffusion", to: "/diffusion", icon: Megaphone, match: (p: string) => p === "/diffusion" }]
+      : []),
+    // ---------- Divine : fin ----------
   ];
 
   const account: Item[] = [

@@ -11,6 +11,9 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { AuthModal } from "./components/auth/AuthModal";
 import { AppShell } from "./components/layout/AppShell";
 import { WelcomeGuide } from "./components/onboarding/WelcomeGuide";
+// ---------- Divine : consentement WhatsApp ----------
+import { WhatsAppPrompt } from "./components/whatsapp/WhatsAppConsent";
+// ---------- Divine : fin ----------
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import { Skeleton } from "./components/ui/Feedback";
 import { AuthProvider } from "./context/AuthContext";
@@ -28,6 +31,9 @@ const Proposer = lazy(() => import("./pages/Proposer"));
 const Ajouter = lazy(() => import("./pages/Ajouter"));
 const Profil = lazy(() => import("./pages/Profil"));
 const Propositions = lazy(() => import("./pages/Propositions"));
+// ---------- Divine : diffusion WhatsApp (admins) ----------
+const Diffusion = lazy(() => import("./pages/Diffusion"));
+// ---------- Divine : fin ----------
 const Contact = lazy(() => import("./pages/Contact"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const NotFound = lazy(() => import("./pages/NotFound"));
@@ -80,6 +86,9 @@ function AnimatedRoutes() {
         <Route path="/ajouter" element={<Page><Ajouter /></Page>} />
         <Route path="/profil" element={<Page><Profil /></Page>} />
         <Route path="/propositions" element={<Page><Propositions /></Page>} />
+        {/* ---------- Divine : diffusion WhatsApp (admins) ---------- */}
+        <Route path="/diffusion" element={<Page><Diffusion /></Page>} />
+        {/* ---------- Divine : fin ---------- */}
         <Route path="/contact" element={<Page><Contact /></Page>} />
         <Route path="/mot-de-passe-oublie" element={<Page><ResetPassword /></Page>} />
         <Route path="*" element={<Page><NotFound /></Page>} />
@@ -104,6 +113,9 @@ export default function App() {
                     </AppShell>
                     <AuthModal />
                     <WelcomeGuide />
+                    {/* ---------- Divine : fenêtre WhatsApp, une seule fois ---------- */}
+                    <WhatsAppPrompt />
+                    {/* ---------- Divine : fin ---------- */}
                   </PrefsProvider>
                 </DocumentsProvider>
               </AuthProvider>
