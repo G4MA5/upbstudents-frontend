@@ -96,7 +96,7 @@ function Intro() {
               Bingerville.
             </>
           ) : (
-            "Examens, TD, TP et livres partagés par les étudiants de l'Université Polytechnique de Bingerville."
+            "Examens, cours, TD, TP, mémoires et livres partagés par les étudiants de l'Université Polytechnique de Bingerville."
           )}
         </p>
       </div>
@@ -199,7 +199,7 @@ function DesktopHome() {
 
 function MobileHome() {
   const { status } = useLibrary();
-  const { status: authStatus, profile, openAuth } = useAuth();
+  const { status: authStatus, openAuth } = useAuth();
   const { searches, removeSearch, clearSearches } = usePrefs();
   const openDocument = useOpenDocument();
   const { latest, recent } = useHomeData();

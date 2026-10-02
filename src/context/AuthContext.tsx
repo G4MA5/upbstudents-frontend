@@ -82,6 +82,8 @@ interface AuthContextValue {
   closeAuth: () => void;
   /** Called by the login form once signed in: closes and resumes. */
   completeAuth: () => void;
+  justLoggedIn: boolean;
+  clearJustLoggedIn: () => void;
 }
 
 const AuthContext = createContext<AuthContextValue | null>(null);
@@ -133,6 +135,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   );
   const [contributions, setContributions] = useState<number | null>(null);
   const [memberSince, setMemberSince] = useState<string | null>(null);
+  const [justLoggedIn, setJustLoggedIn] = useState(false);
+  const clearJustLoggedIn = useCallback(() => setJustLoggedIn(false), []);
   const [status, setStatus] = useState<AuthStatus>(() => {
     const fromLink = sessionFromUrlHash();
     sessionRef.current = fromLink || initialSession();
@@ -398,6 +402,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         body: { email, password },
       });
       persist(data.session, data.profile);
+      setJustLoggedIn(true);
       reloadProfile().catch(() => undefined);
       return data.profile;
     },
@@ -465,6 +470,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setAuthView,
       closeAuth,
       completeAuth,
+      justLoggedIn,
+      clearJustLoggedIn,
     }),
     [
       status,
@@ -481,6 +488,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setAuthView,
       closeAuth,
       completeAuth,
+      justLoggedIn,
+      clearJustLoggedIn,
     ],
   );
 

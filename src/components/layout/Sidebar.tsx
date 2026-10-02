@@ -10,6 +10,7 @@ import {
   FileCheck2,
   FilePlus2,
   FlaskConical,
+  GraduationCap,
   Heart,
   History,
   House,
@@ -17,6 +18,7 @@ import {
   LayoutGrid,
   MessageCircle,
   NotebookPen,
+  Scroll,
   Upload,
   UserRound,
   type LucideIcon,
@@ -44,8 +46,10 @@ const HOME: Item[] = [{ label: "Accueil", to: "/", icon: House, match: (p) => p 
 const DOCUMENTS: Item[] = [
   { label: "Tous les documents", to: "/documents", icon: LayoutGrid, match: docsWith(null) },
   { label: "Examens", to: "/documents?type=Examen", icon: FileCheck2, match: docsWith("Examen") },
+  { label: "Cours", to: "/documents?type=Cours", icon: GraduationCap, match: docsWith("Cours") },
   { label: "TD", to: "/documents?type=TD", icon: NotebookPen, match: docsWith("TD") },
   { label: "TP", to: "/documents?type=TP", icon: FlaskConical, match: docsWith("TP") },
+  { label: "Mémoires", to: "/documents?type=Mémoire", icon: Scroll, match: docsWith("Mémoire") },
   { label: "Livres", to: "/documents?type=Livre", icon: BookOpen, match: docsWith("Livre") },
 ];
 

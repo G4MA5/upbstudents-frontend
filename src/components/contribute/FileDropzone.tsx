@@ -45,7 +45,7 @@ export function FileDropzone({
   const isImage = file && /\.(png|jpe?g)$/i.test(file.name);
 
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex w-full min-w-0 max-w-full flex-col gap-1.5 overflow-hidden">
       <span className="text-sm font-medium text-ink-soft" id={`${id}-label`}>
         Fichier
       </span>
@@ -56,14 +56,16 @@ export function FileDropzone({
             initial={{ opacity: 0, scale: 0.98 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.98 }}
-            className="flex items-center gap-3 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3"
+            className="flex w-full min-w-0 max-w-full items-center gap-3 overflow-hidden rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-3"
           >
             <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-card text-emerald-700 shadow-card">
               {isImage ? <ImageIcon className="h-6 w-6" aria-hidden /> : <FileText className="h-6 w-6" aria-hidden />}
             </span>
-            <div className="min-w-0 flex-1">
-              <p className="truncate font-medium text-ink">{file.name}</p>
-              <p className="text-sm text-ink-muted">
+            <div className="min-w-0 flex-1 overflow-hidden">
+              <p className="truncate font-medium text-ink break-all" title={file.name}>
+                {file.name}
+              </p>
+              <p className="truncate text-sm text-ink-muted">
                 {extensionOf(file.name).toUpperCase()} · {formatBytes(file.size)}
               </p>
             </div>
@@ -91,7 +93,7 @@ export function FileDropzone({
             }}
             onDragLeave={() => setDragging(false)}
             onDrop={onDrop}
-            className={`flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-6 py-8 text-center transition-[background-color,border-color,box-shadow] duration-200 focus-within:border-ink-faint focus-within:bg-card focus-within:shadow-raised ${
+            className={`flex cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed px-4 py-8 text-center transition-[background-color,border-color,box-shadow] duration-200 focus-within:border-ink-faint focus-within:bg-card focus-within:shadow-raised max-w-full overflow-hidden ${
               dragging
                 ? "border-brand-500 bg-accent-soft"
                 : shownError
@@ -99,14 +101,14 @@ export function FileDropzone({
                   : "border-line-strong bg-canvas hover:border-brand-500/40 hover:bg-accent-soft"
             }`}
           >
-            <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-card text-accent shadow-card">
+            <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-card text-accent shadow-card">
               <UploadCloud className="h-6 w-6" aria-hidden />
             </span>
-            <span className="mt-3 font-semibold text-ink">
+            <span className="mt-3 max-w-full truncate font-semibold text-ink">
               <span className="text-accent">Choisissez un fichier</span>
               <span className="hidden sm:inline"> ou glissez-le ici</span>
             </span>
-            <span className="mt-1 text-sm text-ink-muted">PDF, DOC, DOCX, PNG ou JPG · 20 Mo maximum</span>
+            <span className="mt-1 max-w-full truncate text-sm text-ink-muted">PDF, DOC, DOCX, PNG ou JPG · 20 Mo maximum</span>
             <input
               id={id}
               type="file"

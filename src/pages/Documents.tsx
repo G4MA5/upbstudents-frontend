@@ -96,7 +96,9 @@ export default function Documents() {
   const matchFacets = useCallback(
     (doc: LibraryDocument, ignore?: "type" | "filiere") =>
       (ignore === "type" || !filters.type || doc.type === filters.type) &&
-      (ignore === "filiere" || !filters.filiere || doc.filiere === filters.filiere) &&
+      (ignore === "filiere" ||
+        !filters.filiere ||
+        (doc.filiere && doc.filiere.split(/,\s*/).includes(filters.filiere))) &&
       (!filters.niveau || doc.niveau === filters.niveau) &&
       (!filters.annee || doc.annee === filters.annee) &&
       (!filters.session || doc.session === filters.session),
@@ -112,7 +114,12 @@ export default function Documents() {
         type[doc.type] = (type[doc.type] ?? 0) + 1;
         total++;
       }
-      if (matchFacets(doc, "filiere")) filiere[doc.filiere] = (filiere[doc.filiere] ?? 0) + 1;
+      if (matchFacets(doc, "filiere")) {
+        const list = doc.filiere ? doc.filiere.split(/,\s*/).filter(Boolean) : [];
+        for (const f of list) {
+          filiere[f] = (filiere[f] ?? 0) + 1;
+        }
+      }
     }
     return { type, filiere, total };
   }, [searched, matchFacets]);

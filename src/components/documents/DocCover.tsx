@@ -124,6 +124,7 @@ function DocCoverBase({
           {doc.title}
         </span>
         <span className={`mt-auto font-semibold uppercase tracking-wider ${META_SIZE[size]} ${v.meta}`}>
+          {doc.auteur ? `${doc.auteur} · ` : ""}
           {doc.filiere}
           {doc.annee ? ` · ${doc.annee}` : ""}
         </span>

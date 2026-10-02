@@ -1,6 +1,7 @@
 import React, { Suspense, lazy, useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
+  Award,
   Calendar,
   ChevronLeft,
   ChevronRight,
@@ -13,6 +14,7 @@ import {
   Lock,
   LogIn,
   Trash2,
+  UserRound,
 } from "lucide-react";
 import { useAuth } from "../../context/AuthContext";
 import { useLibrary } from "../../context/DocumentsContext";
@@ -143,10 +145,10 @@ function PreviewArea({
 function MetaRow({ icon, label, value }: { icon: React.ReactNode; label: string; value?: React.ReactNode }) {
   if (!value) return null;
   return (
-    <div className="flex items-start gap-3 py-2.5">
-      <span className="mt-0.5 text-ink-faint">{icon}</span>
+    <div className="flex items-start gap-3 py-2.5 min-w-0 max-w-full">
+      <span className="mt-0.5 shrink-0 text-ink-faint">{icon}</span>
       <dt className="w-24 shrink-0 text-sm text-ink-muted">{label}</dt>
-      <dd className="min-w-0 text-sm font-medium text-ink">{value}</dd>
+      <dd className="min-w-0 flex-1 text-sm font-medium text-ink break-words [overflow-wrap:anywhere]">{value}</dd>
     </div>
   );
 }
@@ -275,22 +277,24 @@ export function DocumentPreview({
         {doc && (
           <div className="flex min-h-0 flex-1 flex-col overflow-y-auto overscroll-contain lg:flex-row lg:overflow-hidden">
             {/* Details */}
-            <aside className="shrink-0 border-b border-line p-5 pr-14 pt-2 sm:p-6 sm:pr-16 lg:w-[340px] lg:overflow-y-auto lg:border-b-0 lg:border-r lg:pr-6">
+            <aside className="shrink-0 border-b border-line p-5 pr-14 pt-2 sm:p-6 sm:pr-16 lg:w-[340px] lg:overflow-y-auto lg:border-b-0 lg:border-r lg:pr-6 min-w-0 max-w-full overflow-hidden">
               <AnimatePresence mode="wait" initial={false}>
                 <motion.div key={doc.id} {...fadeUp}>
-                  <div className="flex items-start gap-4">
+                  <div className="flex items-start gap-4 min-w-0 max-w-full">
                     <DocCover doc={doc} size="sm" className="w-20 shrink-0 sm:w-24" />
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1 overflow-hidden">
                       <div className="flex flex-wrap items-center gap-2">
                         <CategoryChip type={doc.type} />
                         <FiliereBadge filiere={doc.filiere} />
                       </div>
-                      <h2 className="mt-2.5 text-lg font-extrabold leading-snug sm:text-xl">{doc.title}</h2>
+                      <h2 className="mt-2.5 text-lg font-extrabold leading-snug sm:text-xl break-words [overflow-wrap:anywhere]">{doc.title}</h2>
                     </div>
                   </div>
 
                   <dl className="mt-4 divide-y divide-line">
+                    <MetaRow icon={<UserRound className="h-4 w-4" />} label="Auteur" value={doc.auteur} />
                     <MetaRow icon={<GraduationCap className="h-4 w-4" />} label="Niveau" value={doc.niveau} />
+                    <MetaRow icon={<Award className="h-4 w-4" />} label="Mention" value={doc.mention} />
                     <MetaRow icon={<Calendar className="h-4 w-4" />} label="Année" value={doc.annee} />
                     <MetaRow icon={<Layers className="h-4 w-4" />} label="Session" value={doc.session} />
                     <MetaRow

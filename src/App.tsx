@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { AuthModal } from "./components/auth/AuthModal";
 import { AppShell } from "./components/layout/AppShell";
+import { ProfileSetupModal } from "./components/onboarding/ProfileSetupModal";
 import { WelcomeGuide } from "./components/onboarding/WelcomeGuide";
 import { ErrorBoundary } from "./components/ui/ErrorBoundary";
 import { Skeleton } from "./components/ui/Feedback";
@@ -104,6 +105,7 @@ export default function App() {
                     </AppShell>
                     <AuthModal />
                     <WelcomeGuide />
+                    <ProfileSetupModal />
                   </PrefsProvider>
                 </DocumentsProvider>
               </AuthProvider>
