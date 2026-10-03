@@ -199,7 +199,7 @@ function DesktopHome() {
 
 function MobileHome() {
   const { status } = useLibrary();
-  const { status: authStatus, profile, openAuth } = useAuth();
+  const { status: authStatus, openAuth } = useAuth();
   const { searches, removeSearch, clearSearches } = usePrefs();
   const openDocument = useOpenDocument();
   const { latest, recent } = useHomeData();
