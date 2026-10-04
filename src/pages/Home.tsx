@@ -24,7 +24,7 @@ import { FEATURES } from "../lib/features";
 import { plural } from "../lib/format";
 import { useIsDesktop, useOpenDocument } from "../lib/hooks";
 import { fadeUp, listItem, SPRING } from "../lib/motion";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 import type { LibraryDocument } from "../types";
 
 function useHomeData() {
@@ -199,7 +199,7 @@ function DesktopHome() {
 
 function MobileHome() {
   const { status } = useLibrary();
-  const { status: authStatus, profile, openAuth } = useAuth();
+  const { status: authStatus, openAuth } = useAuth();
   const { searches, removeSearch, clearSearches } = usePrefs();
   const openDocument = useOpenDocument();
   const { latest, recent } = useHomeData();
@@ -391,7 +391,7 @@ function MobileHome() {
 }
 
 export default function Home() {
-  usePageTitle();
+  useSeoHead();
   const desktop = useIsDesktop();
   return desktop ? <DesktopHome /> : <MobileHome />;
 }

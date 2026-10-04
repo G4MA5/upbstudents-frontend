@@ -1,9 +1,9 @@
 import { ArrowLeft, BookOpen } from "lucide-react";
 import { ButtonLink } from "../components/ui/Button";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 
 export default function NotFound() {
-  usePageTitle("Page introuvable");
+  useSeoHead({ customPath: "/404" });
   return (
     <div className="container-page flex flex-1 flex-col items-center justify-center py-24 text-center">
       <p className="text-7xl font-extrabold text-brand-500">404</p>

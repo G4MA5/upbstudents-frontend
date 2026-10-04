@@ -16,7 +16,7 @@ import { usePrefs } from "../context/PrefsContext";
 import { useIsDesktop, useOpenDocument } from "../lib/hooks";
 import { fadeUp, listItem } from "../lib/motion";
 import { registerPreviewSequence } from "../lib/previewSequence";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 import type { LibraryDocument } from "../types";
 
 type View = "favoris" | "recents" | "collections";
@@ -109,7 +109,7 @@ function CollectionCard({ filiere, docs, index, onOpen }: { filiere: string; doc
 }
 
 export default function Bibliotheque() {
-  usePageTitle("Ma bibliothèque");
+  useSeoHead();
   const desktop = useIsDesktop();
   const [params, setParams] = useSearchParams();
   const view = (VIEWS.find((v) => v.id === params.get("vue"))?.id ?? "favoris") as View;

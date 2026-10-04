@@ -33,7 +33,7 @@ import { useToast } from "../context/ToastContext";
 import { api, ApiError, errorMessage } from "../lib/api";
 import { formatDate } from "../lib/format";
 import { validateNewPassword } from "../lib/validation";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 
 function InfoItem({ icon, label, value }: { icon: React.ReactNode; label: string; value?: string }) {
   return (
@@ -138,7 +138,7 @@ function Preferences() {
 }
 
 export default function Profil() {
-  usePageTitle("Mon profil");
+  useSeoHead();
   const { status, profile, contributions, memberSince, reloadProfile, openAuth, logout } = useAuth();
   const [refreshing, setRefreshing] = useState(true);
 

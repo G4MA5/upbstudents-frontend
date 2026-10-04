@@ -12,7 +12,7 @@ import { useLibrary } from "../context/DocumentsContext";
 import { useToast } from "../context/ToastContext";
 import { api, ApiError, errorMessage } from "../lib/api";
 import { formatBytes, formatDate } from "../lib/format";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 import type { DocumentMetadata, LibraryDocument } from "../types";
 
 interface Proposal extends DocumentMetadata {
@@ -170,7 +170,7 @@ function RefuseDialog({
 }
 
 export default function Propositions() {
-  usePageTitle("Propositions à valider");
+  useSeoHead();
   const { status, profile, openAuth } = useAuth();
   const { add } = useLibrary();
   const toast = useToast();
