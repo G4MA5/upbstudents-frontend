@@ -50,37 +50,37 @@ export const SEO_CONFIG = {
     {
       name: "Dakaud Uriel Jean Bedel",
       linkedIn: "https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375",
-      imageFileName: "dakaud-uriel-jean-bedel.webp",
+      imageFileName: "dakaud-uriel-jean-bedel.jpg",
       hasLocalImage: false, // Passer à true après ajout du fichier dans public/images/team/
     },
     {
       name: "Olivier Grace Divine Graourou",
       linkedIn: "https://www.linkedin.com/in/olivier-grace-divine-graourou-b09490312",
-      imageFileName: "olivier-grace-divine-graourou.webp",
+      imageFileName: "olivier-grace-divine-graourou.jpg",
       hasLocalImage: false,
     },
     {
       name: "Desailly Caleb Deroux",
       linkedIn: "https://www.linkedin.com/in/desailly-caleb-deroux-398132375",
-      imageFileName: "desailly-caleb-deroux.webp",
+      imageFileName: "desailly-caleb-deroux.jpg",
       hasLocalImage: false,
     },
     {
       name: "Yao Eliakim Assale",
       linkedIn: "https://www.linkedin.com/in/yao-eliakim-assale-69224839a",
-      imageFileName: "yao-eliakim-assale.webp",
+      imageFileName: "yao-eliakim-assale.jpg",
       hasLocalImage: false,
     },
     {
       name: "Serge Armel Bénie Ahoussi",
       linkedIn: "https://www.linkedin.com/in/serge-armel-bénie-ahoussi-604479332",
-      imageFileName: "serge-armel-benie-ahoussi.webp",
+      imageFileName: "serge-armel-benie-ahoussi.jpg",
       hasLocalImage: false,
     },
     {
       name: "Baidoo Martin",
       linkedIn: "https://www.linkedin.com/in/baidoo-martin-02823b359",
-      imageFileName: "baidoo-martin.webp",
+      imageFileName: "baidoo-martin.jpg",
       hasLocalImage: false,
     },
   ] as TeamMemberConfig[],
