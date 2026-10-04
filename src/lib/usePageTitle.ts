@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useSeoHead } from "./useSeoHead";
 
-const SITE = "UpB Student's";
-
+/**
+ * Hook de titre de page conservé pour la compatibilité descendante.
+ * Délègue désormais au hook complet useSeoHead.
+ */
 export function usePageTitle(title?: string) {
-  useEffect(() => {
-    document.title = title ? `${title} · ${SITE}` : `${SITE} · Bibliothèque numérique`;
-  }, [title]);
+  useSeoHead(title ? { title: `${title} · UpB Student's` } : undefined);
 }

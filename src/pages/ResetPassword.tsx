@@ -9,7 +9,7 @@ import { PasswordInput } from "../components/ui/Field";
 import { useAuth } from "../context/AuthContext";
 import { api, ApiError, errorMessage } from "../lib/api";
 import { validateNewPassword } from "../lib/validation";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 
 type LinkState = { token: string } | { invalid: "expired" | "missing" };
 
@@ -22,7 +22,7 @@ function readRecoveryLink(): LinkState {
 }
 
 export default function ResetPassword() {
-  usePageTitle("Nouveau mot de passe");
+  useSeoHead();
   const { openAuth } = useAuth();
   const navigate = useNavigate();
   const [link] = useState<LinkState>(readRecoveryLink);

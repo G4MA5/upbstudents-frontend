@@ -12,7 +12,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { errorMessage } from "../lib/api";
 import { validateEmail } from "../lib/validation";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 import type { DocumentMetadata } from "../types";
 
 const STEPS = [
@@ -22,7 +22,7 @@ const STEPS = [
 ];
 
 export default function Proposer() {
-  usePageTitle("Proposer un document");
+  useSeoHead();
   const { status, profile } = useAuth();
   const toast = useToast();
   const upload = useUpload("/api/proposer", "optional");

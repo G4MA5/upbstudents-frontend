@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+Allow: /documents
+Allow: /bibliotheque
+Allow: /proposer
+Allow: /contact
+
+# Exclusion des espaces prives, d'administration et de gestion de compte
+Disallow: /ajouter
+Disallow: /profil
+Disallow: /propositions
+Disallow: /mot-de-passe-oublie
+
+Sitemap: https://upbstudents-labibliotheque.com/sitemap.xml

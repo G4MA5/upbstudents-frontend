@@ -9,7 +9,7 @@ import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { api, errorMessage } from "../lib/api";
 import { validateEmail } from "../lib/validation";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 
 const CHANNELS = [
   {
@@ -24,7 +24,7 @@ const CHANNELS = [
 type Errors = { nom?: string; email?: string; objet?: string; message?: string };
 
 export default function Contact() {
-  usePageTitle("Contact");
+  useSeoHead();
   const { profile } = useAuth();
   const toast = useToast();
   const [params] = useSearchParams();

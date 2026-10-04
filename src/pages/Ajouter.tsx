@@ -12,7 +12,7 @@ import { useAuth } from "../context/AuthContext";
 import { useLibrary } from "../context/DocumentsContext";
 import { useToast } from "../context/ToastContext";
 import { ApiError, errorMessage } from "../lib/api";
-import { usePageTitle } from "../lib/usePageTitle";
+import { useSeoHead } from "../lib/useSeoHead";
 import type { DocumentMetadata, LibraryDocument } from "../types";
 
 function PageHeader() {
@@ -32,7 +32,7 @@ function PageHeader() {
 }
 
 export default function Ajouter() {
-  usePageTitle("Publier un document");
+  useSeoHead();
   const { status, openAuth, reloadProfile } = useAuth();
   const { add } = useLibrary();
   const toast = useToast();
