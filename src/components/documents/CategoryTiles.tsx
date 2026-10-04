@@ -19,7 +19,7 @@ export function CategoryTiles() {
   }, [documents]);
 
   return (
-    <ul className="grid grid-cols-2 gap-3 lg:grid-cols-4 lg:gap-4">
+    <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 lg:gap-4">
       {CATEGORIES.map((c, i) => {
         const Icon = categoryStyle(c.value).icon;
         const n = counts[c.value] ?? 0;

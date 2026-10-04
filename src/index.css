@@ -119,6 +119,12 @@
     }
   }
 
+  fieldset {
+    min-width: 0;
+    min-inline-size: 0;
+    max-width: 100%;
+  }
+
   h1,
   h2,
   h3 {

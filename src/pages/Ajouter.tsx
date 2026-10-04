@@ -17,11 +17,11 @@ import type { DocumentMetadata, LibraryDocument } from "../types";
 
 function PageHeader() {
   return (
-    <section>
+    <section className="w-full min-w-0 max-w-full overflow-hidden">
       <div className="page-head">
         <p className="eyebrow !text-accent">Contributeurs autorisés</p>
-        <h1 className="mt-2 text-2xl font-extrabold lg:text-3xl">Publier un document</h1>
-        <p className="mt-2 max-w-2xl text-ink-muted">
+        <h1 className="mt-2 text-2xl font-extrabold lg:text-3xl break-words max-w-full">Publier un document</h1>
+        <p className="mt-2 max-w-2xl text-ink-muted break-words max-w-full">
           La publication directe rend le document immédiatement visible dans la
           bibliothèque. Elle est réservée aux personnes disposant du mot de passe
           contributeur remis par l'administration.
@@ -88,9 +88,9 @@ export default function Ajouter() {
 
   if (status === "loading") {
     return (
-      <div className="pb-8">
+      <div className="pb-8 w-full min-w-0 max-w-full">
         <PageHeader />
-        <div className="container-page mt-6 max-w-3xl space-y-4" role="status" aria-label="Chargement…">
+        <div className="container-page mt-6 max-w-3xl w-full min-w-0" role="status" aria-label="Chargement…">
           <Skeleton className="h-12" />
           <Skeleton className="h-12" />
           <Skeleton className="h-40" />
@@ -101,16 +101,16 @@ export default function Ajouter() {
 
   if (status === "anonymous") {
     return (
-      <div className="pb-8">
+      <div className="pb-8 w-full min-w-0 max-w-full">
         <PageHeader />
-        <div className="container-page mt-6">
-          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
-            <div className="rounded-3xl border border-line bg-card p-6 shadow-card sm:p-8">
+        <div className="container-page mt-6 w-full min-w-0">
+          <div className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2 min-w-0">
+            <div className="rounded-3xl border border-line bg-card p-6 shadow-card sm:p-8 min-w-0 max-w-full overflow-hidden">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent-soft text-accent">
                 <ShieldCheck className="h-6 w-6" aria-hidden />
               </span>
-              <h2 className="mt-5 text-xl font-bold">Vous êtes contributeur autorisé ?</h2>
-              <p className="mt-2 text-ink-muted">
+              <h2 className="mt-5 text-xl font-bold break-words">Vous êtes contributeur autorisé ?</h2>
+              <p className="mt-2 text-ink-muted break-words">
                 Connectez-vous à votre compte : le formulaire de publication
                 s'affichera ici.
               </p>
@@ -118,12 +118,12 @@ export default function Ajouter() {
                 Se connecter
               </Button>
             </div>
-            <div className="rounded-3xl border border-line bg-sunken p-6 sm:p-8">
+            <div className="rounded-3xl border border-line bg-sunken p-6 sm:p-8 min-w-0 max-w-full overflow-hidden">
               <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-card text-accent">
                 <FilePlus2 className="h-6 w-6" aria-hidden />
               </span>
-              <h2 className="mt-5 text-xl font-bold text-accent">Sinon, proposez votre document</h2>
-              <p className="mt-2 text-ink-soft">
+              <h2 className="mt-5 text-xl font-bold text-accent break-words">Sinon, proposez votre document</h2>
+              <p className="mt-2 text-ink-soft break-words">
                 Sans compte ni mot de passe : l'équipe le vérifie puis le publie.
               </p>
               <ButtonLink to="/proposer" variant="secondary" className="mt-6" iconRight={<ArrowRight className="h-4 w-4" />}>
@@ -137,24 +137,24 @@ export default function Ajouter() {
   }
 
   return (
-    <div className="pb-8">
+    <div className="pb-8 w-full min-w-0 max-w-full overflow-hidden">
       <PageHeader />
-      <div className="container-page mt-6 max-w-3xl">
+      <div className="container-page mt-6 max-w-3xl w-full min-w-0">
         <AnimatePresence mode="wait">
           {published ? (
             <motion.div
               key="done"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center rounded-3xl border border-line bg-card px-6 py-14 text-center shadow-card"
+              className="flex w-full max-w-full min-w-0 flex-col items-center rounded-3xl border border-line bg-card px-6 py-14 text-center shadow-card overflow-hidden"
               role="status"
             >
               <SuccessMark size={84} />
-              <h2 className="mt-6 text-2xl font-extrabold">Document publié</h2>
-              <p className="mt-2 max-w-md text-ink-muted">
+              <h2 className="mt-6 text-2xl font-extrabold break-words max-w-full">Document publié</h2>
+              <p className="mt-2 max-w-md text-ink-muted break-words max-w-full overflow-hidden">
                 « {published.title} » est maintenant disponible dans la bibliothèque.
               </p>
-              <div className="mt-8 flex flex-col gap-2 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-2 sm:flex-row max-w-full">
                 <Button icon={<Eye className="h-4 w-4" />} onClick={() => navigate(`/documents?doc=${published.id}`)}>
                   Voir le document
                 </Button>
@@ -170,9 +170,9 @@ export default function Ajouter() {
               animate={{ opacity: 1, y: 0 }}
               onSubmit={submit}
               noValidate
-              className="flex flex-col gap-6 rounded-3xl border border-line bg-card p-5 shadow-card sm:p-8"
+              className="flex w-full max-w-full min-w-0 flex-col gap-6 rounded-3xl border border-line bg-card p-5 shadow-card sm:p-8 overflow-hidden"
             >
-              <fieldset className="flex flex-col gap-4" disabled={upload.busy}>
+              <fieldset className="flex w-full min-w-0 max-w-full flex-col gap-4 overflow-hidden" disabled={upload.busy}>
                 <legend className="sr-only">Informations du document</legend>
                 <DocumentFields value={meta} onChange={setMeta} errors={errors} />
                 <FileDropzone file={file} onChange={setFile} error={errors.file} disabled={upload.busy} />
@@ -191,7 +191,7 @@ export default function Ajouter() {
 
               <AnimatePresence>
                 {upload.busy && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full min-w-0 max-w-full">
                     <ProgressBar
                       value={upload.phase === "uploading" ? upload.progress : upload.phase === "finalizing" ? 1 : 0.02}
                       label={PHASE_LABEL[upload.phase]}
@@ -201,12 +201,14 @@ export default function Ajouter() {
               </AnimatePresence>
               <AnimatePresence>{failure && !upload.busy && <Alert tone="error" title="Le document n'a pas été publié">{failure}</Alert>}</AnimatePresence>
 
-              <div className="flex flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <p className="flex items-center gap-2 text-sm text-ink-muted">
+              <div className="flex w-full min-w-0 max-w-full flex-col gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <p className="flex items-center gap-2 text-sm text-ink-muted min-w-0 max-w-full break-words">
                   <KeyRound className="h-4 w-4 shrink-0" aria-hidden />
-                  Pas de mot de passe ? <Link to="/proposer" className="font-semibold text-accent hover:underline">Proposez le document</Link>
+                  <span className="min-w-0 break-words">
+                    Pas de mot de passe ? <Link to="/proposer" className="font-semibold text-accent hover:underline">Proposez le document</Link>
+                  </span>
                 </p>
-                <Button type="submit" size="lg" loading={upload.busy} loadingText="Publication…" icon={<Upload className="h-4 w-4" />}>
+                <Button type="submit" size="lg" loading={upload.busy} loadingText="Publication…" icon={<Upload className="h-4 w-4" />} className="shrink-0">
                   Publier le document
                 </Button>
               </div>

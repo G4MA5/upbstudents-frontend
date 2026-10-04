@@ -10,6 +10,7 @@ import {
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { AuthModal } from "./components/auth/AuthModal";
 import { AppShell } from "./components/layout/AppShell";
+import { ProfileSetupModal } from "./components/onboarding/ProfileSetupModal";
 import { WelcomeGuide } from "./components/onboarding/WelcomeGuide";
 // ---------- Divine : consentement WhatsApp ----------
 import { WhatsAppPrompt } from "./components/whatsapp/WhatsAppConsent";
@@ -55,7 +56,12 @@ function PageLoader() {
 function LegacyExamRedirect() {
   const [params] = useSearchParams();
   const query = params.get("query");
-  return <Navigate to={query ? `/documents?q=${encodeURIComponent(query)}` : "/documents"} replace />;
+  return (
+    <Navigate
+      to={query ? `/documents?q=${encodeURIComponent(query)}` : "/documents"}
+      replace
+    />
+  );
 }
 
 function Page({ children }: { children: React.ReactNode }) {
@@ -72,26 +78,108 @@ function AnimatedRoutes() {
   const location = useLocation();
 
   useEffect(() => {
-    if ("scrollRestoration" in window.history) window.history.scrollRestoration = "manual";
+    if ("scrollRestoration" in window.history)
+      window.history.scrollRestoration = "manual";
   }, []);
 
   return (
-    <AnimatePresence mode="wait" initial={false} onExitComplete={() => window.scrollTo(0, 0)}>
+    <AnimatePresence
+      mode="wait"
+      initial={false}
+      onExitComplete={() => window.scrollTo(0, 0)}
+    >
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Page><Home /></Page>} />
-        <Route path="/documents" element={<Page><Documents /></Page>} />
-        <Route path="/bibliotheque" element={<Page><Bibliotheque /></Page>} />
+        <Route
+          path="/"
+          element={
+            <Page>
+              <Home />
+            </Page>
+          }
+        />
+        <Route
+          path="/documents"
+          element={
+            <Page>
+              <Documents />
+            </Page>
+          }
+        />
+        <Route
+          path="/bibliotheque"
+          element={
+            <Page>
+              <Bibliotheque />
+            </Page>
+          }
+        />
         <Route path="/examen" element={<LegacyExamRedirect />} />
-        <Route path="/proposer" element={<Page><Proposer /></Page>} />
-        <Route path="/ajouter" element={<Page><Ajouter /></Page>} />
-        <Route path="/profil" element={<Page><Profil /></Page>} />
-        <Route path="/propositions" element={<Page><Propositions /></Page>} />
+        <Route
+          path="/proposer"
+          element={
+            <Page>
+              <Proposer />
+            </Page>
+          }
+        />
+        <Route
+          path="/ajouter"
+          element={
+            <Page>
+              <Ajouter />
+            </Page>
+          }
+        />
+        <Route
+          path="/profil"
+          element={
+            <Page>
+              <Profil />
+            </Page>
+          }
+        />
+        <Route
+          path="/propositions"
+          element={
+            <Page>
+              <Propositions />
+            </Page>
+          }
+        />
         {/* ---------- Divine : diffusion WhatsApp (admins) ---------- */}
-        <Route path="/diffusion" element={<Page><Diffusion /></Page>} />
+        <Route
+          path="/diffusion"
+          element={
+            <Page>
+              <Diffusion />
+            </Page>
+          }
+        />
         {/* ---------- Divine : fin ---------- */}
-        <Route path="/contact" element={<Page><Contact /></Page>} />
-        <Route path="/mot-de-passe-oublie" element={<Page><ResetPassword /></Page>} />
-        <Route path="*" element={<Page><NotFound /></Page>} />
+        <Route
+          path="/contact"
+          element={
+            <Page>
+              <Contact />
+            </Page>
+          }
+        />
+        <Route
+          path="/mot-de-passe-oublie"
+          element={
+            <Page>
+              <ResetPassword />
+            </Page>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Page>
+              <NotFound />
+            </Page>
+          }
+        />
       </Routes>
     </AnimatePresence>
   );
@@ -116,6 +204,7 @@ export default function App() {
                     {/* ---------- Divine : fenêtre WhatsApp, une seule fois ---------- */}
                     <WhatsAppPrompt />
                     {/* ---------- Divine : fin ---------- */}
+                    <ProfileSetupModal />
                   </PrefsProvider>
                 </DocumentsProvider>
               </AuthProvider>

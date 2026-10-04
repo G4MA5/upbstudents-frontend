@@ -96,7 +96,7 @@ function Intro() {
               Bingerville.
             </>
           ) : (
-            "Examens, TD, TP et livres partagés par les étudiants de l'Université Polytechnique de Bingerville."
+            "Examens, cours, TD, TP, mémoires et livres partagés par les étudiants de l'Université Polytechnique de Bingerville."
           )}
         </p>
       </div>

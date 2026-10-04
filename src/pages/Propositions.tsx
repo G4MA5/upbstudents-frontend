@@ -43,8 +43,8 @@ function PublishDialog({
 
   useEffect(() => {
     if (!proposal) return;
-    const { filiere, type, annee, niveau, matiere, session } = proposal;
-    setMeta({ filiere, type, annee, niveau, matiere, session: session || "" });
+    const { filiere, type, annee, niveau, matiere, session, auteur, mention } = proposal;
+    setMeta({ filiere, type, annee, niveau, matiere, session: session || "", auteur: auteur || "", mention: mention || "" });
     setErrors({});
     setFailure(null);
   }, [proposal]);
@@ -280,6 +280,7 @@ export default function Propositions() {
                         <span className="text-xs text-ink-faint">#{p.id} · reçu le {formatDate(p.created_at)}</span>
                       </div>
                       <h2 className="mt-2 font-sans text-lg font-semibold">{p.matiere}</h2>
+                      {p.auteur && <p className="text-sm font-semibold text-accent">Auteur : {p.auteur}{p.mention ? ` · Mention ${p.mention}` : ""}</p>}
                       <p className="text-sm text-ink-muted">{[p.niveau, p.annee, p.session].filter(Boolean).join(" · ")}</p>
                       <p className="mt-2 text-sm text-ink-soft">
                         Proposé par <strong>{p.nom}</strong> ({p.email})
@@ -294,10 +295,11 @@ export default function Propositions() {
                           href={p.file_url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex h-11 items-center justify-center gap-2 rounded-xl border border-line-strong px-4 text-[15px] font-semibold text-ink-soft hover:bg-canvas"
+                          className="inline-flex max-w-full h-11 items-center justify-center gap-2 rounded-xl border border-line-strong px-4 text-[15px] font-semibold text-ink-soft hover:bg-canvas"
                         >
-                          <ExternalLink className="h-4 w-4" aria-hidden /> Ouvrir le fichier
-                          {p.fichier_taille ? <span className="font-normal text-ink-faint">({formatBytes(p.fichier_taille)})</span> : null}
+                          <ExternalLink className="h-4 w-4 shrink-0" aria-hidden />
+                          <span className="truncate max-w-[180px] sm:max-w-[280px]">{p.fichier_nom || "Ouvrir le fichier"}</span>
+                          {p.fichier_taille ? <span className="shrink-0 font-normal text-ink-faint">({formatBytes(p.fichier_taille)})</span> : null}
                         </a>
                       )}
                       <Button icon={<ClipboardCheck className="h-4 w-4" />} onClick={() => setPublishing(p)}>

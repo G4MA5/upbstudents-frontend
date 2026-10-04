@@ -28,10 +28,10 @@ export function FieldShell({
   className = "",
 }: FieldShellProps) {
   return (
-    <div className={`group flex flex-col gap-1.5 ${className}`}>
+    <div className={`group flex w-full min-w-0 max-w-full flex-col gap-1.5 ${className}`}>
       <label
         htmlFor={id}
-        className="text-sm font-medium text-ink-soft transition-colors duration-200 group-focus-within:text-ink"
+        className="text-sm font-medium text-ink-soft transition-colors duration-200 group-focus-within:text-ink break-words max-w-full"
       >
         {label}
         {optional && (
@@ -48,13 +48,13 @@ export function FieldShell({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4, transition: TRANSITION.exit }}
             transition={TRANSITION.micro}
-            className="flex items-start gap-1.5 text-[13px] font-medium text-red-600"
+            className="flex items-start gap-1.5 text-[13px] font-medium text-red-600 min-w-0 max-w-full break-words"
           >
             <AlertCircle className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
-            {error}
+            <span className="min-w-0 flex-1 break-words">{error}</span>
           </motion.p>
         ) : hint ? (
-          <p key="hint" id={`${id}-hint`} className="text-[13px] text-ink-muted">
+          <p key="hint" id={`${id}-hint`} className="text-[13px] text-ink-muted min-w-0 max-w-full break-words">
             {hint}
           </p>
         ) : null}
@@ -88,7 +88,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         optional={optional}
         className={wrapperClassName}
       >
-        <div className="relative">
+        <div className="relative w-full min-w-0 max-w-full">
           {icon && (
             <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-ink-faint transition-colors duration-200 group-focus-within:text-ink-soft">
               {icon}
@@ -99,7 +99,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={fieldId}
             aria-invalid={Boolean(error) || undefined}
             aria-describedby={error ? `${fieldId}-error` : hint ? `${fieldId}-hint` : undefined}
-            className={`${CONTROL} h-12 px-3.5 ${icon ? "pl-10" : ""} ${className}`}
+            className={`${CONTROL} h-12 px-3.5 w-full min-w-0 max-w-full ${icon ? "pl-10" : ""} ${className}`}
             {...rest}
           />
         </div>
@@ -123,14 +123,14 @@ export const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
         optional={optional}
         className={wrapperClassName}
       >
-        <div className="relative">
+        <div className="relative w-full min-w-0 max-w-full">
           <input
             ref={ref}
             id={fieldId}
             type={visible ? "text" : "password"}
             aria-invalid={Boolean(error) || undefined}
             aria-describedby={error ? `${fieldId}-error` : hint ? `${fieldId}-hint` : undefined}
-            className={`${CONTROL} h-12 pl-3.5 pr-12`}
+            className={`${CONTROL} h-12 pl-3.5 pr-12 w-full min-w-0 max-w-full`}
             {...rest}
           />
           <button
@@ -231,7 +231,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           id={fieldId}
           aria-invalid={Boolean(error) || undefined}
           aria-describedby={error ? `${fieldId}-error` : hint ? `${fieldId}-hint` : undefined}
-          className={`${CONTROL} min-h-[120px] resize-y px-3.5 py-3`}
+          className={`${CONTROL} min-h-[120px] resize-y px-3.5 py-3 w-full min-w-0 max-w-full`}
           {...rest}
         />
       </FieldShell>

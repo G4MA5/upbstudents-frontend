@@ -9,6 +9,9 @@ import { DocCover } from "./DocCover";
 import { Highlight } from "./Highlight";
 
 export function subtitleOf(doc: LibraryDocument) {
+  if (doc.type === "Mémoire" && doc.auteur) {
+    return [`Par ${doc.auteur}`, doc.filiere, doc.niveau, doc.mention ? `Mention ${doc.mention}` : ""].filter(Boolean).join(" · ");
+  }
   return [doc.filiere, doc.niveau].filter(Boolean).join(" · ");
 }
 
@@ -89,7 +92,7 @@ function RowCardBase({
       <span className="min-w-0 flex-1">
         <span className="line-clamp-1 text-sm font-bold text-ink">{doc.title}</span>
         <span className="mt-1 block truncate text-xs text-ink-muted">
-          {[doc.type, doc.filiere, doc.annee].filter(Boolean).join(" · ")}
+          {[doc.type, doc.auteur ? `Par ${doc.auteur}` : "", doc.filiere, doc.annee].filter(Boolean).join(" · ")}
         </span>
       </span>
     </motion.button>

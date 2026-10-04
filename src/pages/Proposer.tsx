@@ -116,25 +116,25 @@ export default function Proposer() {
         </div>
       </section>
 
-      <div className="container-page mt-6 grid gap-8 lg:grid-cols-[1fr_320px]">
+      <div className="container-page mt-6 grid gap-8 lg:grid-cols-[1fr_320px] w-full min-w-0 max-w-full">
         <AnimatePresence mode="wait">
           {done ? (
             <motion.div
               key="done"
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex flex-col items-center rounded-3xl border border-line bg-card px-6 py-14 text-center shadow-card"
+              className="flex w-full max-w-full min-w-0 flex-col items-center rounded-3xl border border-line bg-card px-6 py-14 text-center shadow-card overflow-hidden"
               role="status"
             >
               <SuccessMark size={84} />
-              <h2 className="mt-6 text-2xl font-extrabold">Merci pour votre contribution !</h2>
-              <p className="mt-2 max-w-md text-ink-muted">{done}</p>
+              <h2 className="mt-6 text-2xl font-extrabold break-words max-w-full">Merci pour votre contribution !</h2>
+              <p className="mt-2 max-w-md text-ink-muted break-words max-w-full">{done}</p>
               {confirmationSent && (
-                <p className="mt-2 max-w-md text-sm text-ink-faint">
+                <p className="mt-2 max-w-md text-sm text-ink-faint break-words max-w-full">
                   Un e-mail de confirmation vous a été envoyé à {email}.
                 </p>
               )}
-              <div className="mt-8 flex flex-col gap-2 sm:flex-row">
+              <div className="mt-8 flex flex-col gap-2 sm:flex-row max-w-full">
                 <Button onClick={reset} icon={<FilePlus2 className="h-4 w-4" />}>
                   Proposer un autre document
                 </Button>
@@ -150,14 +150,14 @@ export default function Proposer() {
               animate={{ opacity: 1, y: 0 }}
               onSubmit={submit}
               noValidate
-              className="relative flex flex-col gap-8 rounded-3xl border border-line bg-card p-5 shadow-card sm:p-8"
+              className="relative flex w-full max-w-full min-w-0 flex-col gap-8 rounded-3xl border border-line bg-card p-5 shadow-card sm:p-8 overflow-hidden"
             >
               <Honeypot value={website} onChange={setWebsite} />
-              <fieldset className="flex flex-col gap-4" disabled={upload.busy}>
+              <fieldset className="flex w-full min-w-0 max-w-full flex-col gap-4 overflow-hidden" disabled={upload.busy}>
                 <legend className="mb-4 flex items-center gap-2 text-lg font-bold">
-                  <UserRound className="h-5 w-5 text-brand-600" aria-hidden /> Vos coordonnées
+                  <UserRound className="h-5 w-5 text-brand-600 shrink-0" aria-hidden /> Vos coordonnées
                 </legend>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-2 w-full min-w-0">
                   <Input
                     label="Nom complet"
                     autoComplete="name"
@@ -180,9 +180,9 @@ export default function Proposer() {
                 </div>
               </fieldset>
 
-              <fieldset className="flex flex-col gap-4" disabled={upload.busy}>
+              <fieldset className="flex w-full min-w-0 max-w-full flex-col gap-4 overflow-hidden" disabled={upload.busy}>
                 <legend className="mb-4 flex items-center gap-2 text-lg font-bold">
-                  <FilePlus2 className="h-5 w-5 text-brand-600" aria-hidden /> Le document
+                  <FilePlus2 className="h-5 w-5 text-brand-600 shrink-0" aria-hidden /> Le document
                 </legend>
                 <DocumentFields value={meta} onChange={setMeta} errors={errors} />
                 <Textarea
@@ -198,7 +198,7 @@ export default function Proposer() {
 
               <AnimatePresence>
                 {upload.busy && (
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="w-full min-w-0 max-w-full">
                     <ProgressBar
                       value={upload.phase === "uploading" ? upload.progress : upload.phase === "finalizing" ? 1 : 0.02}
                       label={PHASE_LABEL[upload.phase]}
@@ -208,11 +208,11 @@ export default function Proposer() {
               </AnimatePresence>
               <AnimatePresence>{failure && !upload.busy && <Alert tone="error" title="La proposition n'a pas été envoyée">{failure}</Alert>}</AnimatePresence>
 
-              <div className="flex flex-col-reverse items-stretch gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-                <p className="text-sm text-ink-muted">
+              <div className="flex w-full min-w-0 max-w-full flex-col-reverse items-stretch gap-3 border-t border-line pt-6 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-sm text-ink-muted min-w-0 break-words">
                   Le document ne sera <strong className="text-ink">pas publié</strong> avant vérification.
                 </p>
-                <Button type="submit" size="lg" loading={upload.busy} loadingText="Envoi en cours…" icon={<Send className="h-4 w-4" />}>
+                <Button type="submit" size="lg" loading={upload.busy} loadingText="Envoi en cours…" icon={<Send className="h-4 w-4" />} className="shrink-0">
                   Envoyer ma proposition
                 </Button>
               </div>

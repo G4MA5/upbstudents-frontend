@@ -9,6 +9,8 @@ export interface LibraryDocument {
   file_url: string;
   filePath: string;
   created_at: string | null;
+  auteur?: string | null;
+  mention?: string | null;
 }
 
 export interface Profile {
@@ -35,4 +37,6 @@ export interface DocumentMetadata {
   niveau: string;
   matiere: string;
   session: string;
+  auteur?: string;
+  mention?: string;
 }

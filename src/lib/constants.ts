@@ -10,14 +10,18 @@ export const FILIERES = [
 
 export const NIVEAUX_INSCRIPTION = ["Licence 1", "Licence 2", "Licence 3"];
 export const NIVEAUX = [...NIVEAUX_INSCRIPTION, "Master 1", "Master 2"];
+export const NIVEAUX_MEMOIRE = ["Licence", "Master"];
 
 export const SESSIONS = ["Session 1", "Session 2"];
+export const MENTIONS = ["Passable", "Assez Bien", "Bien", "Très Bien", "Félicitations du jury"];
 
 /** Document categories. `value` is the stored `type`. */
 export const CATEGORIES = [
   { value: "Examen", label: "Examens", singular: "Examen" },
+  { value: "Cours", label: "Cours", singular: "Cours" },
   { value: "TD", label: "TD", singular: "TD" },
   { value: "TP", label: "TP", singular: "TP" },
+  { value: "Mémoire", label: "Mémoires", singular: "Mémoire" },
   { value: "Livre", label: "Livres", singular: "Livre" },
 ] as const;
 

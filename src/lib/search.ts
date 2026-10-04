@@ -34,6 +34,8 @@ export function scoreDocument(doc: LibraryDocument, tokens: string[]) {
       doc.niveau,
       doc.annee,
       doc.session,
+      doc.auteur ?? "",
+      doc.mention ?? "",
     ].join(" "),
   );
 
