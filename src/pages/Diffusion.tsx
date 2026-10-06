@@ -324,7 +324,11 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
       setConfirming(false);
       if (res.campagne.statut === "echec") {
         campaignId.current = newId();
-        setFailure("Le service WhatsApp n'a pas accepté la diffusion. Réessayez dans quelques instants.");
+        // Divine : on affiche la vraie raison enregistrée par le serveur quand elle existe.
+        const reason = res.campagne.erreurs?.raison;
+        setFailure(
+          `Le service WhatsApp n'a pas accepté la diffusion${typeof reason === "string" && reason ? ` : ${reason}` : ""}. Réessayez dans quelques instants.`,
+        );
         return;
       }
       setCampaign(res.campagne);
