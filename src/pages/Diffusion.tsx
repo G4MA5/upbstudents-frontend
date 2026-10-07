@@ -12,6 +12,9 @@ import {
   RefreshCw,
   Send,
   ShieldAlert,
+  ImagePlus,
+  Smile,
+  Trash2,
   Users,
 } from "lucide-react";
 import { Chip } from "../components/documents/FilterBar";
@@ -23,10 +26,11 @@ import { Switch } from "../components/ui/Switch";
 import { useAuth } from "../context/AuthContext";
 import { useToast } from "../context/ToastContext";
 import { errorMessage } from "../lib/api";
+import { prepareImage, prepareSticker, type MediaKind, type PreparedMedia } from "../lib/media";
 import {
   cancelCampaign,
   describeTarget,
-  ERROR_LABEL,
+  errorLabel,
   fetchCampaign,
   fetchHistory,
   isFinished,
@@ -76,7 +80,7 @@ function FailureList({ campaign }: { campaign: Campaign }) {
     return <p className="mt-3 text-sm text-ink-muted">Le détail des numéros en échec n'est pas disponible pour cette diffusion.</p>;
   }
 
-  const reason = (r: string) => ERROR_LABEL[r] ?? r;
+  const reason = (r: string) => errorLabel(r);
   const copy = async () => {
     const text = list.map((f) => [f.nom, f.numero, reason(f.raison)].filter(Boolean).join(" · ")).join("\n");
     try {
@@ -209,7 +213,7 @@ function CampaignProgress({
         <ul className="mt-3 space-y-1 text-sm text-ink-muted">
           {errors.map(([key, n]) => (
             <li key={key}>
-              {ERROR_LABEL[key] ?? key} : <strong className="text-ink-soft">{typeof n === "number" ? n : String(n)}</strong>
+              {errorLabel(key)} : <strong className="text-ink-soft">{typeof n === "number" ? n : String(n)}</strong>
             </li>
           ))}
         </ul>
@@ -261,6 +265,12 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
   const [contributeurs, setContributeurs] = useState(false);
   const [emailsText, setEmailsText] = useState("");
   const [message, setMessage] = useState("");
+  // Divine : pièce jointe facultative (sticker ou image)
+  const [media, setMedia] = useState<PreparedMedia | null>(null);
+  const [mediaBusy, setMediaBusy] = useState(false);
+  const [mediaError, setMediaError] = useState<string | null>(null);
+  const fileInput = useRef<HTMLInputElement>(null);
+  const pickKind = useRef<MediaKind>("sticker");
 
   const [preview, setPreview] = useState<Preview | null>(null);
   const [checking, setChecking] = useState(false);
@@ -278,7 +288,41 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
   );
 
   // Toute modification invalide l'aperçu : le nombre confirmé doit correspondre à la cible actuelle.
-  useEffect(() => setPreview(null), [target, message]);
+  useEffect(() => setPreview(null), [target, message, media]);
+
+  // ---------- Divine : pièce jointe (sticker ou image) ----------
+  const releaseMedia = (m: PreparedMedia | null) => {
+    if (m) URL.revokeObjectURL(m.previewUrl);
+  };
+  const choose = (kind: MediaKind) => {
+    pickKind.current = kind;
+    setMediaError(null);
+    fileInput.current?.click();
+  };
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = ""; // permet de rechoisir le même fichier
+    if (!file) return;
+    setMediaBusy(true);
+    setMediaError(null);
+    try {
+      const next = pickKind.current === "sticker" ? await prepareSticker(file) : await prepareImage(file);
+      setMedia((old) => {
+        releaseMedia(old);
+        return next;
+      });
+    } catch (err) {
+      setMediaError(err instanceof Error ? err.message : "Fichier impossible à préparer.");
+    } finally {
+      setMediaBusy(false);
+    }
+  };
+  const removeMedia = () => {
+    releaseMedia(media);
+    setMedia(null);
+    setMediaError(null);
+  };
+  // ---------- Divine : fin ----------
 
   const toggle = (list: string[], set: (v: string[]) => void, value: string) =>
     set(list.includes(value) ? list.filter((x) => x !== value) : [...list, value]);
@@ -308,7 +352,9 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
     }
   };
 
-  const messageTooShort = message.trim().length < 5;
+  // Divine : le texte est facultatif quand il y a un sticker ou une image (mais s'il existe, 5 caractères minimum).
+  const textLength = message.trim().length;
+  const messageTooShort = media ? textLength > 0 && textLength < 5 : textLength < 5;
   const canSend = Boolean(preview && preview.total > 0 && !preview.depasseLimite && !messageTooShort);
 
   const send = async () => {
@@ -317,6 +363,7 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
     try {
       const res = await sendBroadcast({
         message: message.trim(),
+        media: media ? { type: media.type, data: media.data } : undefined, // Divine
         cible: target,
         confirmer: preview.total,
         campagneId: campaignId.current,
@@ -346,6 +393,8 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
     setCampaign(null);
     setPreview(null);
     setMessage("");
+    releaseMedia(media);
+    setMedia(null);
     setSelFilieres([]);
     setSelNiveaux([]);
     setContributeurs(false);
@@ -425,10 +474,65 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
             <Chip active={false} onClick={() => insert("{nom}")}>{"{nom}"}</Chip>
           </div>
 
-          {shown && (
+          {/* ---------- Divine : pièce jointe (sticker ou image) ---------- */}
+          <div className="mt-6 border-t border-line pt-5">
+            <p className="text-sm font-medium text-ink-soft">
+              Pièce jointe <span className="font-normal text-ink-faint">(facultatif)</span>
+            </p>
+            <input ref={fileInput} type="file" accept="image/*" className="hidden" onChange={onFile} />
+            <div className="mt-3 flex flex-wrap items-center gap-2">
+              <Button variant="outline" size="sm" icon={<Smile className="h-4 w-4" />} loading={mediaBusy} loadingText="Préparation…" onClick={() => choose("sticker")}>
+                {media?.type === "sticker" ? "Changer le sticker" : "Ajouter un sticker"}
+              </Button>
+              <Button variant="outline" size="sm" icon={<ImagePlus className="h-4 w-4" />} disabled={mediaBusy} onClick={() => choose("image")}>
+                {media?.type === "image" ? "Changer l'image" : "Ajouter une image"}
+              </Button>
+              {media && (
+                <Button variant="ghost" size="sm" icon={<Trash2 className="h-4 w-4" />} onClick={removeMedia}>
+                  Retirer
+                </Button>
+              )}
+            </div>
+            <AnimatePresence>{mediaError && <div className="mt-3"><Alert tone="error">{mediaError}</Alert></div>}</AnimatePresence>
+            {!media && !mediaError && (
+              <p className="mt-2 text-[13px] text-ink-muted">
+                Un sticker est créé automatiquement à partir de n'importe quelle image (512 × 512). Avec une image, votre texte devient sa légende.
+              </p>
+            )}
+            {media && (
+              <div className="mt-3 flex items-center gap-4 rounded-2xl bg-sunken p-3">
+                <img
+                  src={media.previewUrl}
+                  alt={media.type === "sticker" ? "Aperçu du sticker" : "Aperçu de l'image"}
+                  className={media.type === "sticker" ? "h-24 w-24 rounded-xl bg-card object-contain" : "h-24 w-32 rounded-xl bg-card object-cover"}
+                />
+                <div className="min-w-0 text-sm">
+                  <p className="font-semibold text-ink-soft">{media.type === "sticker" ? "Sticker" : "Image"} · {Math.max(1, Math.round(media.size / 1024))} Ko</p>
+                  <p className="mt-0.5 text-[13px] text-ink-muted">
+                    {media.type === "sticker"
+                      ? message.trim()
+                        ? "Il part dans un second message, juste après le texte."
+                        : "Le sticker sera envoyé seul."
+                      : "Votre texte sert de légende à l'image."}
+                  </p>
+                </div>
+              </div>
+            )}
+          </div>
+          {/* ---------- Divine : fin ---------- */}
+
+          {(shown || media) && (
             <div className="mt-5">
               <p className="mb-2 text-sm font-medium text-ink-soft">Aperçu pour {sample}</p>
-              <div className="whitespace-pre-wrap rounded-2xl rounded-tl-md bg-sunken p-4 text-[15px] text-ink-soft">{shown}</div>
+              <div className="space-y-2">
+                {media?.type === "image" && (
+                  <img src={media.previewUrl} alt="" className="max-h-56 w-auto max-w-full rounded-2xl rounded-tl-md" />
+                )}
+                {shown && (
+                  <div className="whitespace-pre-wrap rounded-2xl rounded-tl-md bg-sunken p-4 text-[15px] text-ink-soft">{shown}</div>
+                )}
+                {media?.type === "sticker" && <img src={media.previewUrl} alt="" className="h-28 w-28 object-contain" />}
+              </div>
             </div>
           )}
         </section>
@@ -487,7 +591,7 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
             Envoyer la diffusion
           </Button>
           <p className="mt-2 text-center text-xs text-ink-faint">
-            {!preview ? "Vérifiez d'abord les destinataires." : messageTooShort ? "Écrivez un message (5 caractères minimum)." : "Une confirmation vous sera demandée."}
+            {!preview ? "Vérifiez d'abord les destinataires." : messageTooShort ? (media ? "Le texte doit faire 5 caractères minimum (ou le laisser vide)." : "Écrivez un message (5 caractères minimum).") : "Une confirmation vous sera demandée."}
           </p>
         </section>
       </aside>
@@ -502,7 +606,7 @@ function NewBroadcast({ options, onSent }: { options: BroadcastOptions; onSent: 
         onConfirm={send}
         onCancel={() => setConfirming(false)}
       >
-        Le message sera envoyé sur WhatsApp à <strong>{plural(preview?.total ?? 0, "personne", "personnes")}</strong> ({describeTarget(target)}). Cette action ne peut pas être reprise une fois les messages partis.
+        Le message{media ? (media.type === "sticker" ? " (avec un sticker)" : " (avec une image)") : ""} sera envoyé sur WhatsApp à <strong>{plural(preview?.total ?? 0, "personne", "personnes")}</strong> ({describeTarget(target)}). Cette action ne peut pas être reprise une fois les messages partis.
       </ConfirmDialog>
     </div>
   );
@@ -534,6 +638,7 @@ function HistoryItem({ campaign, onUpdate }: { campaign: Campaign; onUpdate: (c:
       <div className="flex flex-wrap items-center gap-2">
         <StatusBadge campaign={campaign} />
         <Badge tone="brand">{TYPE_LABEL[campaign.type] ?? campaign.type}</Badge>
+        {campaign.cible?.media && <Badge tone="navy">{campaign.cible.media === "sticker" ? "Avec sticker" : "Avec image"}</Badge>}
         <span className="text-xs text-ink-faint">{formatDateTime(campaign.creeLe)}</span>
       </div>
       <p className="mt-2 text-sm text-ink-soft">

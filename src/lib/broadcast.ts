@@ -18,6 +18,9 @@ export interface FailedNumber {
   raison: string;
 }
 
+/** Cible d'une campagne telle qu'enregistrée : les filtres, et le type de pièce jointe s'il y en avait une. */
+export type CampaignTarget = Partial<BroadcastTarget> & { media?: "sticker" | "image" };
+
 export interface Campaign {
   id: string;
   creeLe: string;
@@ -25,7 +28,7 @@ export interface Campaign {
   admin: string;
   canal: string;
   type: BroadcastType;
-  cible: Partial<BroadcastTarget>;
+  cible: CampaignTarget;
   message: string;
   statut: BroadcastStatus;
   total: number;
@@ -75,14 +78,23 @@ export const STATUS_LABEL: Record<BroadcastStatus, { label: string; tone: "brand
   interrompue: { label: "Interrompue", tone: "warning" },
 };
 
+// Divine : WhatsApp peut refuser un message APRÈS l'envoi (code 463 : le compte n'a pas le droit d'écrire à un
+// nouveau contact pour le moment). Le serveur enregistre alors « rejete_par_whatsapp_<code> ».
+export function errorLabel(key: string) {
+  if (key === "rejete_par_whatsapp_463") return "Refusé par WhatsApp (compte restreint)";
+  if (key.startsWith("rejete_par_whatsapp_")) return `Refusé par WhatsApp (code ${key.slice(20)})`;
+  return ERROR_LABEL[key] ?? key;
+}
+
 export const ERROR_LABEL: Record<string, string> = {
   numero_absent_de_whatsapp: "Numéro absent de WhatsApp",
   echec_envoi: "Échec d'envoi",
+  piece_jointe_introuvable: "Pièce jointe introuvable",
   raison: "Raison",
 };
 
 /** Résumé lisible de la cible choisie ("MIAGE, SEA · Licence 1"). */
-export function describeTarget(t: Partial<BroadcastTarget>) {
+export function describeTarget(t: CampaignTarget) {
   const parts: string[] = [];
   if (t.filieres?.length) parts.push(t.filieres.join(", "));
   if (t.niveaux?.length) parts.push(t.niveaux.join(", "));
@@ -104,13 +116,15 @@ export const previewAudience = (cible: BroadcastTarget) =>
 
 export const sendBroadcast = (body: {
   message: string;
+  /** Sticker ou image joint à tous les messages (facultatif). */
+  media?: { type: "sticker" | "image"; data: string };
   cible: BroadcastTarget;
   confirmer: number;
   campagneId: string;
 }) =>
   api<{ campagneId: string; campagne: Campaign; doublon?: boolean }>("/api/diffusion", {
     auth: true,
-    timeoutMs: 30000,
+    timeoutMs: 60000,
     body: { action: "envoyer", ...body },
   });
 
