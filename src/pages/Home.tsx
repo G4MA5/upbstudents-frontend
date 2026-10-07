@@ -199,7 +199,8 @@ function DesktopHome() {
 
 function MobileHome() {
   const { status } = useLibrary();
-  const { status: authStatus, profile, openAuth } = useAuth();
+  // Divine : `profile` retiré (déclaré mais jamais lu dans MobileHome, ce qui faisait échouer `tsc` au build).
+  const { status: authStatus, openAuth } = useAuth();
   const { searches, removeSearch, clearSearches } = usePrefs();
   const openDocument = useOpenDocument();
   const { latest, recent } = useHomeData();
