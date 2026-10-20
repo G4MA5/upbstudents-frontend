@@ -1,0 +1,29 @@
+# UpB Student's
+
+> UpB Student's (https://upbstudents-labibliotheque.com) est la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB), à Bingerville en Côte d'Ivoire. Elle a été conçue et développée par Gama Labs.
+
+La bibliothèque rassemble 209 documents : examens (75), cours (51), TD (67), TP (11), mémoires (1), livres (4), classés par filière (MIAGE, ASSRI, SEA, SEG, 3EA, SJAP, RIT), par niveau et par année. Le catalogue est consultable par tous ; la lecture et le téléchargement sont gratuits avec un compte étudiant.
+
+## Pages principales
+
+- [Accueil](https://upbstudents-labibliotheque.com/) : présentation et derniers documents
+- [Tous les documents](https://upbstudents-labibliotheque.com/documents) : catalogue complet, avec un lien vers la page de chaque document
+- [À propos](https://upbstudents-labibliotheque.com/a-propos) : présentation détaillée et questions fréquentes
+- [Proposer un document](https://upbstudents-labibliotheque.com/proposer) : contribution des étudiants, vérifiée avant publication
+- [Contact](https://upbstudents-labibliotheque.com/contact)
+
+## Créateurs
+
+- [Gama Labs](https://upbstudents-labibliotheque.com/gama-labs) : Gama Labs est l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (Côte d'Ivoire). Réseaux : [LinkedIn](https://www.linkedin.com/in/gama-labs-523139375).
+- [L'équipe](https://upbstudents-labibliotheque.com/equipe) : les membres de Gama Labs
+- [Dakaud Uriel Jean Bedel](https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375)
+- [Olivier Grace Divine Graourou](https://upbstudents-labibliotheque.com/equipe/olivier-grace-divine-graourou) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/olivier-grace-divine-graourou-b09490312)
+- [Desailly Caleb Deroux](https://upbstudents-labibliotheque.com/equipe/desailly-caleb-deroux) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/desailly-caleb-deroux-398132375)
+- [Yao Eliakim Assale](https://upbstudents-labibliotheque.com/equipe/yao-eliakim-assale) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/yao-eliakim-assale-69224839a)
+- [Serge Armel Bénie Ahoussi](https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332)
+- [Baidoo Martin](https://upbstudents-labibliotheque.com/equipe/baidoo-martin) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/baidoo-martin-02823b359)
+
+## Optional
+
+- [Version complète pour les IA](https://upbstudents-labibliotheque.com/llms-full.txt) : présentation, FAQ, équipe et liste de tous les documents
+- [Plan du site](https://upbstudents-labibliotheque.com/sitemap.xml)

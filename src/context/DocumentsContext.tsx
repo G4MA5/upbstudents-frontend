@@ -39,6 +39,8 @@ function toDocument(d: ApiDocument): LibraryDocument {
     file_url: d.file_url ?? "",
     filePath: d.filePath ?? "",
     created_at: d.created_at ?? null,
+    auteur: d.auteur ?? null,
+    mention: d.mention ?? null,
   };
 }
 

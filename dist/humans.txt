@@ -1,0 +1,33 @@
+/* TEAM */
+  Développeur : Dakaud Uriel Jean Bedel
+  Profil : https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel
+  LinkedIn : https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375
+
+  Développeur : Olivier Grace Divine Graourou
+  Profil : https://upbstudents-labibliotheque.com/equipe/olivier-grace-divine-graourou
+  LinkedIn : https://www.linkedin.com/in/olivier-grace-divine-graourou-b09490312
+
+  Développeur : Desailly Caleb Deroux
+  Profil : https://upbstudents-labibliotheque.com/equipe/desailly-caleb-deroux
+  LinkedIn : https://www.linkedin.com/in/desailly-caleb-deroux-398132375
+
+  Développeur : Yao Eliakim Assale
+  Profil : https://upbstudents-labibliotheque.com/equipe/yao-eliakim-assale
+  LinkedIn : https://www.linkedin.com/in/yao-eliakim-assale-69224839a
+
+  Développeur : Serge Armel Bénie Ahoussi
+  Profil : https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi
+  LinkedIn : https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332
+
+  Développeur : Baidoo Martin
+  Profil : https://upbstudents-labibliotheque.com/equipe/baidoo-martin
+  LinkedIn : https://www.linkedin.com/in/baidoo-martin-02823b359
+
+/* STUDIO */
+  Gama Labs · https://upbstudents-labibliotheque.com/gama-labs
+  Contact : Gamalabs2.0@gmail.com
+
+/* SITE */
+  UpB Student's · https://upbstudents-labibliotheque.com
+  Langue : français
+  Technologies : React, Vite, Tailwind CSS, Next.js, Supabase

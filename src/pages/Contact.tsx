@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
-import { ExternalLink, Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
+import { Mail, MapPin, MessageSquare, Phone, Send } from "lucide-react";
 import { Button } from "../components/ui/Button";
 import { Alert, SuccessMark } from "../components/ui/Feedback";
 import { Honeypot, Input, Textarea } from "../components/ui/Field";
@@ -10,7 +10,6 @@ import { useToast } from "../context/ToastContext";
 import { api, errorMessage } from "../lib/api";
 import { validateEmail } from "../lib/validation";
 import { useSeoHead } from "../lib/useSeoHead";
-import { getConfiguredSocialLinks, SEO_CONFIG } from "../lib/seoConfig";
 
 const CHANNELS = [
   {
@@ -184,42 +183,6 @@ export default function Contact() {
           </AnimatePresence>
         </div>
       </div>
-
-      <section className="container-page mt-12">
-        <h2 className="mb-4 text-2xl font-extrabold">L’équipe</h2>
-        <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          {SEO_CONFIG.teamMembers.map((member) => {
-            const links = [
-              { label: "LinkedIn", url: member.linkedIn },
-              ...(member.website ? [{ label: "Site personnel", url: member.website }] : []),
-              ...getConfiguredSocialLinks(member.socials || {})
-                .filter(({ platform }) => platform !== "linkedIn")
-                .map(({ label, url }) => ({ label, url })),
-            ];
-
-            return (
-              <li key={member.name} className="rounded-2xl border border-line bg-card p-4 shadow-card">
-                <h3 className="font-bold text-ink">{member.name}</h3>
-                <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold">
-                  {links.map(({ label, url }) => (
-                    <li key={label}>
-                      <a
-                        href={url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-1 text-accent hover:underline"
-                      >
-                        {label}
-                        <ExternalLink className="h-3.5 w-3.5" aria-hidden />
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            );
-          })}
-        </ul>
-      </section>
 
       <section className="container-page mt-12">
         <h2 className="mb-4 text-2xl font-extrabold">Où nous trouver ?</h2>

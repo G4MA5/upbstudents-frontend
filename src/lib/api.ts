@@ -3,10 +3,26 @@
 
 // Development: same-origin "/api", forwarded by the Vite proxy (no CORS).
 // Production: the Vercel backend, unless VITE_API_URL says otherwise.
-export const API_URL = (
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.DEV ? "" : "https://upbstudents-backend.vercel.app")
-).replace(/\/+$/, "");
+const DEFAULT_API_URL = import.meta.env.DEV ? "" : "https://upbstudents-backend.vercel.app";
+
+/** A single absolute http(s) address; anything else (e.g. "url1,url2") is ignored. */
+function configuredApiUrl(): string {
+  const value = (import.meta.env.VITE_API_URL || "").trim();
+  if (!value) return DEFAULT_API_URL;
+  try {
+    const url = new URL(value);
+    if (/^https?:$/.test(url.protocol) && !value.includes(",")) return value;
+  } catch {
+    // Reported below.
+  }
+  console.error(
+    `[config] VITE_API_URL n'est pas une adresse valide (« ${value} ») : elle est ignorée. ` +
+      "Indiquez une seule adresse, ou laissez-la vide en développement (voir .env.example).",
+  );
+  return DEFAULT_API_URL;
+}
+
+export const API_URL = configuredApiUrl().replace(/\/+$/, "");
 
 export class ApiError extends Error {
   status: number;

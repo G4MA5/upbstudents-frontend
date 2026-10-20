@@ -19,6 +19,7 @@ export function Footer() {
           <nav className="mt-3 flex flex-wrap gap-x-5 gap-y-1 font-semibold" aria-label="Liens utiles">
             <Link to="/documents" className="hover:text-accent">Documents</Link>
             <Link to="/proposer" className="hover:text-accent">Proposer un document</Link>
+            <Link to="/a-propos" className="hover:text-accent">À propos</Link>
             <Link to="/contact" className="hover:text-accent">Contact</Link>
             <Link to={`/contact?objet=${encodeURIComponent("Signaler un problème")}`} className="hover:text-accent">
               Signaler un problème

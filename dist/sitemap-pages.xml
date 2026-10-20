@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://upbstudents-labibliotheque.com/</loc>
+    <lastmod>2026-10-20</lastmod>
+    <image:image><image:loc>https://upbstudents-labibliotheque.com/logo-upb-students.png</image:loc></image:image>
+    <image:image><image:loc>https://upbstudents-labibliotheque.com/og/upb-students.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://upbstudents-labibliotheque.com/documents</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://upbstudents-labibliotheque.com/a-propos</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://upbstudents-labibliotheque.com/contact</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+  <url>
+    <loc>https://upbstudents-labibliotheque.com/proposer</loc>
+    <lastmod>2026-10-20</lastmod>
+  </url>
+</urlset>

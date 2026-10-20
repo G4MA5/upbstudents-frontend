@@ -24,6 +24,7 @@ import { plural } from "../lib/format";
 import { useIsDesktop, useOpenDocument } from "../lib/hooks";
 import { registerPreviewSequence } from "../lib/previewSequence";
 import { normalize, scoreDocument, tokenize } from "../lib/search";
+import { staticPageMeta } from "../lib/seo";
 import { useSeoHead } from "../lib/useSeoHead";
 import type { LibraryDocument } from "../types";
 
@@ -48,12 +49,18 @@ export default function Documents() {
   }, [params]);
 
   const category = CATEGORIES.find((c) => c.value === filters.type);
-  useSeoHead({
-    title: category ? `${category.label} · UpB Student's` : "Documents & Épreuves · UpB Student's",
-    description: category
-      ? `Consultez les ${category.label.toLowerCase()} de l'Université Polytechnique de Bingerville.`
-      : "Consultez et recherchez parmi le catalogue complet d'examens, TD, TP et livres pour toutes les filières de l'UPB.",
-  });
+  // The catalogue is listed in the structured data (links to every document page).
+  const seo = useMemo(() => {
+    const meta = staticPageMeta("/documents", status === "ready" ? documents : [])!;
+    return category
+      ? {
+          ...meta,
+          title: `${category.label} de l'UPB · UpB Student's`,
+          description: `Tous les ${category.label.toLowerCase()} de l'Université Polytechnique de Bingerville, par filière et par niveau.`,
+        }
+      : meta;
+  }, [category, documents, status]);
+  useSeoHead(seo);
 
   const updateFilters = useCallback(
     (patch: Partial<Filters>) => {

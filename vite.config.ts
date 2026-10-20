@@ -1,12 +1,21 @@
 import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
+import { seoPrerender } from "./seo/prerender";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
 
   return {
-    plugins: [react()],
+    plugins: [
+      react(),
+      // Real HTML pages, sitemaps, robots.txt and llms.txt for search engines and AI.
+      seoPrerender({
+        // First valid address only (tolerates "url1,url2" in VITE_API_URL).
+        apiUrl: (env.VITE_API_URL?.split(",").map((u) => u.trim()).find((u) => /^https?:\/\//.test(u)) ||
+          "https://upbstudents-backend.vercel.app").replace(/\/+$/, ""),
+      }),
+    ],
     resolve: {
       alias: [
         // The modern pdf.js build relies on very recent browser APIs

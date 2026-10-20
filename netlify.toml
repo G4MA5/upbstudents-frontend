@@ -2,11 +2,8 @@
   command = "npm run build"
   publish = "dist"
 
-# Single-page application: every route is served by index.html.
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Routing: dist/_redirects is generated at build time (seo/prerender.ts):
+# pre-rendered pages, short document links, private pages and a real 404.
 
 [[headers]]
   for = "/*"
@@ -27,3 +24,4 @@
   for = "/index.html"
   [headers.values]
     Cache-Control = "no-cache"
+

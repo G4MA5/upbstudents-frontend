@@ -8,57 +8,75 @@
     />
     <meta name="theme-color" content="#ffffff" />
     <script>
+      // JavaScript available: the pre-rendered content stays hidden (the app replaces it).
+      document.documentElement.classList.add("js");
       // Apply the saved theme before the first paint (no flash).
       try {
         if (localStorage.getItem("upb_theme") === "dark") document.documentElement.dataset.theme = "dark";
       } catch (e) {}
     </script>
     
-    <!-- Informations SEO de référence (Domaine officiel: https://upbstudents-labibliotheque.com) -->
-    <title>UpB Student's · Bibliothèque numérique</title>
-    <meta
-      name="description"
-      content="Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville : examens, TD, TP et livres par filière et par niveau."
-    />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://upbstudents-labibliotheque.com/" />
-
-    <!-- Open Graph / Facebook -->
+    <!-- Balises SEO : remplacées page par page au build (seo/prerender.ts)
+         et mises à jour par l'application (src/lib/useSeoHead.ts). -->
+    <!--seo:start-->
+    <title>UpB Student's · Bibliothèque numérique de l'UPB (examens, cours, TD, TP)</title>
+    <meta name="description" content="Examens, cours, TD, TP, mémoires et livres de l'Université Polytechnique de Bingerville, classés par filière et par niveau. Accès gratuit." />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://upbstudents-labibliotheque.com/" />
-    <meta property="og:title" content="UpB Student's · Bibliothèque numérique" />
-    <meta
-      property="og:description"
-      content="Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville : examens, TD, TP et livres par filière et par niveau."
-    />
-    <meta property="og:image" content="https://upbstudents-labibliotheque.com/logo5.png" />
     <meta property="og:site_name" content="UpB Student's" />
-
-    <!-- Twitter -->
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:url" content="https://upbstudents-labibliotheque.com/" />
+    <meta property="og:title" content="UpB Student's · Bibliothèque numérique de l'UPB (examens, cours, TD, TP)" />
+    <meta property="og:description" content="Examens, cours, TD, TP, mémoires et livres de l'Université Polytechnique de Bingerville, classés par filière et par niveau. Accès gratuit." />
+    <meta property="og:image" content="https://upbstudents-labibliotheque.com/og/upb-students.png" />
+    <meta property="og:image:alt" content="UpB Student's, bibliothèque numérique de l'UPB" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="UpB Student's · Bibliothèque numérique" />
-    <meta
-      name="twitter:description"
-      content="Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville : examens, TD, TP et livres par filière et par niveau."
-    />
-    <meta name="twitter:image" content="https://upbstudents-labibliotheque.com/logo5.png" />
+    <meta name="twitter:title" content="UpB Student's · Bibliothèque numérique de l'UPB (examens, cours, TD, TP)" />
+    <meta name="twitter:description" content="Examens, cours, TD, TP, mémoires et livres de l'Université Polytechnique de Bingerville, classés par filière et par niveau. Accès gratuit." />
+    <meta name="twitter:image" content="https://upbstudents-labibliotheque.com/og/upb-students.png" />
+    <meta name="twitter:image:alt" content="UpB Student's, bibliothèque numérique de l'UPB" />
+    <link rel="canonical" href="https://upbstudents-labibliotheque.com/" />
+    <script id="seo-json-ld" type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://upbstudents-labibliotheque.com/#website","url":"https://upbstudents-labibliotheque.com/","name":"UpB Student's","alternateName":["UpB Students","UpB Student's Bibliothèque","Bibliothèque numérique UPB"],"description":"Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB) : examens, cours, TD, TP, mémoires et livres par filière et par niveau, en accès gratuit.","inLanguage":"fr","publisher":{"@id":"https://upbstudents-labibliotheque.com/#organization"},"creator":{"@type":"Organization","@id":"https://upbstudents-labibliotheque.com/#gama-labs","name":"Gama Labs"},"copyrightYear":"2025","potentialAction":{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://upbstudents-labibliotheque.com/documents?q={search_term_string}"},"query-input":"required name=search_term_string"}},{"@type":["Library","Organization"],"@id":"https://upbstudents-labibliotheque.com/#organization","name":"UpB Student's","legalName":"UpB Student's - Bibliothèque numérique","alternateName":["UpB Students","UpB Student's Bibliothèque","Bibliothèque numérique UPB"],"url":"https://upbstudents-labibliotheque.com/","logo":{"@type":"ImageObject","url":"https://upbstudents-labibliotheque.com/logo-upb-students.png","contentUrl":"https://upbstudents-labibliotheque.com/logo-upb-students.png","caption":"Logo de UpB Student's"},"image":"https://upbstudents-labibliotheque.com/og/upb-students.png","description":"Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB) : examens, cours, TD, TP, mémoires et livres par filière et par niveau, en accès gratuit.","email":"Gamalabs2.0@gmail.com","telephone":"+2250172489331","address":{"@type":"PostalAddress","addressLocality":"Bingerville","addressRegion":"Abidjan","addressCountry":"CI","streetAddress":"Route de Bingerville, Université Polytechnique de Bingerville"},"areaServed":{"@type":"Country","name":"Côte d'Ivoire"},"audience":{"@type":"EducationalAudience","educationalRole":"student"},"parentOrganization":{"@id":"https://upbstudents-labibliotheque.com/#upb"}},{"@type":["CollegeOrUniversity","EducationalOrganization"],"@id":"https://upbstudents-labibliotheque.com/#upb","name":"Université Polytechnique de Bingerville","alternateName":"UPB","url":"https://upb.edu.ci","address":{"@type":"PostalAddress","addressLocality":"Bingerville","addressCountry":"CI"}},{"@type":"WebPage","@id":"https://upbstudents-labibliotheque.com/#webpage","url":"https://upbstudents-labibliotheque.com/","name":"UpB Student's · Bibliothèque numérique de l'UPB (examens, cours, TD, TP)","description":"Examens, cours, TD, TP, mémoires et livres de l'Université Polytechnique de Bingerville, classés par filière et par niveau. Accès gratuit.","inLanguage":"fr","isPartOf":{"@id":"https://upbstudents-labibliotheque.com/#website"},"about":{"@id":"https://upbstudents-labibliotheque.com/#organization"}}]}</script>
+    <!--seo:end-->
+    <meta name="author" content="Gama Labs" />
+    <meta name="application-name" content="UpB Student's" />
+    <meta name="apple-mobile-web-app-title" content="UpB Student's" />
+    <link rel="author" href="/humans.txt" />
+    <link rel="alternate" type="text/plain" title="Présentation pour les IA" href="/llms.txt" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <style>
+      /* Pre-rendered content: read by search engines and AI crawlers, shown
+         without JavaScript, replaced by the application as soon as it starts. */
+      .js .ssg { display: none; }
+      .ssg { max-width: 960px; margin: 0 auto; padding: 24px 16px; font-family: "Plus Jakarta Sans", system-ui, sans-serif; line-height: 1.6; color: #161618; }
+      .ssg a { color: #c94f00; }
+      .ssg img { max-width: 100%; height: auto; border-radius: 12px; }
+    </style>
 
     <meta name="format-detection" content="telephone=no" />
     <link rel="icon" type="image/png" href="/logo5.png" />
-    <link rel="apple-touch-icon" href="/logo5.png" />
+    <link rel="apple-touch-icon" href="/logo-upb-students.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <script type="module" crossorigin src="/assets/index-Dl1UFLA2.js"></script>
-    <link rel="modulepreload" crossorigin href="/assets/react-BEj_fKGY.js">
-    <link rel="modulepreload" crossorigin href="/assets/motion-C0yRF_c5.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-BZ8bvZAw.css">
+    <script type="module" crossorigin src="/assets/index-fSQXRU87.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/react-DUtDWr9_.js">
+    <link rel="modulepreload" crossorigin href="/assets/motion-BWJRYhOL.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-m-5Ma2FJ.css">
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><div class="ssg"><header><p><a href="/"><strong>UpB Student's</strong></a> · Bibliothèque numérique de l'Université Polytechnique de Bingerville</p>
+<nav aria-label="Navigation principale"><a href="/">Accueil</a> · <a href="/documents">Documents</a> · <a href="/documents?type=Examen">Examens</a> · <a href="/documents?type=Cours">Cours</a> · <a href="/documents?type=TD">TD</a> · <a href="/documents?type=TP">TP</a> · <a href="/documents?type=M%C3%A9moire">Mémoires</a> · <a href="/documents?type=Livre">Livres</a> · <a href="/proposer">Proposer un document</a> · <a href="/a-propos">À propos</a> · <a href="/contact">Contact</a></nav></header><main><h1>UpB Student's : la bibliothèque numérique de l'Université Polytechnique de Bingerville</h1>
+<p>Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB) : examens, cours, TD, TP, mémoires et livres par filière et par niveau, en accès gratuit.</p>
+<p>209 documents en ligne.</p>
+<section><h2>Par catégorie</h2><ul><li><a href="/documents?type=Examen">Examens</a> (75)</li><li><a href="/documents?type=Cours">Cours</a> (51)</li><li><a href="/documents?type=TD">TD</a> (67)</li><li><a href="/documents?type=TP">TP</a> (11)</li><li><a href="/documents?type=M%C3%A9moire">Mémoires</a> (1)</li><li><a href="/documents?type=Livre">Livres</a> (4)</li></ul></section>
+<section><h2>Par filière</h2><ul><li><a href="/documents?filiere=MIAGE">MIAGE</a> (68)</li><li><a href="/documents?filiere=ASSRI">ASSRI</a> (65)</li><li><a href="/documents?filiere=SEA">SEA</a> (60)</li><li><a href="/documents?filiere=SEG">SEG</a> (24)</li><li><a href="/documents?filiere=3EA">3EA</a> (11)</li><li><a href="/documents?filiere=SJAP">SJAP</a> (9)</li><li><a href="/documents?filiere=RIT">RIT</a> (20)</li></ul></section>
+<section><h2>Derniers documents ajoutés</h2><ul><li><a href="/documents/302-cours-probabilite-statistiques-miage-licence-2-2026">Probabilité statistiques</a> (Cours · MIAGE · Licence 2 · 2026)</li><li><a href="/documents/301-td-structure-de-donnees-miage-licence-2-2026">STRUCTURE DE DONNÉES</a> (TD · MIAGE · Licence 2 · 2026)</li><li><a href="/documents/300-cours-electronique-numerique-1-3ea-licence-1-2026">Électronique numérique 1</a> (Cours · 3EA · Licence 1 · 2026)</li><li><a href="/documents/299-td-mecanique-3ea-licence-1-2024">Mécanique</a> (TD · 3EA · Licence 1 · 2024)</li><li><a href="/documents/298-td-electricite-3ea-licence-1-2025">Électricité</a> (TD · 3EA · Licence 1 · 2025)</li><li><a href="/documents/297-cours-introduction-a-la-securite-des-si-miage-licence-3-2025">Introduction à la sécurité des SI</a> (Cours · MIAGE, ASSRI · Licence 3 · 2025)</li><li><a href="/documents/296-cours-gestion-des-risques-miage-licence-3-2025">Gestion des Risques</a> (Cours · MIAGE, ASSRI · Licence 3 · 2025)</li><li><a href="/documents/295-cours-securite-des-applications-web-attaques-menaces-miage-licence-3-2025">Sécurité des Applications Web - Attaques-menaces</a> (Cours · MIAGE, ASSRI · Licence 3 · 2025)</li><li><a href="/documents/294-cours-securite-des-applications-web-base-de-donnees-assri-licence-3-2025">Sécurité des Applications Web - Base de Donnees</a> (Cours · ASSRI, MIAGE · Licence 3 · 2025)</li><li><a href="/documents/292-cours-statistique-inferentielle-sea-licence-1-2025">Statistique inférentielle</a> (Cours · SEA, SEG · Licence 1 · 2025)</li><li><a href="/documents/291-cours-macroeconomie-sea-licence-1-2024">Macroéconomie</a> (Cours · SEA, SEG · Licence 1 · 2024)</li><li><a href="/documents/290-cours-calcul-integrale-et-equations-differentielles-sea-licence-1-2025">Calcul intégrale et équations différentielles</a> (Cours · SEA, SEG · Licence 1 · 2025)</li><li><a href="/documents/289-cours-statistique-bivariee-seg-licence-1-2025">Statistique bivariée</a> (Cours · SEG, SEA · Licence 1 · 2025)</li><li><a href="/documents/288-cours-initiation-a-la-gestion-des-entreprises-sea-licence-1-2025">Initiation à la gestion des entreprises</a> (Cours · SEA, SEG · Licence 1 · 2025)</li><li><a href="/documents/287-cours-espace-vectorielle-et-application-lineaire-sea-licence-1-2018">Espace vectorielle et application linéaire</a> (Cours · SEA, SEG · Licence 1 · 2018)</li><li><a href="/documents/286-cours-statistique-descriptive-seg-licence-1-2023">Statistique descriptive</a> (Cours · SEG, SEA · Licence 1 · 2023)</li><li><a href="/documents/285-cours-microeconomie-assri-licence-1-2023">Microéconomie</a> (Cours · ASSRI, SEA · Licence 1 · 2023)</li><li><a href="/documents/284-cours-comptabilite-financiere-sea-licence-1-2025">Comptabilité financière</a> (Cours · SEA, SEG · Licence 1 · 2025)</li><li><a href="/documents/283-cours-algorithme-sea-licence-1-2025">Algorithme</a> (Cours · SEA · Licence 1 · 2025)</li><li><a href="/documents/282-cours-mrls-sea-licence-2-2025">MRLS</a> (Cours · SEA · Licence 2 · 2025)</li><li><a href="/documents/281-cours-mrlm-sea-licence-2-2025">MRLM</a> (Cours · SEA · Licence 2 · 2025)</li><li><a href="/documents/280-cours-collecte-de-donnees-sea-licence-2-2025">Collecte de données</a> (Cours · SEA · Licence 2 · 2025)</li><li><a href="/documents/279-cours-optimisation-statistique-sea-licence-2-2025">Optimisation statistique</a> (Cours · SEA · Licence 2 · 2025)</li><li><a href="/documents/278-cours-econometrie-sea-licence-2-2025">Econometrie</a> (Cours · SEA · Licence 2 · 2025)</li></ul><p><a href="/documents">Voir tous les documents</a></p></section></main><footer><p>UpB Student's · Bibliothèque numérique de l'Université Polytechnique de Bingerville, Bingerville, Côte d'Ivoire.</p>
+<p>Conçu et développé par Gama Labs.</p>
+<p>Contact : <a href="mailto:Gamalabs2.0@gmail.com">Gamalabs2.0@gmail.com</a></p></footer></div></div>
     <noscript>
       Veuillez activer JavaScript pour utiliser la bibliothèque UpB Student's.
     </noscript>

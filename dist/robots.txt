@@ -1,14 +1,41 @@
+# UpB Student's · https://upbstudents-labibliotheque.com
+# Moteurs de recherche et assistants IA sont les bienvenus sur toutes les pages publiques.
+
 User-agent: *
 Allow: /
-Allow: /documents
-Allow: /bibliotheque
-Allow: /proposer
-Allow: /contact
-
-# Exclusion des espaces prives, d'administration et de gestion de compte
-Disallow: /ajouter
 Disallow: /profil
+Disallow: /ajouter
 Disallow: /propositions
+Disallow: /diffusion
 Disallow: /mot-de-passe-oublie
+Disallow: /bibliotheque
+
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Google-Extended
+User-agent: Bingbot
+User-agent: DuckDuckBot
+User-agent: YandexBot
+User-agent: Applebot
+User-agent: Applebot-Extended
+User-agent: GPTBot
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: ClaudeBot
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: meta-externalagent
+User-agent: DuckAssistBot
+User-agent: MistralAI-User
+User-agent: CCBot
+Allow: /
+Disallow: /profil
+Disallow: /ajouter
+Disallow: /propositions
+Disallow: /diffusion
+Disallow: /mot-de-passe-oublie
+Disallow: /bibliotheque
 
 Sitemap: https://upbstudents-labibliotheque.com/sitemap.xml

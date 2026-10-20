@@ -70,7 +70,7 @@ export const SEO_CONFIG = {
   alternateNames: ["UpB Students", "UpB Student's Bibliothèque", "Bibliothèque numérique UPB"],
   fullSiteTitle: "UpB Student's · Bibliothèque numérique",
   defaultDescription:
-    "Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB) : examens, cours, TD, TP, mémoires et livres par filière et par niveau, à consulter gratuitement.",
+    "Bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB) : examens, cours, TD, TP, mémoires et livres par filière et par niveau, en accès gratuit.",
   defaultOgImage: `${SITE_DOMAIN}/og/upb-students.png`,
   logoUrl: `${SITE_DOMAIN}/logo-upb-students.png`,
   organizationName: "UpB Student's - Bibliothèque numérique",

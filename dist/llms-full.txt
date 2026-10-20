@@ -1,0 +1,329 @@
+# UpB Student's
+
+> UpB Student's (https://upbstudents-labibliotheque.com) est la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB), à Bingerville en Côte d'Ivoire. Elle a été conçue et développée par Gama Labs.
+
+La bibliothèque rassemble 209 documents : examens (75), cours (51), TD (67), TP (11), mémoires (1), livres (4), classés par filière (MIAGE, ASSRI, SEA, SEG, 3EA, SJAP, RIT), par niveau et par année. Le catalogue est consultable par tous ; la lecture et le téléchargement sont gratuits avec un compte étudiant.
+
+## Pages principales
+
+- [Accueil](https://upbstudents-labibliotheque.com/) : présentation et derniers documents
+- [Tous les documents](https://upbstudents-labibliotheque.com/documents) : catalogue complet, avec un lien vers la page de chaque document
+- [À propos](https://upbstudents-labibliotheque.com/a-propos) : présentation détaillée et questions fréquentes
+- [Proposer un document](https://upbstudents-labibliotheque.com/proposer) : contribution des étudiants, vérifiée avant publication
+- [Contact](https://upbstudents-labibliotheque.com/contact)
+
+## Créateurs
+
+- [Gama Labs](https://upbstudents-labibliotheque.com/gama-labs) : Gama Labs est l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (Côte d'Ivoire). Réseaux : [LinkedIn](https://www.linkedin.com/in/gama-labs-523139375).
+- [L'équipe](https://upbstudents-labibliotheque.com/equipe) : les membres de Gama Labs
+- [Dakaud Uriel Jean Bedel](https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375)
+- [Olivier Grace Divine Graourou](https://upbstudents-labibliotheque.com/equipe/olivier-grace-divine-graourou) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/olivier-grace-divine-graourou-b09490312)
+- [Desailly Caleb Deroux](https://upbstudents-labibliotheque.com/equipe/desailly-caleb-deroux) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/desailly-caleb-deroux-398132375)
+- [Yao Eliakim Assale](https://upbstudents-labibliotheque.com/equipe/yao-eliakim-assale) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/yao-eliakim-assale-69224839a)
+- [Serge Armel Bénie Ahoussi](https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332)
+- [Baidoo Martin](https://upbstudents-labibliotheque.com/equipe/baidoo-martin) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/baidoo-martin-02823b359)
+
+## Questions fréquentes
+
+### Qui a créé UpB Student's ?
+
+UpB Student's a été conçue et développée par Gama Labs, dont l'équipe est composée de Dakaud Uriel Jean Bedel, Olivier Grace Divine Graourou, Desailly Caleb Deroux, Yao Eliakim Assale, Serge Armel Bénie Ahoussi et Baidoo Martin.
+
+### Qu'est-ce que UpB Student's ?
+
+UpB Student's est la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB), à Bingerville en Côte d'Ivoire. Elle rassemble des épreuves d'examens, des cours, des sujets de TD et de TP, des mémoires et des livres, classés par filière, par niveau et par année.
+
+### Quels documents trouve-t-on dans la bibliothèque ?
+
+Des épreuves d'examens (sessions 1 et 2), des cours, des sujets de travaux dirigés (TD) et de travaux pratiques (TP), des mémoires et des livres, pour les filières MIAGE, ASSRI, SEA, SEG, 3EA, SJAP et RIT, de la Licence 1 au Master.
+
+### La bibliothèque est-elle gratuite ?
+
+Oui. Le catalogue est consultable par tous, et la lecture en ligne comme le téléchargement des documents sont gratuits : il suffit de créer un compte étudiant gratuit.
+
+### Comment proposer un document ?
+
+Depuis la page « Proposer un document », n'importe quel étudiant peut envoyer une épreuve, un cours, un TD ou un TP. Chaque proposition est vérifiée par l'équipe avant d'être publiée.
+
+### Comment contacter l'équipe ?
+
+Par le formulaire de la page Contact, ou par e-mail à Gamalabs2.0@gmail.com.
+
+## Gama Labs
+
+Gama Labs est l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (Côte d'Ivoire).
+
+Contact : Gamalabs2.0@gmail.com
+
+Membres :
+
+### Dakaud Uriel Jean Bedel
+
+Dakaud Uriel Jean Bedel est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
+
+Profil : https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel
+Réseaux : [LinkedIn](https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375)
+
+### Olivier Grace Divine Graourou
+
+Olivier Grace Divine Graourou est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
+
+Profil : https://upbstudents-labibliotheque.com/equipe/olivier-grace-divine-graourou
+Réseaux : [LinkedIn](https://www.linkedin.com/in/olivier-grace-divine-graourou-b09490312)
+
+### Desailly Caleb Deroux
+
+Desailly Caleb Deroux est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
+
+Profil : https://upbstudents-labibliotheque.com/equipe/desailly-caleb-deroux
+Réseaux : [LinkedIn](https://www.linkedin.com/in/desailly-caleb-deroux-398132375)
+
+### Yao Eliakim Assale
+
+Yao Eliakim Assale est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
+
+Profil : https://upbstudents-labibliotheque.com/equipe/yao-eliakim-assale
+Réseaux : [LinkedIn](https://www.linkedin.com/in/yao-eliakim-assale-69224839a)
+
+### Serge Armel Bénie Ahoussi
+
+Serge Armel Bénie Ahoussi est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
+
+Profil : https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi
+Réseaux : [LinkedIn](https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332)
+
+### Baidoo Martin
+
+Baidoo Martin est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
+
+Profil : https://upbstudents-labibliotheque.com/equipe/baidoo-martin
+Réseaux : [LinkedIn](https://www.linkedin.com/in/baidoo-martin-02823b359)
+
+## Catalogue des documents
+
+### Cours
+
+- [Probabilité statistiques](https://upbstudents-labibliotheque.com/documents/302-cours-probabilite-statistiques-miage-licence-2-2026) : MIAGE, Licence 2, 2026
+- [Électronique numérique 1](https://upbstudents-labibliotheque.com/documents/300-cours-electronique-numerique-1-3ea-licence-1-2026) : 3EA, Licence 1, 2026
+- [Introduction à la sécurité des SI](https://upbstudents-labibliotheque.com/documents/297-cours-introduction-a-la-securite-des-si-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Gestion des Risques](https://upbstudents-labibliotheque.com/documents/296-cours-gestion-des-risques-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Sécurité des Applications Web - Attaques-menaces](https://upbstudents-labibliotheque.com/documents/295-cours-securite-des-applications-web-attaques-menaces-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Sécurité des Applications Web - Base de Donnees](https://upbstudents-labibliotheque.com/documents/294-cours-securite-des-applications-web-base-de-donnees-assri-licence-3-2025) : ASSRI, MIAGE, Licence 3, 2025
+- [Statistique inférentielle](https://upbstudents-labibliotheque.com/documents/292-cours-statistique-inferentielle-sea-licence-1-2025) : SEA, SEG, Licence 1, 2025
+- [Macroéconomie](https://upbstudents-labibliotheque.com/documents/291-cours-macroeconomie-sea-licence-1-2024) : SEA, SEG, Licence 1, 2024
+- [Calcul intégrale et équations différentielles](https://upbstudents-labibliotheque.com/documents/290-cours-calcul-integrale-et-equations-differentielles-sea-licence-1-2025) : SEA, SEG, Licence 1, 2025
+- [Statistique bivariée](https://upbstudents-labibliotheque.com/documents/289-cours-statistique-bivariee-seg-licence-1-2025) : SEG, SEA, Licence 1, 2025
+- [Initiation à la gestion des entreprises](https://upbstudents-labibliotheque.com/documents/288-cours-initiation-a-la-gestion-des-entreprises-sea-licence-1-2025) : SEA, SEG, Licence 1, 2025
+- [Espace vectorielle et application linéaire](https://upbstudents-labibliotheque.com/documents/287-cours-espace-vectorielle-et-application-lineaire-sea-licence-1-2018) : SEA, SEG, Licence 1, 2018
+- [Statistique descriptive](https://upbstudents-labibliotheque.com/documents/286-cours-statistique-descriptive-seg-licence-1-2023) : SEG, SEA, Licence 1, 2023
+- [Microéconomie](https://upbstudents-labibliotheque.com/documents/285-cours-microeconomie-assri-licence-1-2023) : ASSRI, SEA, Licence 1, 2023
+- [Comptabilité financière](https://upbstudents-labibliotheque.com/documents/284-cours-comptabilite-financiere-sea-licence-1-2025) : SEA, SEG, Licence 1, 2025
+- [Algorithme](https://upbstudents-labibliotheque.com/documents/283-cours-algorithme-sea-licence-1-2025) : SEA, Licence 1, 2025
+- [MRLS](https://upbstudents-labibliotheque.com/documents/282-cours-mrls-sea-licence-2-2025) : SEA, Licence 2, 2025
+- [MRLM](https://upbstudents-labibliotheque.com/documents/281-cours-mrlm-sea-licence-2-2025) : SEA, Licence 2, 2025
+- [Collecte de données](https://upbstudents-labibliotheque.com/documents/280-cours-collecte-de-donnees-sea-licence-2-2025) : SEA, Licence 2, 2025
+- [Optimisation statistique](https://upbstudents-labibliotheque.com/documents/279-cours-optimisation-statistique-sea-licence-2-2025) : SEA, Licence 2, 2025
+- [Econometrie](https://upbstudents-labibliotheque.com/documents/278-cours-econometrie-sea-licence-2-2025) : SEA, Licence 2, 2025
+- [Inférence statistique](https://upbstudents-labibliotheque.com/documents/277-cours-inference-statistique-sea-licence-2-2025) : SEA, Licence 2, 2025
+- [Économétrie des séries temporelles](https://upbstudents-labibliotheque.com/documents/276-cours-econometrie-des-series-temporelles-sea-licence-2-2025) : SEA, SEG, Licence 2, 2025
+- [Economie du développement](https://upbstudents-labibliotheque.com/documents/275-cours-economie-du-developpement-sea-licence-2-2025) : SEA, Licence 2, 2025
+- [Microéconomie](https://upbstudents-labibliotheque.com/documents/274-cours-microeconomie-seg-licence-2-2022) : SEG, Licence 2, 2022
+- [Démographie](https://upbstudents-labibliotheque.com/documents/273-cours-demographie-sea-licence-2-2025) : SEA, SEG, Licence 2, 2025
+- [Economie publique](https://upbstudents-labibliotheque.com/documents/272-cours-economie-publique-seg-licence-2-2025) : SEG, SEA, Licence 2, 2025
+- [Anthropologie economique](https://upbstudents-labibliotheque.com/documents/271-cours-anthropologie-economique-sea-licence-2-2025) : SEA, SEG, Licence 2, 2025
+- [Commerce internationale](https://upbstudents-labibliotheque.com/documents/270-cours-commerce-internationale-sea-licence-2-2025) : SEA, SEG, Licence 2, 2025
+- [Plan de sondage aléatoire simple](https://upbstudents-labibliotheque.com/documents/269-cours-plan-de-sondage-aleatoire-simple-seg-licence-2-2025) : SEG, SEA, Licence 2, 2025
+- [Echantillonnage aléatoire stratifie](https://upbstudents-labibliotheque.com/documents/268-cours-echantillonnage-aleatoire-stratifie-sea-licence-2-2020) : SEA, SEG, Licence 2, 2020
+- [Analyse et conception des systèmes d'information](https://upbstudents-labibliotheque.com/documents/267-cours-analyse-et-conception-des-systemes-d-information-sea-licence-2-2020) : SEA, SEG, Licence 2, 2020
+- [Base de données](https://upbstudents-labibliotheque.com/documents/266-cours-base-de-donnees-sea-licence-2-2024) : SEA, SEG, Licence 2, 2024
+- [Asymptotique et hétéroscédasticité ch4](https://upbstudents-labibliotheque.com/documents/265-cours-asymptotique-et-heteroscedasticite-ch4-sea-licence-2-2025) : SEA, SEG, Licence 2, 2025
+- [Applied economics](https://upbstudents-labibliotheque.com/documents/264-cours-applied-economics-sea-licence-2-2025) : SEA, SEG, Licence 2, 2025
+- [Tests non paramétriques](https://upbstudents-labibliotheque.com/documents/256-cours-tests-non-parametriques-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Data Mining](https://upbstudents-labibliotheque.com/documents/255-cours-data-mining-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [La monnaie et le système bancaire](https://upbstudents-labibliotheque.com/documents/254-cours-la-monnaie-et-le-systeme-bancaire-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Finance](https://upbstudents-labibliotheque.com/documents/253-cours-finance-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Indice statistique](https://upbstudents-labibliotheque.com/documents/252-cours-indice-statistique-sea-licence-3-2024) : SEA, Licence 3, 2024
+- [Anglais](https://upbstudents-labibliotheque.com/documents/251-cours-anglais-sea-licence-3-2023) : SEA, Licence 3, 2023
+- [Cours de Gestion de parcs informatique](https://upbstudents-labibliotheque.com/documents/247-cours-cours-de-gestion-de-parcs-informatique-assri-licence-3-2025) : ASSRI, Licence 3, 2025
+- [Méthodologie de rédaction de mémoire](https://upbstudents-labibliotheque.com/documents/241-cours-methodologie-de-redaction-de-memoire-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Programmation Linéaire (Branch & Bound)](https://upbstudents-labibliotheque.com/documents/238-cours-programmation-lineaire-branch-bound-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Programmation Linéaire (Dualité)](https://upbstudents-labibliotheque.com/documents/237-cours-programmation-lineaire-dualite-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Ressources humaines et Marketing](https://upbstudents-labibliotheque.com/documents/236-cours-ressources-humaines-et-marketing-miage-licence-3-2026) : MIAGE, Licence 3, 2026
+- [Programmation Linéaire](https://upbstudents-labibliotheque.com/documents/235-cours-programmation-lineaire-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Gestion de Production](https://upbstudents-labibliotheque.com/documents/229-cours-gestion-de-production-miage-licence-3-2026) : MIAGE, Licence 3, 2026
+- [Cours D'anglais](https://upbstudents-labibliotheque.com/documents/227-cours-cours-d-anglais-miage-licence-3-2026) : MIAGE, ASSRI, Licence 3, 2026
+- [Cours de Genie Logiciel](https://upbstudents-labibliotheque.com/documents/226-cours-cours-de-genie-logiciel-miage-licence-3-2026) : MIAGE, Licence 3, 2026
+- [Structure_Donnees](https://upbstudents-labibliotheque.com/documents/211-cours-structure-donnees-miage-licence-2-2025) : MIAGE, ASSRI, Licence 2, 2025
+
+### TD
+
+- [STRUCTURE DE DONNÉES](https://upbstudents-labibliotheque.com/documents/301-td-structure-de-donnees-miage-licence-2-2026) : MIAGE, Licence 2, 2026
+- [Mécanique](https://upbstudents-labibliotheque.com/documents/299-td-mecanique-3ea-licence-1-2024) : 3EA, Licence 1, 2024
+- [Électricité](https://upbstudents-labibliotheque.com/documents/298-td-electricite-3ea-licence-1-2025) : 3EA, Licence 1, 2025
+- [Indices Statistiques](https://upbstudents-labibliotheque.com/documents/263-td-indices-statistiques-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Finance publique](https://upbstudents-labibliotheque.com/documents/262-td-finance-publique-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Tests Paramétriques](https://upbstudents-labibliotheque.com/documents/261-td-tests-parametriques-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Marchés Financiers](https://upbstudents-labibliotheque.com/documents/260-td-marches-financiers-sea-licence-3-2024) : SEA, Licence 3, 2024
+- [Economie Monétaire Internationale](https://upbstudents-labibliotheque.com/documents/259-td-economie-monetaire-internationale-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Croissance économique](https://upbstudents-labibliotheque.com/documents/258-td-croissance-economique-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Théorie et modèles de croissance](https://upbstudents-labibliotheque.com/documents/257-td-theorie-et-modeles-de-croissance-sea-licence-3-2025) : SEA, Licence 3, 2025
+- [Gestion de parcs informatiques (Fiche 3)](https://upbstudents-labibliotheque.com/documents/250-td-gestion-de-parcs-informatiques-fiche-3-assri-licence-3-2025) : ASSRI, Licence 3, 2025
+- [Gestion de parcs informatiques (Fiche 2)](https://upbstudents-labibliotheque.com/documents/249-td-gestion-de-parcs-informatiques-fiche-2-assri-licence-3-2025) : ASSRI, Licence 3, 2025
+- [Gestion de parcs informatique (Fiche 1)](https://upbstudents-labibliotheque.com/documents/248-td-gestion-de-parcs-informatique-fiche-1-assri-licence-3-2025) : ASSRI, Licence 3, 2025
+- [Théorie des graphes (Graphe réseau)](https://upbstudents-labibliotheque.com/documents/246-td-theorie-des-graphes-graphe-reseau-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Théorie des graphes (Djikstra)](https://upbstudents-labibliotheque.com/documents/245-td-theorie-des-graphes-djikstra-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Théorie des graphes (Fiche 3)](https://upbstudents-labibliotheque.com/documents/244-td-theorie-des-graphes-fiche-3-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Théorie des graphes (Fiche 2)](https://upbstudents-labibliotheque.com/documents/243-td-theorie-des-graphes-fiche-2-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Théorie des graphes](https://upbstudents-labibliotheque.com/documents/242-td-theorie-des-graphes-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [Programmation Linéaire](https://upbstudents-labibliotheque.com/documents/240-td-programmation-lineaire-miage-licence-3-2025) : MIAGE, ASSRI, Licence 3, 2025
+- [TD Ressources Humaines et Marketing](https://upbstudents-labibliotheque.com/documents/239-td-td-ressources-humaines-et-marketing-miage-licence-3-2026) : MIAGE, Licence 3, 2026
+- [Entrepreneuriat](https://upbstudents-labibliotheque.com/documents/233-td-entrepreneuriat-assri-licence-3-2025) : ASSRI, MIAGE, Licence 3, 2025
+- [TD Gestion de production](https://upbstudents-labibliotheque.com/documents/231-td-td-gestion-de-production-miage-licence-3-2026) : MIAGE, Licence 3, 2026
+- [Combinatoire et probabilité](https://upbstudents-labibliotheque.com/documents/223-td-combinatoire-et-probabilite-sea-licence-1-2025) : SEA, Licence 1, 2025
+- [mecanique](https://upbstudents-labibliotheque.com/documents/194-td-mecanique-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [electronique numerique](https://upbstudents-labibliotheque.com/documents/188-td-electronique-numerique-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [Algo](https://upbstudents-labibliotheque.com/documents/187-td-algo-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [Transistor Bipolaire TD3](https://upbstudents-labibliotheque.com/documents/176-td-transistor-bipolaire-td3-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [Diodes et Applications TD 2](https://upbstudents-labibliotheque.com/documents/175-td-diodes-et-applications-td-2-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [Diodes en régime statique TD1](https://upbstudents-labibliotheque.com/documents/174-td-diodes-en-regime-statique-td1-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [Ondes Electromagnétique](https://upbstudents-labibliotheque.com/documents/173-td-ondes-electromagnetique-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [champ electromagnetisme](https://upbstudents-labibliotheque.com/documents/168-td-champ-electromagnetisme-rit-licence-1-2026) : RIT, Licence 1, 2026
+- [OPTIQUE](https://upbstudents-labibliotheque.com/documents/160-td-optique-rit-licence-1-2025) : RIT, Licence 1, 2025
+- [optique](https://upbstudents-labibliotheque.com/documents/159-td-optique-rit-licence-1-2025) : RIT, Licence 1, 2025, Session 1
+- [ARCHITECTURE  DES  ORDINATEURS ](https://upbstudents-labibliotheque.com/documents/151-td-architecture-des-ordinateurs-assri-licence-1-2025) : ASSRI, Licence 1, 2025
+- [ALGEBRE 1](https://upbstudents-labibliotheque.com/documents/150-td-algebre-1-assri-licence-1-2025) : ASSRI, Licence 1, 2025
+- [Algebre 2](https://upbstudents-labibliotheque.com/documents/149-td-algebre-2-assri-licence-1-2025) : ASSRI, Licence 1, 2025
+- [ MATHEMATIQUES FINANCIERES](https://upbstudents-labibliotheque.com/documents/148-td-mathematiques-financieres-assri-licence-1-2024) : ASSRI, Licence 1, 2024
+- [ PROBABILITE STATISTIQUE](https://upbstudents-labibliotheque.com/documents/147-td-probabilite-statistique-assri-licence-2-2025) : ASSRI, Licence 2, 2025, Session 2
+- [ORACLE](https://upbstudents-labibliotheque.com/documents/126-td-oracle-miage-licence-3-2025) : MIAGE, Licence 3, 2025
+- [ALGEBRE LINEAIRE](https://upbstudents-labibliotheque.com/documents/118-td-algebre-lineaire-miage-licence-1-2025) : MIAGE, Licence 1, 2025
+- [Analyse 1](https://upbstudents-labibliotheque.com/documents/117-td-analyse-1-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [Comptabilite financier ](https://upbstudents-labibliotheque.com/documents/116-td-comptabilite-financier-miage-licence-2-2024) : MIAGE, Licence 2, 2024
+- [DROIT CONST](https://upbstudents-labibliotheque.com/documents/96-td-droit-const-sjap-licence-2-2023) : SJAP, Licence 2, 2023
+- [PROBABILITE-STATISTIQUE](https://upbstudents-labibliotheque.com/documents/89-td-probabilite-statistique-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+- [PRINCIPES RESEAU INFORMATIQUE](https://upbstudents-labibliotheque.com/documents/83-td-principes-reseau-informatique-assri-licence-1-2024) : ASSRI, Licence 1, 2024
+- [MATHS FINANCIERE](https://upbstudents-labibliotheque.com/documents/82-td-maths-financiere-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [ECONOMIE D'ENTREPRISE](https://upbstudents-labibliotheque.com/documents/81-td-economie-d-entreprise-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [BASE DE DONNEES](https://upbstudents-labibliotheque.com/documents/78-td-base-de-donnees-miage-licence-1-2023) : MIAGE, Licence 1, 2023
+- [Merise](https://upbstudents-labibliotheque.com/documents/75-td-merise-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [ANALYSE 2](https://upbstudents-labibliotheque.com/documents/74-td-analyse-2-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [MICROECONOMIE 2](https://upbstudents-labibliotheque.com/documents/72-td-microeconomie-2-sea-licence-1-2024) : SEA, Licence 1, 2024
+- [ALGORITHMIQUE](https://upbstudents-labibliotheque.com/documents/71-td-algorithmique-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [ANALYSE COMBINATOIRE](https://upbstudents-labibliotheque.com/documents/70-td-analyse-combinatoire-sea-licence-1-2024) : SEA, Licence 1, 2024
+- [ALGEBRE 2](https://upbstudents-labibliotheque.com/documents/69-td-algebre-2-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [CALCUL INTEGRALS ET EQUATIONS DIFFERENTIELLES](https://upbstudents-labibliotheque.com/documents/68-td-calcul-integrals-et-equations-differentielles-sea-licence-1-2024) : SEA, Licence 1, 2024
+- [ALGEBRE 1](https://upbstudents-labibliotheque.com/documents/67-td-algebre-1-miage-licence-1-2023) : MIAGE, Licence 1, 2023
+- [STATISTIQUE DESCRIPTIVE](https://upbstudents-labibliotheque.com/documents/66-td-statistique-descriptive-sea-licence-1-2024) : SEA, Licence 1, 2024
+- [TIC ](https://upbstudents-labibliotheque.com/documents/64-td-tic-sea-licence-1-2025) : SEA, Licence 1, 2025
+- [Algebre Lineaire](https://upbstudents-labibliotheque.com/documents/62-td-algebre-lineaire-sea-licence-1-2024) : SEA, Licence 1, 2024
+- [TD ADMINISTRATION SYSTEME](https://upbstudents-labibliotheque.com/documents/61-td-td-administration-systeme-assri-licence-1-2025) : ASSRI, Licence 1, 2025
+- [MONNAIE](https://upbstudents-labibliotheque.com/documents/59-td-monnaie-sea-licence-1-2024) : SEA, Licence 1, 2024
+- [Structure de donnee](https://upbstudents-labibliotheque.com/documents/56-td-structure-de-donnee-miage-licence-2-2024) : MIAGE, Licence 2, 2024
+- [calcul numerique](https://upbstudents-labibliotheque.com/documents/55-td-calcul-numerique-miage-licence-2-2024) : MIAGE, Licence 2, 2024
+- [Transmission analogique](https://upbstudents-labibliotheque.com/documents/49-td-transmission-analogique-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+- [Math du signal](https://upbstudents-labibliotheque.com/documents/48-td-math-du-signal-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+- [Fondamentaux de la securite](https://upbstudents-labibliotheque.com/documents/47-td-fondamentaux-de-la-securite-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+- [ CRYPTOGRAPHIE](https://upbstudents-labibliotheque.com/documents/46-td-cryptographie-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+
+### Livres
+
+- [GUIDE INSTITUTIONNEL DE RÉDACTION DU MÉMOIRE](https://upbstudents-labibliotheque.com/documents/234-livre-guide-institutionnel-de-redaction-du-memoire-miage) : MIAGE, ASSRI, SEA, SEG, 3EA, SJAP, RIT
+- [Base de données](https://upbstudents-labibliotheque.com/documents/218-livre-base-de-donnees-miage) : MIAGE
+- [Cours et exercices corrigés d’Analyse 1](https://upbstudents-labibliotheque.com/documents/213-livre-cours-et-exercices-corriges-d-analyse-1-miage) : MIAGE, ASSRI, SEA, SEG, RIT, 3EA
+- [developpement personnel](https://upbstudents-labibliotheque.com/documents/196-livre-developpement-personnel-rit-licence-1-2026) : RIT, Licence 1, 2026
+
+### Examens
+
+- [Statistiques Inférentielles](https://upbstudents-labibliotheque.com/documents/232-examen-statistiques-inferentielles-seg-licence-1-2025) : SEG, Licence 1, 2025, Session 2
+- [Calculs intégrales et équations différentielles](https://upbstudents-labibliotheque.com/documents/230-examen-calculs-integrales-et-equations-differentielles-seg-licence-1-2024) : SEG, Licence 1, 2024, Session 1
+- [Recherche Operationnelle](https://upbstudents-labibliotheque.com/documents/228-examen-recherche-operationnelle-sea-licence-2-2024) : SEA, Licence 2, 2024, Session 2
+- [Anglais](https://upbstudents-labibliotheque.com/documents/225-examen-anglais-sea-licence-1-2025) : SEA, Licence 1, 2025, Session 1
+- [Statistiques inférentielles](https://upbstudents-labibliotheque.com/documents/224-examen-statistiques-inferentielles-sea-licence-1-2025) : SEA, Licence 1, 2025, Session 2
+- [Algèbre linéaire et fonctions à deux variables](https://upbstudents-labibliotheque.com/documents/222-examen-algebre-lineaire-et-fonctions-a-deux-variables-sea-licence-1-2025) : SEA, Licence 1, 2025, Session 1
+- [telecom devoir de niveau](https://upbstudents-labibliotheque.com/documents/190-examen-telecom-devoir-de-niveau-rit-licence-1-2026) : RIT, Licence 1, 2026, Session 1
+- [circuit electrique](https://upbstudents-labibliotheque.com/documents/186-examen-circuit-electrique-rit-licence-1-2026) : RIT, Licence 1, 2026, Session 2
+- [introduction aux telecom](https://upbstudents-labibliotheque.com/documents/184-examen-introduction-aux-telecom-rit-licence-1-2026) : RIT, Licence 1, 2026, Session 1
+- [DLP Statut](https://upbstudents-labibliotheque.com/documents/183-examen-dlp-statut-sjap-licence-3-2026) : SJAP, Licence 3, 2026, Session 2
+- [DLP Garanties](https://upbstudents-labibliotheque.com/documents/182-examen-dlp-garanties-sjap-licence-3-2026) : SJAP, Licence 3, 2026, Session 2
+- [DROIT DE LA COMPTABILITÉ](https://upbstudents-labibliotheque.com/documents/181-examen-droit-de-la-comptabilite-sjap-licence-3-2026) : SJAP, Licence 3, 2026
+- [Monnaie](https://upbstudents-labibliotheque.com/documents/180-examen-monnaie-sjap-licence-2-2026) : SJAP, Licence 2, 2026, Session 2
+- [ENVIRONNEMENT NUMERIQUE](https://upbstudents-labibliotheque.com/documents/179-examen-environnement-numerique-sjap-licence-1-2026) : SJAP, Licence 1, 2026, Session 2
+- [INFORMATIQUE](https://upbstudents-labibliotheque.com/documents/178-examen-informatique-sjap-licence-1-2026) : SJAP, Licence 1, 2026
+- [EGYPTE PHARAONIQUE](https://upbstudents-labibliotheque.com/documents/177-examen-egypte-pharaonique-sjap-licence-1-2026) : SJAP, Licence 1, 2026, Session 2
+- [ELECTROMAGNETISME](https://upbstudents-labibliotheque.com/documents/172-examen-electromagnetisme-rit-licence-1-2026) : RIT, Licence 1, 2026, Session 1
+- [Electronique Analogique](https://upbstudents-labibliotheque.com/documents/171-examen-electronique-analogique-rit-licence-1-2026) : RIT, Licence 1, 2026, Session 2
+- [Mecanique du point](https://upbstudents-labibliotheque.com/documents/170-examen-mecanique-du-point-rit-licence-1-2026) : RIT, Licence 1, 2026, Session 2
+- [Electronique Analogique](https://upbstudents-labibliotheque.com/documents/169-examen-electronique-analogique-rit-licence-1-2026) : RIT, Licence 1, 2026, Session 1
+- [MERISE](https://upbstudents-labibliotheque.com/documents/166-examen-merise-miage-licence-1-2026) : MIAGE, Licence 1, 2026, Session 1
+- [ALGORITHMIQUE ET LANGUAGE C](https://upbstudents-labibliotheque.com/documents/165-examen-algorithmique-et-language-c-miage-licence-1-2026) : MIAGE, Licence 1, 2026
+- [Installation electrique](https://upbstudents-labibliotheque.com/documents/158-examen-installation-electrique-3ea-licence-1-2025) : 3EA, Licence 1, 2025, Session 2
+- [Circuit electrique](https://upbstudents-labibliotheque.com/documents/157-examen-circuit-electrique-3ea-licence-1-2025) : 3EA, Licence 1, 2025, Session 1
+- [Installation electrique](https://upbstudents-labibliotheque.com/documents/156-examen-installation-electrique-3ea-licence-1-2025) : 3EA, Licence 1, 2025, Session 1
+- [Metrologie](https://upbstudents-labibliotheque.com/documents/155-examen-metrologie-3ea-licence-1-2025) : 3EA, Licence 1, 2025, Session 1
+- [Droit](https://upbstudents-labibliotheque.com/documents/154-examen-droit-miage-licence-1-2025) : MIAGE, Licence 1, 2025, Session 1
+- [Anglais](https://upbstudents-labibliotheque.com/documents/153-examen-anglais-3ea-licence-1-2025) : 3EA, Licence 1, 2025, Session 1
+- [ALGORITHME](https://upbstudents-labibliotheque.com/documents/152-examen-algorithme-3ea-licence-1-2025) : 3EA, Licence 1, 2025, Session 1
+- [MERISE](https://upbstudents-labibliotheque.com/documents/146-examen-merise-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [ALGORITHMIQUE](https://upbstudents-labibliotheque.com/documents/145-examen-algorithmique-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 2
+- [Programmation Web 1](https://upbstudents-labibliotheque.com/documents/144-examen-programmation-web-1-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [ALGO,C ET PYTHON](https://upbstudents-labibliotheque.com/documents/143-examen-algo-c-et-python-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 2
+- [ALGO,C ET PYTHON](https://upbstudents-labibliotheque.com/documents/142-examen-algo-c-et-python-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [ Python](https://upbstudents-labibliotheque.com/documents/141-examen-python-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [ANGLAIS](https://upbstudents-labibliotheque.com/documents/140-examen-anglais-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 2
+- [ MATHEMATIQUES FINANCIERES](https://upbstudents-labibliotheque.com/documents/139-examen-mathematiques-financieres-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [ARCHITECTURE ET PRINCIPES DES RESEAUX INFORMATIQUES](https://upbstudents-labibliotheque.com/documents/138-examen-architecture-et-principes-des-reseaux-informatiques-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [PRINCIPES DES  RESEAUX  INFORMATIQUES](https://upbstudents-labibliotheque.com/documents/137-examen-principes-des-reseaux-informatiques-assri-licence-1-2024) : ASSRI, Licence 1, 2024, Session 1
+- [MICROECONOMIE](https://upbstudents-labibliotheque.com/documents/136-examen-microeconomie-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [EXAMEN DE PROGRAMMATION LINEAIRE](https://upbstudents-labibliotheque.com/documents/135-examen-examen-de-programmation-lineaire-assri-licence-3-2025) : ASSRI, Licence 3, 2025, Session 1
+- [EXAMEN DE THEORIE DES GRAPHES](https://upbstudents-labibliotheque.com/documents/134-examen-examen-de-theorie-des-graphes-miage-licence-3-2025) : MIAGE, Licence 3, 2025, Session 1
+- [EXAMEN DE THEORIE DES GRAPHES](https://upbstudents-labibliotheque.com/documents/133-examen-examen-de-theorie-des-graphes-assri-licence-3-2025) : ASSRI, Licence 3, 2025, Session 2
+- [EXAMEN DE THEORIE DES GRAPHES](https://upbstudents-labibliotheque.com/documents/132-examen-examen-de-theorie-des-graphes-miage-licence-3-2025) : MIAGE, Licence 3, 2025, Session 2
+- [ALGORITHMIQUE & LANGAGE C](https://upbstudents-labibliotheque.com/documents/129-examen-algorithmique-langage-c-miage-licence-1-2025) : MIAGE, Licence 1, 2025, Session 1
+- [ALGORITHMIQUE & LANGAGE C](https://upbstudents-labibliotheque.com/documents/128-examen-algorithmique-langage-c-assri-licence-1-2025) : ASSRI, Licence 1, 2025, Session 1
+- [Algebre1](https://upbstudents-labibliotheque.com/documents/127-examen-algebre1-sea-licence-1-2023) : SEA, Licence 1, 2023, Session 2
+- [Comptabilite](https://upbstudents-labibliotheque.com/documents/125-examen-comptabilite-sea-licence-1-2024) : SEA, Licence 1, 2024, Session 1
+- [CALCULS INTEGRALES](https://upbstudents-labibliotheque.com/documents/122-examen-calculs-integrales-sea-licence-1-2024) : SEA, Licence 1, 2024, Session 1
+- [ANALYSE 2](https://upbstudents-labibliotheque.com/documents/121-examen-analyse-2-miage-licence-1-2024) : MIAGE, Licence 1, 2024, Session 1
+- [CALCUL NUMERIQUE](https://upbstudents-labibliotheque.com/documents/120-examen-calcul-numerique-miage-licence-1-2024) : MIAGE, Licence 1, 2024, Session 1
+- [CALCUL NUMERIQUE](https://upbstudents-labibliotheque.com/documents/119-examen-calcul-numerique-miage-licence-1-2024) : MIAGE, Licence 1, 2024, Session 2
+- [TECHNIQUES D EXPRESSION FRANCAISE](https://upbstudents-labibliotheque.com/documents/115-examen-techniques-d-expression-francaise-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 2
+- [Administration Systeme 2](https://upbstudents-labibliotheque.com/documents/114-examen-administration-systeme-2-assri-licence-2-2022) : ASSRI, Licence 2, 2022, Session 1
+- [ALGEBRE 1](https://upbstudents-labibliotheque.com/documents/113-examen-algebre-1-sea-licence-1-2022) : SEA, Licence 1, 2022, Session 2
+- [Programmation Python](https://upbstudents-labibliotheque.com/documents/112-examen-programmation-python-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 2
+- [Technologies Web 1](https://upbstudents-labibliotheque.com/documents/111-examen-technologies-web-1-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 2
+- [BASES DE DONNEES](https://upbstudents-labibliotheque.com/documents/110-examen-bases-de-donnees-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 1
+- [Programmation Python](https://upbstudents-labibliotheque.com/documents/109-examen-programmation-python-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 1
+- [ANALYSE 2](https://upbstudents-labibliotheque.com/documents/108-examen-analyse-2-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 2
+- [ANALYSE 1](https://upbstudents-labibliotheque.com/documents/107-examen-analyse-1-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 2
+- [TECHNIQUES ](https://upbstudents-labibliotheque.com/documents/105-examen-techniques-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 2
+- [MATHEMATIQUES FINANCIERES](https://upbstudents-labibliotheque.com/documents/103-examen-mathematiques-financieres-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 1
+- [PRINCIPE ET ARCHITECTURE DES RESEAUX](https://upbstudents-labibliotheque.com/documents/102-examen-principe-et-architecture-des-reseaux-assri-licence-1-2020) : ASSRI, Licence 1, 2020, Session 2
+- [ARCHITECTURE DES ORDINATEURS](https://upbstudents-labibliotheque.com/documents/101-examen-architecture-des-ordinateurs-assri-licence-1-2023) : ASSRI, Licence 1, 2023, Session 2
+- [ALGORITHME ET PROGRAMMATION](https://upbstudents-labibliotheque.com/documents/100-examen-algorithme-et-programmation-miage-licence-1-2020) : MIAGE, Licence 1, 2020, Session 1
+- [ARCHITECTURE DES ORDINATEURS](https://upbstudents-labibliotheque.com/documents/99-examen-architecture-des-ordinateurs-assri-licence-1-2022) : ASSRI, Licence 1, 2022, Session 1
+- [ALGEBRE 1](https://upbstudents-labibliotheque.com/documents/98-examen-algebre-1-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 2
+- [ALGEBRE 2](https://upbstudents-labibliotheque.com/documents/97-examen-algebre-2-miage-licence-1-2022) : MIAGE, Licence 1, 2022, Session 1
+- [Technologie du Web](https://upbstudents-labibliotheque.com/documents/88-examen-technologie-du-web-miage-licence-1-2023) : MIAGE, Licence 1, 2023, Session 1
+- [PYTHON](https://upbstudents-labibliotheque.com/documents/85-examen-python-miage-licence-1-2023) : MIAGE, Licence 1, 2023, Session 2
+- [Analyse de donnee](https://upbstudents-labibliotheque.com/documents/80-examen-analyse-de-donnee-assri-licence-2-2023) : ASSRI, Licence 2, 2023, Session 1
+- [PROBABILITE-STATISTIQUE](https://upbstudents-labibliotheque.com/documents/77-examen-probabilite-statistique-assri-licence-2-2023) : ASSRI, Licence 2, 2023, Session 2
+- [PROBABILITE-STATISTIQUE](https://upbstudents-labibliotheque.com/documents/76-examen-probabilite-statistique-assri-licence-2-2023) : ASSRI, Licence 2, 2023, Session 1
+- [Analyse 2](https://upbstudents-labibliotheque.com/documents/73-examen-analyse-2-sea-licence-1-2023) : SEA, Licence 1, 2023, Session 1
+
+### Mémoires
+
+- [DEPLOIEMENT D’UNE ARCHITECTURE MULTI-SITES INTERCONNECTEE AVEC IPSEC ET TUNNELS GRE SUR GNS3](https://upbstudents-labibliotheque.com/documents/217-memoire-deploiement-d-une-architecture-multi-sites-interconnectee-avec-ipsec-et-tunnels-gr) : ASSRI, Licence, 2025
+
+### TP
+
+- [web design](https://upbstudents-labibliotheque.com/documents/95-tp-web-design-miage-licence-2-2024) : MIAGE, Licence 2, 2024
+- [PYTHON](https://upbstudents-labibliotheque.com/documents/87-tp-python-miage-licence-1-2024) : MIAGE, Licence 1, 2024
+- [PRINCIPE DE RESEAU](https://upbstudents-labibliotheque.com/documents/84-tp-principe-de-reseau-assri-licence-1-2024) : ASSRI, Licence 1, 2024
+- [BASE DE DONNEE](https://upbstudents-labibliotheque.com/documents/79-tp-base-de-donnee-miage-licence-1-2023) : MIAGE, Licence 1, 2023
+- [TP ADMINISTRATION SYSTEME ](https://upbstudents-labibliotheque.com/documents/65-tp-tp-administration-systeme-assri-licence-1-2025) : ASSRI, Licence 1, 2025
+- [Structure de donnee](https://upbstudents-labibliotheque.com/documents/57-tp-structure-de-donnee-miage-licence-2-2024) : MIAGE, Licence 2, 2024
+- [reseaux et services 4](https://upbstudents-labibliotheque.com/documents/54-tp-reseaux-et-services-4-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+- [reseaux et services 3](https://upbstudents-labibliotheque.com/documents/53-tp-reseaux-et-services-3-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+- [reseaux et services 2](https://upbstudents-labibliotheque.com/documents/52-tp-reseaux-et-services-2-assri-licence-2-2024) : ASSRI, Licence 2, 2024
+- [reseaux et services 1](https://upbstudents-labibliotheque.com/documents/51-tp-reseaux-et-services-1-assri-licence-2-2024) : ASSRI, Licence 2, 2024, Session 1
+- [Analyse de donnee](https://upbstudents-labibliotheque.com/documents/50-tp-analyse-de-donnee-assri-licence-2-2024) : ASSRI, Licence 2, 2024

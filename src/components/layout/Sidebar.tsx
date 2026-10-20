@@ -14,6 +14,7 @@ import {
   Heart,
   History,
   House,
+  Info,
   Layers,
   LayoutGrid,
   Megaphone,
@@ -150,6 +151,12 @@ export function Sidebar({ collapsed, onToggle }: { collapsed: boolean; onToggle:
       match: (p) => p === "/profil",
     },
     { label: "Contact et aide", to: "/contact", icon: MessageCircle, match: (p) => p === "/contact" },
+    {
+      label: "À propos",
+      to: "/a-propos",
+      icon: Info,
+      match: (p) => p === "/a-propos",
+    },
   ];
 
   const toggleLabel = collapsed ? "Déplier le menu" : "Replier le menu";

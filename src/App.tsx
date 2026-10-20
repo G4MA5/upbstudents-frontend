@@ -36,6 +36,11 @@ const Propositions = lazy(() => import("./pages/Propositions"));
 const Diffusion = lazy(() => import("./pages/Diffusion"));
 // ---------- Divine : fin ----------
 const Contact = lazy(() => import("./pages/Contact"));
+const DocumentPage = lazy(() => import("./pages/DocumentPage"));
+const APropos = lazy(() => import("./pages/APropos"));
+const Equipe = lazy(() => import("./pages/Equipe"));
+const Membre = lazy(() => import("./pages/Membre"));
+const GamaLabs = lazy(() => import("./pages/GamaLabs"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
@@ -102,6 +107,46 @@ function AnimatedRoutes() {
           element={
             <Page>
               <Documents />
+            </Page>
+          }
+        />
+        <Route
+          path="/documents/:ref"
+          element={
+            <Page>
+              <DocumentPage />
+            </Page>
+          }
+        />
+        <Route
+          path="/a-propos"
+          element={
+            <Page>
+              <APropos />
+            </Page>
+          }
+        />
+        <Route
+          path="/equipe"
+          element={
+            <Page>
+              <Equipe />
+            </Page>
+          }
+        />
+        <Route
+          path="/equipe/:slug"
+          element={
+            <Page>
+              <Membre />
+            </Page>
+          }
+        />
+        <Route
+          path="/gama-labs"
+          element={
+            <Page>
+              <GamaLabs />
             </Page>
           }
         />
