@@ -16,22 +16,22 @@ La bibliothèque rassemble 209 documents : examens (75), cours (51), TD (67), TP
 
 - [Gama Labs](https://upbstudents-labibliotheque.com/gama-labs) : Gama Labs est l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (Côte d'Ivoire). Réseaux : [LinkedIn](https://www.linkedin.com/in/gama-labs-523139375).
 - [L'équipe](https://upbstudents-labibliotheque.com/equipe) : les membres de Gama Labs
-- [Dakaud Uriel Jean Bedel](https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375)
 - [Olivier Grace Divine Graourou](https://upbstudents-labibliotheque.com/equipe/olivier-grace-divine-graourou) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/olivier-grace-divine-graourou-b09490312)
 - [Desailly Caleb Deroux](https://upbstudents-labibliotheque.com/equipe/desailly-caleb-deroux) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/desailly-caleb-deroux-398132375)
 - [Yao Eliakim Assale](https://upbstudents-labibliotheque.com/equipe/yao-eliakim-assale) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/yao-eliakim-assale-69224839a)
 - [Serge Armel Bénie Ahoussi](https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332)
+- [Dakaud Uriel Jean Bedel](https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375)
 - [Baidoo Martin](https://upbstudents-labibliotheque.com/equipe/baidoo-martin) : membre de Gama Labs. [LinkedIn](https://www.linkedin.com/in/baidoo-martin-02823b359)
 
 ## Questions fréquentes
 
-### Qui a créé UpB Student's ?
-
-UpB Student's a été conçue et développée par Gama Labs, dont l'équipe est composée de Dakaud Uriel Jean Bedel, Olivier Grace Divine Graourou, Desailly Caleb Deroux, Yao Eliakim Assale, Serge Armel Bénie Ahoussi et Baidoo Martin.
-
 ### Qu'est-ce que UpB Student's ?
 
 UpB Student's est la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB), à Bingerville en Côte d'Ivoire. Elle rassemble des épreuves d'examens, des cours, des sujets de TD et de TP, des mémoires et des livres, classés par filière, par niveau et par année.
+
+### Qui a créé UpB Student's ?
+
+UpB Student's a été conçue et développée par Gama Labs, dont l'équipe est composée de Olivier Grace Divine Graourou, Desailly Caleb Deroux, Yao Eliakim Assale, Serge Armel Bénie Ahoussi, Dakaud Uriel Jean Bedel et Baidoo Martin.
 
 ### Quels documents trouve-t-on dans la bibliothèque ?
 
@@ -56,13 +56,6 @@ Gama Labs est l'équipe qui a conçu et développé UpB Student's, la bibliothè
 Contact : Gamalabs2.0@gmail.com
 
 Membres :
-
-### Dakaud Uriel Jean Bedel
-
-Dakaud Uriel Jean Bedel est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
-
-Profil : https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel
-Réseaux : [LinkedIn](https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375)
 
 ### Olivier Grace Divine Graourou
 
@@ -91,6 +84,13 @@ Serge Armel Bénie Ahoussi est membre de Gama Labs et fait partie de l'équipe q
 
 Profil : https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi
 Réseaux : [LinkedIn](https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332)
+
+### Dakaud Uriel Jean Bedel
+
+Dakaud Uriel Jean Bedel est membre de Gama Labs et fait partie de l'équipe qui a conçu et développé UpB Student's, la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville.
+
+Profil : https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel
+Réseaux : [LinkedIn](https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375)
 
 ### Baidoo Martin
 

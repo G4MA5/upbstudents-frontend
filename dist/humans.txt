@@ -1,8 +1,4 @@
 /* TEAM */
-  Développeur : Dakaud Uriel Jean Bedel
-  Profil : https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel
-  LinkedIn : https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375
-
   Développeur : Olivier Grace Divine Graourou
   Profil : https://upbstudents-labibliotheque.com/equipe/olivier-grace-divine-graourou
   LinkedIn : https://www.linkedin.com/in/olivier-grace-divine-graourou-b09490312
@@ -18,6 +14,10 @@
   Développeur : Serge Armel Bénie Ahoussi
   Profil : https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi
   LinkedIn : https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332
+
+  Développeur : Dakaud Uriel Jean Bedel
+  Profil : https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel
+  LinkedIn : https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375
 
   Développeur : Baidoo Martin
   Profil : https://upbstudents-labibliotheque.com/equipe/baidoo-martin

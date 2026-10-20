@@ -124,14 +124,6 @@ export const SEO_CONFIG = {
   // ---------------------------------------------------------------------------
   teamMembers: [
     {
-      slug: "dakaud-uriel-jean-bedel",
-      name: "Dakaud Uriel Jean Bedel",
-      photos: ["dakaud-uriel-jean-bedel.jpeg"],
-      socials: {
-        linkedIn: "https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375",
-      },
-    },
-    {
       slug: "olivier-grace-divine-graourou",
       name: "Olivier Grace Divine Graourou",
       photos: ["olivier-grace-divine-graourou.jpeg"],
@@ -161,6 +153,14 @@ export const SEO_CONFIG = {
       photos: ["serge-armel-benie-ahoussi.jpeg"],
       socials: {
         linkedIn: "https://www.linkedin.com/in/serge-armel-b%C3%A9nie-ahoussi-604479332",
+      },
+    },
+    {
+      slug: "dakaud-uriel-jean-bedel",
+      name: "Dakaud Uriel Jean Bedel",
+      photos: ["dakaud-uriel-jean-bedel.jpeg"],
+      socials: {
+        linkedIn: "https://www.linkedin.com/in/dakaud-uriel-jean-bedel-194788375",
       },
     },
     {

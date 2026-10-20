@@ -28,27 +28,43 @@ export function MemberPhoto({ member, className = "" }: { member: TeamMemberConf
   );
 }
 
-export function MemberCard({ member }: { member: TeamMemberConfig }) {
+/**
+ * `linked`: links to the member's profile page. Off on the pages visitors
+ * browse (Contact, À propos): the team pages are reached from search engines
+ * only, never from the site's navigation.
+ */
+export function MemberCard({ member, linked = true }: { member: TeamMemberConfig; linked?: boolean }) {
+  const photo = <MemberPhoto member={member} className="h-full w-full transition duration-500 group-hover:scale-[1.03]" />;
   return (
     <article className="group flex flex-col overflow-hidden rounded-3xl border border-line bg-card shadow-card transition hover:-translate-y-0.5 hover:shadow-raised">
-      <Link to={memberPath(member)} className="relative block aspect-[4/5] overflow-hidden" aria-label={`Profil de ${member.name}`}>
-        <MemberPhoto member={member} className="h-full w-full transition duration-500 group-hover:scale-[1.03]" />
-      </Link>
+      {linked ? (
+        <Link to={memberPath(member)} className="relative block aspect-[4/5] overflow-hidden" aria-label={`Profil de ${member.name}`}>
+          {photo}
+        </Link>
+      ) : (
+        <div className="relative aspect-[4/5] overflow-hidden">{photo}</div>
+      )}
       <div className="flex flex-1 flex-col p-4">
         <h3 className="text-base font-extrabold leading-snug">
-          <Link to={memberPath(member)} className="hover:text-accent">
-            {member.name}
-          </Link>
+          {linked ? (
+            <Link to={memberPath(member)} className="hover:text-accent">
+              {member.name}
+            </Link>
+          ) : (
+            member.name
+          )}
         </h3>
         <p className="mt-1 text-sm text-ink-muted">{member.role || `Membre de ${GAMA_LABS.name}`}</p>
         <div className="mt-auto flex flex-wrap items-center justify-between gap-2 pt-4">
           <SocialLinks socials={member.socials} owner={member.name} size="sm" />
-          <Link
-            to={memberPath(member)}
-            className="inline-flex items-center gap-1 text-sm font-bold text-accent hover:underline"
-          >
-            Profil <ArrowUpRight className="h-4 w-4" aria-hidden />
-          </Link>
+          {linked && (
+            <Link
+              to={memberPath(member)}
+              className="inline-flex items-center gap-1 text-sm font-bold text-accent hover:underline"
+            >
+              Profil <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </Link>
+          )}
         </div>
       </div>
     </article>

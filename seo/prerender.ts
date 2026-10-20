@@ -22,7 +22,6 @@ import {
   documentFacts,
   documentMeta,
   documentPath,
-  CREATORS_FAQ,
   FAQ,
   headTags,
   memberMeta,
@@ -128,6 +127,12 @@ function countBy(documents: SeoDocument[]) {
   return { byType, byFiliere };
 }
 
+function creatorsHtml() {
+  return `<section><h2>Créée par ${esc(GAMA_LABS.name)}</h2>
+<p>${esc(SEO_CONFIG.siteName)} a été conçue et développée par ${esc(GAMA_LABS.name)}, dont l'équipe est composée de :</p>
+${list(TEAM.map((m) => `${esc(m.name)}${m.role ? `, ${esc(m.role)}` : ""}`))}</section>`;
+}
+
 function homeBody(documents: SeoDocument[]) {
   const { byType, byFiliere } = countBy(documents);
   return `<h1>${esc(SEO_CONFIG.siteName)} : la bibliothèque numérique de l'${esc(SEO_CONFIG.universityName)}</h1>
@@ -220,7 +225,8 @@ ${GAMA_LABS.photos.map((p, i) => `<img src="${gamaPhotoUrl(p)}" alt="${esc(`${GA
 
 const contactBody = () => `<h1>Contactez-nous</h1>
 <p>Une question, un problème sur le site ou un document introuvable ? Écrivez-nous, nous vous répondrons par e-mail.</p>
-<ul><li>E-mail : ${link(`mailto:${SEO_CONFIG.contact.email}`, SEO_CONFIG.contact.email)}</li><li>Téléphone : ${link(`tel:${SEO_CONFIG.contact.telephone}`, "+225 01 72 48 93 31")}</li><li>Adresse : ${esc(SEO_CONFIG.location.streetAddress)}, ${esc(SEO_CONFIG.location.addressLocality)}, Côte d'Ivoire</li></ul>`;
+<ul><li>E-mail : ${link(`mailto:${SEO_CONFIG.contact.email}`, SEO_CONFIG.contact.email)}</li><li>Téléphone : ${link(`tel:${SEO_CONFIG.contact.telephone}`, "+225 01 72 48 93 31")}</li><li>Adresse : ${esc(SEO_CONFIG.location.streetAddress)}, ${esc(SEO_CONFIG.location.addressLocality)}, Côte d'Ivoire</li></ul>
+${creatorsHtml()}`;
 
 const proposeBody = () => `<h1>Proposer un document</h1>
 <p>Vous avez une épreuve d'examen, un cours, un TD ou un TP qui n'est pas encore dans la bibliothèque ? Proposez-le : chaque proposition est vérifiée par l'équipe avant d'être publiée.</p>`;
@@ -360,7 +366,7 @@ function llmsFullTxt(documents: SeoDocument[]) {
   return `${llmsTxt(documents).replace(/\n## Optional[\s\S]*$/, "")}
 ## Questions fréquentes
 
-${[CREATORS_FAQ, ...FAQ].map(({ q, a }) => `### ${q}\n\n${a}`).join("\n\n")}
+${FAQ.map(({ q, a }) => `### ${q}\n\n${a}`).join("\n\n")}
 
 ## ${GAMA_LABS.name}
 

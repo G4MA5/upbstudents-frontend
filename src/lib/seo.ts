@@ -140,8 +140,8 @@ function siteNodes() {
       description: SEO_CONFIG.defaultDescription,
       inLanguage: "fr",
       publisher: { "@id": ID.library },
-      // Credited in the footer of every page ("Conçu et développé par Gama Labs").
-      creator: { "@type": "Organization", "@id": ID.gama, name: GAMA_LABS.name },
+      creator: { "@id": ID.gama },
+      contributor: TEAM.map((m) => ({ "@id": ID.person(m) })),
       copyrightYear: SEO_CONFIG.launchYear,
       potentialAction: {
         "@type": "SearchAction",
@@ -165,6 +165,7 @@ function siteNodes() {
       areaServed: { "@type": "Country", name: "Côte d'Ivoire" },
       audience: { "@type": "EducationalAudience", educationalRole: "student" },
       parentOrganization: { "@id": ID.university },
+      founder: { "@id": ID.gama },
       ...(librarySameAs.length ? { sameAs: librarySameAs } : {}),
     },
     {
@@ -178,9 +179,9 @@ function siteNodes() {
   ];
 }
 
-/** Gama Labs and its members are described only on their own pages, which
- *  show that information (structured data must match the visible content). */
-export const isTeamPage = (path: string) => path === "/equipe" || path.startsWith("/equipe/") || path === "/gama-labs";
+/** Pages that display the members (their structured data must match what is visible). */
+const showsMembers = (path: string) =>
+  ["/contact", "/equipe", "/gama-labs"].includes(path) || path.startsWith("/equipe/");
 
 /** Full JSON-LD document for a page. */
 export function buildJsonLd(meta: SeoMeta) {
@@ -188,7 +189,8 @@ export function buildJsonLd(meta: SeoMeta) {
   const crumbs = [{ name: "Accueil", path: "/" }, ...(meta.breadcrumb ?? [])];
   const nodes: Record<string, unknown>[] = [
     ...siteNodes(),
-    ...(isTeamPage(meta.path) ? [gamaNode(), ...TEAM.map(personNode)] : []),
+    gamaNode(),
+    ...(showsMembers(meta.path) ? TEAM.map(personNode) : []),
   ];
 
   if (crumbs.length > 1) {
@@ -238,18 +240,17 @@ function webPage(meta: SeoMeta, type: string | string[], extra: Record<string, u
 const SUFFIX = ` · ${SEO_CONFIG.siteName}`;
 const PRIVATE = { noindex: true };
 
-/** About the creators: only on the (unlinked) team pages and in llms-full.txt. */
-export const CREATORS_FAQ = {
+const CREATORS_FAQ = {
   q: `Qui a créé ${SEO_CONFIG.siteName} ?`,
   a: `${SEO_CONFIG.siteName} a été conçue et développée par ${GAMA_LABS.name}, dont l'équipe est composée de ${TEAM.map((m) => m.name).join(", ").replace(/, ([^,]*)$/, " et $1")}.`,
 };
 
-/** Questions shown on the "À propos" page. */
 export const FAQ = [
   {
     q: `Qu'est-ce que ${SEO_CONFIG.siteName} ?`,
     a: `${SEO_CONFIG.siteName} est la bibliothèque numérique des étudiants de l'${SEO_CONFIG.universityName} (UPB), à Bingerville en Côte d'Ivoire. Elle rassemble des épreuves d'examens, des cours, des sujets de TD et de TP, des mémoires et des livres, classés par filière, par niveau et par année.`,
   },
+  CREATORS_FAQ,
   {
     q: "Quels documents trouve-t-on dans la bibliothèque ?",
     a: "Des épreuves d'examens (sessions 1 et 2), des cours, des sujets de travaux dirigés (TD) et de travaux pratiques (TP), des mémoires et des livres, pour les filières MIAGE, ASSRI, SEA, SEG, 3EA, SJAP et RIT, de la Licence 1 au Master.",

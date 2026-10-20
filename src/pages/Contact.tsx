@@ -10,6 +10,8 @@ import { useToast } from "../context/ToastContext";
 import { api, errorMessage } from "../lib/api";
 import { validateEmail } from "../lib/validation";
 import { useSeoHead } from "../lib/useSeoHead";
+import { TEAM } from "../lib/seoConfig";
+import { MemberCard } from "../components/team/MemberCard";
 
 const CHANNELS = [
   {
@@ -183,6 +185,17 @@ export default function Contact() {
           </AnimatePresence>
         </div>
       </div>
+
+      <section className="container-page mt-12" aria-labelledby="equipe-titre">
+        <h2 id="equipe-titre" className="mb-4 text-2xl font-extrabold">L’équipe</h2>
+        <ul className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-6">
+          {TEAM.map((member) => (
+            <li key={member.slug} className="min-w-0">
+              <MemberCard member={member} linked={false} />
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section className="container-page mt-12">
         <h2 className="mb-4 text-2xl font-extrabold">Où nous trouver ?</h2>

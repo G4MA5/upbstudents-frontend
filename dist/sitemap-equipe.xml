@@ -3,11 +3,11 @@
   <url>
     <loc>https://upbstudents-labibliotheque.com/equipe</loc>
     <lastmod>2026-10-20</lastmod>
-    <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/dakaud-uriel-jean-bedel.jpeg</image:loc></image:image>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/olivier-grace-divine-graourou.jpeg</image:loc></image:image>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/desailly-caleb-deroux.jpeg</image:loc></image:image>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/yao-eliakim-assale.jpeg</image:loc></image:image>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/serge-armel-benie-ahoussi.jpeg</image:loc></image:image>
+    <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/dakaud-uriel-jean-bedel.jpeg</image:loc></image:image>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/baidoo-martin.jpeg</image:loc></image:image>
   </url>
   <url>
@@ -15,11 +15,6 @@
     <lastmod>2026-10-20</lastmod>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/logo_gama.png</image:loc></image:image>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/og/gama-labs.png</image:loc></image:image>
-  </url>
-  <url>
-    <loc>https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel</loc>
-    <lastmod>2026-10-20</lastmod>
-    <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/dakaud-uriel-jean-bedel.jpeg</image:loc></image:image>
   </url>
   <url>
     <loc>https://upbstudents-labibliotheque.com/equipe/olivier-grace-divine-graourou</loc>
@@ -40,6 +35,11 @@
     <loc>https://upbstudents-labibliotheque.com/equipe/serge-armel-benie-ahoussi</loc>
     <lastmod>2026-10-20</lastmod>
     <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/serge-armel-benie-ahoussi.jpeg</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://upbstudents-labibliotheque.com/equipe/dakaud-uriel-jean-bedel</loc>
+    <lastmod>2026-10-20</lastmod>
+    <image:image><image:loc>https://upbstudents-labibliotheque.com/images/team/dakaud-uriel-jean-bedel.jpeg</image:loc></image:image>
   </url>
   <url>
     <loc>https://upbstudents-labibliotheque.com/equipe/baidoo-martin</loc>
