@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
+import { getConfiguredSocialLinks, SEO_CONFIG } from "../../lib/seoConfig";
 
 export function Footer() {
   const year = Math.max(new Date().getFullYear(), 2026);
+  const socialLinks = getConfiguredSocialLinks(SEO_CONFIG.organizationSocials);
+
   return (
     <footer className="mt-auto border-t border-line px-4 py-8 sm:px-6 lg:px-8">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -21,13 +24,22 @@ export function Footer() {
               Signaler un problème
             </Link>
           </nav>
+          {socialLinks.length > 0 && (
+            <nav className="mt-3 flex flex-wrap gap-x-5 gap-y-2 font-semibold" aria-label="Réseaux sociaux officiels">
+              {socialLinks.map(({ platform, label, url }) => (
+                <a key={platform} href={url} target="_blank" rel="noopener noreferrer" className="hover:text-accent">
+                  {label}
+                </a>
+              ))}
+            </nav>
+          )}
         </div>
         <div className="flex flex-col gap-3 text-sm text-ink-muted lg:items-end">
           <a
             href="mailto:Gamalabs2.0@gmail.com"
             className="group inline-flex w-fit items-center gap-3 rounded-full border border-line bg-card py-1.5 pl-1.5 pr-4 shadow-card transition hover:border-brand-500/40"
           >
-            <img src="/logo_gama.png" alt="" width={30} height={30} loading="lazy" className="h-[30px] w-[30px] rounded-full bg-white object-contain p-0.5" />
+            <img src="/logo_gama.png" alt="" width={30} height={30} loading="lazy" className="h-[30px] w-[30px] rounded-full bg-white object-contain p-1.5 ring-1 ring-black/5" />
             <span>
               Conçu et développé par{" "}
               <strong className="font-extrabold text-ink group-hover:text-accent">Gama Labs</strong>

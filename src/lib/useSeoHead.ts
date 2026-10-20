@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { generateJsonLd, PAGES_SEO, SEO_CONFIG, SITE_DOMAIN, type PageSeoConfig } from "./seoConfig";
+import { generateJsonLd, getPageSeoConfig, SEO_CONFIG, SITE_DOMAIN, type PageSeoConfig } from "./seoConfig";
 
 function setOrUpdateMeta(selector: string, attributeName: string, attributeValue: string, content: string) {
   let element = document.head.querySelector<HTMLMetaElement>(selector);
@@ -39,7 +39,7 @@ function injectJsonLd(jsonLdObject: object) {
 export function useSeoHead(overrideConfig?: Partial<PageSeoConfig> & { customPath?: string }) {
   useEffect(() => {
     const currentPath = overrideConfig?.customPath || window.location.pathname || "/";
-    const basePageConfig = PAGES_SEO[currentPath] || PAGES_SEO[currentPath.slice(1)] || {
+    const basePageConfig = getPageSeoConfig(currentPath) || {
       title: SEO_CONFIG.fullSiteTitle,
       description: SEO_CONFIG.defaultDescription,
       path: currentPath,

@@ -1,0 +1,21 @@
+# UpB Student's
+
+> UpB Student's est la bibliothèque numérique des étudiants de l'Université Polytechnique de Bingerville (UPB), en Côte d'Ivoire.
+
+La plateforme permet de consulter et de rechercher des ressources pédagogiques, notamment des épreuves d'examens, des sujets de TD, des TP et des livres classés par filière et par niveau. Les étudiants peuvent également proposer des documents pour enrichir la bibliothèque.
+
+## Pages principales
+
+- [Accueil](https://upbstudents-labibliotheque.com/)
+- [Documents et épreuves](https://upbstudents-labibliotheque.com/documents)
+- [Proposer un document](https://upbstudents-labibliotheque.com/proposer)
+- [Contact et équipe](https://upbstudents-labibliotheque.com/contact)
+
+## Organisation
+
+- Nom : UpB Student's
+- Établissement associé : Université Polytechnique de Bingerville
+- Localisation : Bingerville, Abidjan, Côte d'Ivoire
+- Site officiel : https://upbstudents-labibliotheque.com/
+
+Les liens officiels vers les réseaux sociaux et les profils des membres de l'équipe sont publiés sur la page Contact.
